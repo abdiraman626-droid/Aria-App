@@ -1,5 +1,5 @@
 import { initializeApp }                      from 'firebase/app';
-import { getAuth, GoogleAuthProvider }        from 'firebase/auth';
+import { getAuth }                             from 'firebase/auth';
 import { getFirestore }                       from 'firebase/firestore';
 import { getStorage }                         from 'firebase/storage';
 import { getMessaging, isSupported }          from 'firebase/messaging';
@@ -22,7 +22,5 @@ export const storage = getStorage(app);
 // messaging is only available in secure contexts (HTTPS / localhost)
 export const messagingPromise = isSupported().then(ok => ok ? getMessaging(app) : null);
 
-// Google provider pre-loaded with Calendar + Gmail scopes
-export const googleProvider = new GoogleAuthProvider();
-googleProvider.addScope('https://www.googleapis.com/auth/calendar.readonly');
-googleProvider.addScope('https://www.googleapis.com/auth/gmail.readonly');
+// Google OAuth provider is now built per-request in services/google.js
+// with forced consent to ensure Calendar + Gmail scopes are granted.

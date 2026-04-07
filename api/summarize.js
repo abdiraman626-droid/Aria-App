@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   const { transcript } = req.body || {};
   if (!transcript) return res.status(400).json({ error: 'No transcript provided' });
 
-  const key = process.env.VITE_ANTHROPIC_API_KEY;
+  const key = process.env.ANTHROPIC_API_KEY || process.env.VITE_ANTHROPIC_API_KEY;
   if (!key) return res.status(500).json({ error: 'ANTHROPIC_API_KEY is not set on the server' });
 
   const upstream = await fetch('https://api.anthropic.com/v1/messages', {

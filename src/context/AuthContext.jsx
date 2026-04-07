@@ -13,8 +13,8 @@ import {
 import {
   doc, getDoc, setDoc, updateDoc, serverTimestamp,
 } from 'firebase/firestore';
-import { auth, db, googleProvider } from '../lib/firebase';
-import { getToken, restoreToken, clearToken } from '../services/google';
+import { auth, db } from '../lib/firebase';
+import { getToken, restoreToken } from '../services/google';
 import { initPushNotifications } from '../services/notifications';
 
 const AuthContext = createContext(null);
@@ -91,8 +91,7 @@ export function AuthProvider({ children }) {
           await setDoc(doc(db, 'users', fbUser.uid), profile);
         }
 
-        // Restore Google token FIRST — before setUser — so components see it on first render.
-        // If the saved token is expired, leave localStorage empty (getToken returns null).
+        // Restore Google token from Firestore if localStorage is empty
         if (profile?.googleConnected && !getToken()) {
           const { googleAccessToken: savedToken, googleTokenExpiry: savedExpiry } = profile;
           if (savedToken && savedExpiry && Date.now() < savedExpiry - 60_000) {
@@ -100,17 +99,7 @@ export function AuthProvider({ children }) {
           }
         }
 
-        // setUser after restoreToken so getToken() reflects reality at render time.
-        setUser(prev => {
-          const fresh = mergeUser(fbUser, profile);
-          // Trust a valid localStorage token over whatever Firestore returned.
-          if (!fresh.googleConnected && getToken()) fresh.googleConnected = true;
-          // If Firestore says connected but no token available, show disconnected locally.
-          if (fresh.googleConnected && !getToken()) fresh.googleConnected = false;
-          return fresh;
-        });
-
-        // Init push notifications (asks permission once, saves FCM token)
+        setUser(mergeUser(fbUser, profile));
         initPushNotifications(fbUser.uid);
       } else {
         setUser(null);
@@ -155,19 +144,24 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = async () => {
     await setPersistence(auth, browserLocalPersistence);
-    const result     = await signInWithPopup(auth, googleProvider);
+    const provider = new GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/gmail.readonly');
+    provider.addScope('https://www.googleapis.com/auth/calendar.readonly');
+    provider.setCustomParameters({ prompt: 'consent', access_type: 'offline' });
+
+    const result = await signInWithPopup(auth, provider);
     const credential = GoogleAuthProvider.credentialFromResult(result);
-    if (credential?.accessToken) {
+    const googleAccessToken = credential?.accessToken;
+
+    if (googleAccessToken) {
       const expiry = Date.now() + 3600 * 1000;
-      storeGoogleToken(credential.accessToken);
+      storeGoogleToken(googleAccessToken);
       await updateDoc(doc(db, 'users', result.user.uid), {
         googleConnected:   true,
         googleEmail:       result.user.email,
-        googleAccessToken: credential.accessToken,
+        googleAccessToken: googleAccessToken,
         googleTokenExpiry: expiry,
       });
-      // onAuthStateChanged runs before updateDoc above completes (stale Firestore read),
-      // so we explicitly sync local state here after the write is confirmed.
       setUser(prev => prev ? {
         ...prev,
         googleConnected: true,
@@ -178,7 +172,10 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
-    clearToken();
+    // Don't clearToken() here — onAuthStateChanged(null) handles cleanup.
+    // Clearing before signOut caused a race where re-login couldn't restore
+    // the token from Firestore because the profile still said googleConnected
+    // but localStorage was already wiped.
     await signOut(auth);
   };
 

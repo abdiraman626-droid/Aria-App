@@ -39,7 +39,8 @@ export default function Login() {
     try {
       await login(email, password, rememberMe);
       toast.success('Welcome back!');
-      navigate('/dashboard');
+      // Don't navigate here — the useEffect watching `user` handles it
+      // after onAuthStateChanged sets the user in context.
     } catch (err) {
       toast.error(err.message || 'Invalid email or password');
     } finally {
@@ -49,8 +50,13 @@ export default function Login() {
 
   const handleGoogle = async () => {
     setGoogleLoading(true);
-    try { await loginWithGoogle(); }
-    catch { toast.error('Google sign-in failed'); setGoogleLoading(false); }
+    try {
+      await loginWithGoogle();
+    } catch {
+      toast.error('Google sign-in failed');
+    } finally {
+      setGoogleLoading(false);
+    }
   };
 
   return (

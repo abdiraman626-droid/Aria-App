@@ -2,13 +2,17 @@
   "functions": {
     "api/transcribe-start.js": { "maxDuration": 15 },
     "api/transcribe-poll.js":  { "maxDuration": 10 },
-    "api/summarize.js":        { "maxDuration": 30 }
+    "api/summarize.js":        { "maxDuration": 30 },
+    "api/summarize-emails.js": { "maxDuration": 30 }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" },
         { "key": "X-Frame-Options",        "value": "DENY" },
         { "key": "X-Content-Type-Options",  "value": "nosniff" },
         { "key": "X-XSS-Protection",        "value": "1; mode=block" },

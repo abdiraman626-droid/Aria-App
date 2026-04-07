@@ -1,5 +1,6 @@
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth, googleProvider } from '../lib/firebase';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { doc, updateDoc } from 'firebase/firestore';
+import { auth, db } from '../lib/firebase';
 
 const TOKEN_KEY   = 'aria_google_token';
 const EXPIRY_KEY  = 'aria_google_expiry';
@@ -23,7 +24,6 @@ export function restoreToken(token, expiry) {
   localStorage.setItem(EXPIRY_KEY, String(expiry));
 }
 
-
 export function clearToken() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(EXPIRY_KEY);
@@ -35,28 +35,49 @@ export function getProfile() {
   catch { return null; }
 }
 
-// ─── OAuth token flow ───────────────────────────────────────────────────────
+// ─── Connect Google (popup-based) ───────────────────────────────────────────
 
 export async function connectGoogle() {
-  const result     = await signInWithPopup(auth, googleProvider);
-  const credential = GoogleAuthProvider.credentialFromResult(result);
-  if (!credential?.accessToken) throw new Error('no_credential');
+  // 1. Build provider with Gmail + Calendar scopes
+  const provider = new GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/gmail.readonly');
+  provider.addScope('https://www.googleapis.com/auth/calendar.readonly');
+  provider.setCustomParameters({ prompt: 'consent', access_type: 'offline' });
 
-  const token  = credential.accessToken;
+  // 2. Sign in via popup
+  const result = await signInWithPopup(auth, provider);
+
+  // 3. Extract the Google access token
+  const credential = GoogleAuthProvider.credentialFromResult(result);
+  const googleAccessToken = credential.accessToken;
+  if (!googleAccessToken) throw new Error('no_access_token');
+
   const expiry = Date.now() + 3600 * 1000;
-  localStorage.setItem(TOKEN_KEY,  token);
+
+  // 4. Save to localStorage for immediate use
+  localStorage.setItem(TOKEN_KEY,  googleAccessToken);
   localStorage.setItem(EXPIRY_KEY, String(expiry));
 
+  // 5. Save to Firestore so the token persists across sessions
+  const uid = result.user.uid;
+  await updateDoc(doc(db, 'users', uid), {
+    googleConnected:   true,
+    googleEmail:       result.user.email,
+    googleAccessToken: googleAccessToken,
+    googleTokenExpiry: expiry,
+  });
+
+  // 6. Fetch Google profile for display
+  let profile = result.user;
   try {
     const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${googleAccessToken}` },
     });
-    const profile = await r.json();
+    profile = await r.json();
     localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
-    return { token, expiry, profile };
-  } catch {
-    return { token, expiry, profile: result.user };
-  }
+  } catch { /* use result.user as fallback */ }
+
+  return { token: googleAccessToken, expiry, profile };
 }
 
 export function disconnectGoogle() {
@@ -67,6 +88,7 @@ export function disconnectGoogle() {
 
 export async function fetchCalendarEvents() {
   const token = getToken();
+  console.log('[ARIA Calendar] Token from getToken():', token ? `${token.slice(0, 15)}...${token.slice(-10)} (length: ${token.length})` : 'NULL');
   if (!token) throw new Error('no_token');
 
   const now = new Date().toISOString();
@@ -78,6 +100,12 @@ export async function fetchCalendarEvents() {
     `&singleEvents=true&orderBy=startTime&maxResults=10`,
     { headers: { Authorization: `Bearer ${token}` } }
   );
+
+  console.log('[ARIA Calendar] API response status:', res.status);
+  if (res.status === 403) {
+    const errorBody = await res.clone().json().catch(() => ({}));
+    console.error('[ARIA Calendar] 403 error body:', JSON.stringify(errorBody, null, 2));
+  }
 
   if (res.status === 401) { clearToken(); throw new Error('token_expired'); }
   if (!res.ok) throw new Error('calendar_api_error');
@@ -92,6 +120,14 @@ export async function fetchCalendarEvents() {
 }
 
 // ─── Gmail API ──────────────────────────────────────────────────────────────
+
+// Decode HTML entities (Gmail snippets contain &#39; &amp; &quot; etc.)
+function decodeHtmlEntities(str) {
+  if (!str) return '';
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = str;
+  return textarea.value;
+}
 
 // Decode base64url (Gmail uses URL-safe base64)
 function decodeBase64url(str) {
@@ -138,6 +174,10 @@ function extractEmailBody(payload) {
 
 export async function fetchGmailMessages() {
   const token = getToken();
+  console.log('[ARIA Gmail] Token from getToken():', token ? `${token.slice(0, 15)}...${token.slice(-10)} (length: ${token.length})` : 'NULL');
+  console.log('[ARIA Gmail] Token starts with "ya29."?', token?.startsWith('ya29.'));
+  console.log('[ARIA Gmail] localStorage aria_google_token:', localStorage.getItem('aria_google_token')?.slice(0, 20) || 'EMPTY');
+  console.log('[ARIA Gmail] localStorage aria_google_expiry:', localStorage.getItem('aria_google_expiry'), 'now:', Date.now());
   if (!token) throw new Error('no_token');
 
   // Fetch 5 most recent inbox emails regardless of read/unread status
@@ -146,6 +186,12 @@ export async function fetchGmailMessages() {
     `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=5&q=${q}`,
     { headers: { Authorization: `Bearer ${token}` } }
   );
+
+  console.log('[ARIA Gmail] API response status:', listRes.status);
+  if (listRes.status === 403) {
+    const errorBody = await listRes.clone().json().catch(() => ({}));
+    console.error('[ARIA Gmail] 403 error body:', JSON.stringify(errorBody, null, 2));
+  }
 
   if (listRes.status === 401) { clearToken(); throw new Error('token_expired'); }
   if (!listRes.ok) throw new Error('gmail_api_error');
@@ -166,19 +212,19 @@ export async function fetchGmailMessages() {
   return details.map(msg => {
     const headers = msg.payload?.headers || [];
     const rawFrom  = headers.find(h => h.name === 'From')?.value    || 'Unknown';
-    const subject  = headers.find(h => h.name === 'Subject')?.value || '(no subject)';
+    const subject  = decodeHtmlEntities(headers.find(h => h.name === 'Subject')?.value || '(no subject)');
 
     const addrMatch   = rawFrom.match(/<([^>]+)>/);
     const emailAddr   = addrMatch ? addrMatch[1] : rawFrom;
     const displayName = rawFrom.replace(/\s*<[^>]+>/, '').replace(/"/g, '').trim() || emailAddr;
 
-    const snippet    = msg.snippet || '';
+    const snippet    = decodeHtmlEntities(msg.snippet || '');
     const receivedAt = msg.internalDate
       ? new Date(parseInt(msg.internalDate, 10)).toISOString()
       : new Date().toISOString();
 
-    // Extract full body text; cap at 4000 chars to keep AI prompts manageable
-    const rawBody = extractEmailBody(msg.payload);
+    // Extract full body text; decode entities, cap at 4000 chars
+    const rawBody = decodeHtmlEntities(extractEmailBody(msg.payload));
     const body    = rawBody.slice(0, 4000);
 
     return {
@@ -194,51 +240,33 @@ export async function fetchGmailMessages() {
   }).slice(0, 5);
 }
 
-// ─── AI email summarisation (single Claude call for all emails) ───────────
+// ─── AI email summarisation (via serverless proxy to Claude) ────────────
 
 export async function summarizeEmails(emails) {
-  const key = import.meta.env.VITE_ANTHROPIC_KEY || import.meta.env.VITE_ANTHROPIC_API_KEY;
-  if (!key || !emails.length) return {};
+  if (!emails.length) return {};
 
-  const emailList = emails.map((em, i) =>
-    `[${i + 1}] id:${em.id}\nFrom: ${em.from}\nSubject: ${em.subject}\n` +
-    `Body:\n${em.body || em.snippet || '(no body)'}`
-  ).join('\n\n---\n\n');
-
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  // Send emails to the serverless endpoint — API key is stored server-side
+  const res = await fetch('/api/summarize-emails', {
     method: 'POST',
-    headers: {
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-allow-browser': 'true',
-      'content-type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 2048,
-      messages: [{
-        role: 'user',
-        content: `For each email, write exactly one clear sentence summarizing what it is about. One sentence only — no bullet points, no extra detail.
-
-Return ONLY valid JSON, no markdown:
-{"summaries":[{"id":"<email id>","summary":"<one sentence>"}]}
-
-Emails:
-${emailList}`,
-      }],
+      emails: emails.map(em => ({
+        id: em.id,
+        from: em.from,
+        subject: em.subject,
+        snippet: em.snippet,
+        body: em.body,
+      })),
     }),
   });
 
-  if (!res.ok) return {};
-  const data = await res.json();
-  const text = data.content?.[0]?.text || '';
-  try {
-    const match = text.match(/\{[\s\S]*\}/);
-    const parsed = JSON.parse(match?.[0] || text);
-    const out = {};
-    (parsed.summaries || []).forEach(s => { out[s.id] = s.summary; });
-    return out;
-  } catch {
+  if (!res.ok) {
+    console.error('[ARIA Summarize] Server error:', res.status);
     return {};
   }
+
+  const data = await res.json();
+  const out = {};
+  (data.summaries || []).forEach(s => { out[s.id] = s.summary; });
+  return out;
 }

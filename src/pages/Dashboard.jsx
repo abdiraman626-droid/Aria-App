@@ -60,7 +60,10 @@ export default function Dashboard() {
   const [speakingEmailId,  setSpeakingEmailId]   = useState(null);
   const [emailSummaries,   setEmailSummaries]    = useState({});
   const [summarizing,      setSummarizing]       = useState(false);
-  const isGoogleConnected = !!getToken();
+  const [calError,         setCalError]          = useState(null);
+  const [emailError,       setEmailError]        = useState(null);
+  const isGoogleConnected = user?.googleConnected;
+  const hasValidToken      = !!getToken();
 
   const h     = new Date().getHours();
   const greet = h < 12 ? t('greeting_morning') : h < 17 ? t('greeting_afternoon') : t('greeting_evening');
@@ -112,28 +115,29 @@ export default function Dashboard() {
 
   // Load real Google data when token is available
   useEffect(() => {
-    if (!isGoogleConnected) return;
+    if (!isGoogleConnected || !hasValidToken) return;
 
+    setCalError(null);
     setCalLoading(true);
     fetchCalendarEvents()
       .then(setCalEvents)
-      .catch(() => {})
+      .catch(err => setCalError(err.message))
       .finally(() => setCalLoading(false));
 
+    setEmailError(null);
     setEmailLoading(true);
     fetchGmailMessages()
       .then(fetched => {
         setEmails(fetched);
-        // Summarize full email content with Claude once list is loaded
         setSummarizing(true);
         summarizeEmails(fetched)
           .then(setEmailSummaries)
           .catch(() => {})
           .finally(() => setSummarizing(false));
       })
-      .catch(() => {})
+      .catch(err => setEmailError(err.message))
       .finally(() => setEmailLoading(false));
-  }, [isGoogleConnected]);
+  }, [isGoogleConnected, hasValidToken]);
 
   const readEmailAloud = async (em) => {
     const svc = voice();
@@ -434,6 +438,16 @@ export default function Dashboard() {
                 Go to Settings →
               </a>
             </div>
+          ) : !hasValidToken || calError === 'no_token' || calError === 'token_expired' ? (
+            <div className="card" style={{ padding: '24px', textAlign: 'center', border: '1px solid var(--border)' }}>
+              <RefreshCw size={24} style={{ color: 'var(--text-muted)', margin: '0 auto 10px' }} />
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>
+                Google session expired — reconnect in Settings
+              </p>
+              <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+                Reconnect Google →
+              </a>
+            </div>
           ) : calLoading ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {[1, 2, 3].map(i => (
@@ -491,6 +505,20 @@ export default function Dashboard() {
               </a>
             </div>
 
+          ) : !hasValidToken || emailError === 'no_token' || emailError === 'token_expired' ? (
+            <div className="card" style={{ padding: '28px 24px', textAlign: 'center', border: '1px solid var(--border)' }}>
+              <RefreshCw size={26} style={{ color: 'var(--text-muted)', margin: '0 auto 10px' }} />
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 6 }}>
+                Google session expired
+              </p>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 14 }}>
+                Reconnect in Settings to refresh your inbox
+              </p>
+              <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+                Reconnect Google →
+              </a>
+            </div>
+
           ) : emailLoading ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[1, 2, 3].map(i => (
@@ -498,9 +526,14 @@ export default function Dashboard() {
               ))}
             </div>
 
+          ) : emailError ? (
+            <div className="card" style={{ padding: '28px', textAlign: 'center' }}>
+              <p style={{ fontSize: 15, color: '#ef4444' }}>Failed to load emails. Try refreshing.</p>
+            </div>
+
           ) : emails.length === 0 ? (
             <div className="card" style={{ padding: '28px', textAlign: 'center' }}>
-              <p style={{ fontSize: 15, color: 'var(--text-muted)' }}>No emails in inbox</p>
+              <p style={{ fontSize: 15, color: 'var(--text-muted)' }}>Inbox is empty — you're all caught up!</p>
             </div>
 
           ) : (

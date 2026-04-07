@@ -97,23 +97,20 @@ export default function Settings() {
 
   const handleConnectGoogle = async () => {
     setGoogleLoading(true);
-    // Safety net — reset after 30s in case the Promise ever stalls
-    const safetyTimer = setTimeout(() => setGoogleLoading(false), 30_000);
     try {
       const { token, expiry, profile } = await connectGoogle();
       setGoogleConn(true);
+      // connectGoogle() already saved to Firestore — just sync local state
       updateUser({
         googleConnected:   true,
         googleEmail:       profile?.email || null,
-        googleAccessToken: token,
-        googleTokenExpiry: expiry,
       });
       toast.success(`Connected as ${profile?.email || 'Google account'}`);
     } catch (err) {
-      const silent = ['access_denied', 'popup_closed', 'popup_blocked_by_browser'].includes(err.message);
+      const code = err.code || err.message || '';
+      const silent = code.includes('popup-closed') || code.includes('access_denied');
       if (!silent) toast.error('Google sign-in failed. Try again.');
     } finally {
-      clearTimeout(safetyTimer);
       setGoogleLoading(false);
     }
   };
