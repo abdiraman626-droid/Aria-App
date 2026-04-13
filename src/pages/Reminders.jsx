@@ -69,13 +69,13 @@ export default function Reminders() {
     await svc.speak(text);
   };
 
-  const { hasMpesa, hasTeam } = usePlan();
+  const { hasMpesa, hasTeam, hasWhatsApp } = usePlan();
 
   const markPaid = async (r) => {
     await update(r.id, { paymentConfirmed: true, paymentConfirmedAt: new Date().toISOString() });
     toast.success('Payment marked as confirmed');
   };
-  const canWhatsAppAny = hasTeam;
+  const canWhatsAppAny = hasWhatsApp;
 
   const buildWhatsAppMsg = (r) => {
     const d = new Date(r.dateTime);
@@ -277,11 +277,13 @@ export default function Reminders() {
                           style={{ width: 32, height: 32, borderRadius: 10, background: speaking === r.id ? 'rgba(139,92,246,0.2)' : 'var(--bg-card2)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: speaking === r.id ? '#8B5CF6' : 'var(--text-muted)' }}>
                           <Mic size={13} />
                         </button>
-                        {/* WhatsApp */}
+                        {/* WhatsApp — Corporate Mini+ only */}
+                        {hasWhatsApp && (
                         <button onClick={() => sendWhatsApp(r)} title="Send via WhatsApp"
                           style={{ width: 32, height: 32, borderRadius: 10, background: 'var(--bg-card2)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#22c55e' }}>
                           <MessageCircle size={13} />
                         </button>
+                        )}
                         {/* Email */}
                         <button onClick={() => sendEmail(r)} title="Send email reminder"
                           style={{ width: 32, height: 32, borderRadius: 10, background: 'var(--bg-card2)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F6EF7' }}>

@@ -46,13 +46,14 @@ function maxDate() {
 export default function ReminderSheet({ open, onClose, editing, initial }) {
   const { add, update, reminders } = useReminders();
   const { members, clients }       = useTeam();
-  const { canAddReminder, reminderLimit, plan, hasTeam, hasMpesa, isCorporate, isMajorCorporate, isEnterprise } = usePlan();
+  const { canAddReminder, reminderLimit, plan, hasTeam, hasWhatsApp, hasMpesa, isCorporate, isMajorCorporate, isEnterprise } = usePlan();
   const isPremium = isCorporate || isMajorCorporate || isEnterprise;
+  const availableChannels = hasWhatsApp ? CHANNELS : CHANNELS.filter(c => c.id !== 'whatsapp');
 
   const [title,         setTitle]         = useState('');
   const [desc,          setDesc]          = useState('');
   const [dt,            setDt]            = useState(defaultDT());
-  const [channel,       setChannel]       = useState('whatsapp');
+  const [channel,       setChannel]       = useState('notification');
   const [priority,      setPriority]      = useState('medium');
   const [recurrence,    setRecurrence]    = useState(null);
   const [recurrenceEnd, setRecurrenceEnd] = useState('');
@@ -67,7 +68,7 @@ export default function ReminderSheet({ open, onClose, editing, initial }) {
       setTitle(editing?.title       || initial?.title       || '');
       setDesc(editing?.description  || initial?.description || '');
       setDt(editing ? new Date(editing.dateTime).toISOString().slice(0, 16) : defaultDT());
-      setChannel(editing?.channel   || 'whatsapp');
+      setChannel(editing?.channel   || 'notification');
       setPriority(editing?.priority || 'medium');
       setRecurrence(editing?.recurrence    || null);
       setRecurrenceEnd(editing?.recurrenceEnd ? new Date(editing.recurrenceEnd).toISOString().slice(0, 10) : '');
@@ -197,7 +198,7 @@ export default function ReminderSheet({ open, onClose, editing, initial }) {
               <div>
                 <label className="label">Notify via</label>
                 <div className="grid grid-cols-2 gap-2">
-                  {CHANNELS.map(c => (
+                  {availableChannels.map(c => (
                     <button type="button" key={c.id} onClick={() => setChannel(c.id)}
                       className="flex items-center gap-2.5 px-4 py-3 rounded-2xl transition-all"
                       style={{

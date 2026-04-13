@@ -1,11 +1,11 @@
 import { useAuth } from '../context/AuthContext';
 
 const LIMITS = {
-  individual:      { reminders: Infinity, team: false, teamLimit: 3,        mpesa: false, customVoice: false, clientPortal: false, emailSummaries: false, meetingRecorder: false, analytics: false, workflows: false },
-  corporate_mini:  { reminders: Infinity, team: true,  teamLimit: 10,       mpesa: false, customVoice: false, clientPortal: true,  emailSummaries: true,  meetingRecorder: false, analytics: false, workflows: false },
-  corporate:       { reminders: Infinity, team: true,  teamLimit: 50,       mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: false, workflows: false },
-  major_corporate: { reminders: Infinity, team: true,  teamLimit: 500,      mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: true,  workflows: false },
-  enterprise:      { reminders: Infinity, team: true,  teamLimit: Infinity, mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: true,  workflows: true  },
+  individual:      { reminders: Infinity, team: false, teamLimit: 3,        whatsapp: false, mpesa: false, customVoice: false, clientPortal: false, emailSummaries: false, meetingRecorder: false, analytics: false, workflows: false },
+  corporate_mini:  { reminders: Infinity, team: true,  teamLimit: 10,       whatsapp: true,  mpesa: false, customVoice: false, clientPortal: true,  emailSummaries: true,  meetingRecorder: false, analytics: false, workflows: false },
+  corporate:       { reminders: Infinity, team: true,  teamLimit: 50,       whatsapp: true,  mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: false, workflows: false },
+  major_corporate: { reminders: Infinity, team: true,  teamLimit: 500,      whatsapp: true,  mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: true,  workflows: false },
+  enterprise:      { reminders: Infinity, team: true,  teamLimit: Infinity, whatsapp: true,  mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: true,  workflows: true  },
 };
 
 export function usePlan() {
@@ -22,6 +22,7 @@ export function usePlan() {
     reminderLimit:   limits.reminders,
     hasTeam:         limits.team,
     teamLimit:       limits.teamLimit,
+    hasWhatsApp:     limits.whatsapp,
     hasMpesa:        limits.mpesa,
     hasCustomVoice:  limits.customVoice,
     hasClientPortal: limits.clientPortal,

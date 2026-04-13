@@ -9,13 +9,13 @@ const PLANS = [
   {
     id: 'individual', name: 'Individual', price: 5000, icon: Star,
     color: '#4F6EF7', desc: '1–3 people',
-    features: ['Built-in calendar (manual scheduling)', 'AI assistant', 'WhatsApp notifications', 'Multi-language: English, Somali, Arabic', '7-day free trial'],
-    notIncluded: ['Email summaries', 'Meeting recorder', 'Analytics'],
+    features: ['Built-in calendar (manual scheduling)', 'AI assistant', 'Browser & email notifications', 'Multi-language: English, Somali, Arabic', '7-day free trial'],
+    notIncluded: ['WhatsApp reminders', 'Email summaries', 'Meeting recorder'],
   },
   {
     id: 'corporate_mini', name: 'Corporate Mini', price: 15000, priceNote: '/person', icon: Zap, popular: true,
     color: '#8B5CF6', desc: '5–10 people',
-    features: ['Everything in Individual', 'Email summaries', 'Google Calendar sync', 'Team admin dashboard', 'Member invites by email', '7-day free trial'],
+    features: ['Everything in Individual', 'WhatsApp reminders (WasenderAPI)', 'Email summaries', 'Google Calendar sync', 'Team admin dashboard', 'Member invites by email', '7-day free trial'],
     notIncluded: ['Voice (Rachel AI)', 'Meeting recorder'],
   },
   {
@@ -40,7 +40,7 @@ const PLANS = [
 
 const FEATURES = [
   { icon: Mic,            title: 'Voice Briefings', desc: 'Every morning, ARIA greets you by name and reads your full schedule aloud.' },
-  { icon: MessageCircle,  title: 'WhatsApp Reminders',    desc: 'Reminders delivered to your WhatsApp — the app you already use all day.' },
+  { icon: MessageCircle,  title: 'WhatsApp Reminders',    desc: 'Reminders delivered to your WhatsApp via WasenderAPI. Available on Corporate Mini and above.' },
   { icon: Calendar,       title: 'Google Calendar Sync',  desc: 'Connect once. All your meetings appear automatically, no manual entry needed.' },
   { icon: Mail,           title: 'Gmail Intelligence',    desc: 'ARIA scans your inbox and surfaces urgent emails in your morning briefing.' },
   { icon: Globe,          title: 'English, Somali & Arabic', desc: 'Switch languages instantly. ARIA speaks and responds in all three.' },
@@ -56,7 +56,7 @@ const TESTIMONIALS = [
 const TABLE = [
   { feature: 'People',                   individual: '1–3',  corporate_mini: '5–10',  corporate: '10–50', major_corporate: 'Up to 500', enterprise: '500+' },
   { feature: 'AI assistant',             individual: true,    corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
-  { feature: 'WhatsApp notifications',   individual: true,    corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'WhatsApp reminders',        individual: false,   corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
   { feature: 'Multi-language',           individual: true,    corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
   { feature: 'Email summaries',          individual: false,   corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
   { feature: 'Google Calendar sync',     individual: false,   corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
