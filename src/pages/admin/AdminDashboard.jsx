@@ -12,9 +12,11 @@ import { db } from '../../lib/firebase';
 import toast from 'react-hot-toast';
 
 const PLAN_META = {
-  personal: { price:99,  color:'#4F6EF7', icon:Star  },
-  business: { price:299, color:'#8B5CF6', icon:Zap   },
-  premium:  { price:500, color:'#f59e0b', icon:Crown  },
+  individual:      { price:5000,   color:'#4F6EF7', icon:Star  },
+  corporate_mini:  { price:15000,  color:'#8B5CF6', icon:Zap   },
+  corporate:       { price:30000,  color:'#22c55e', icon:Zap   },
+  major_corporate: { price:100000, color:'#f59e0b', icon:Crown },
+  enterprise:      { price:250000, color:'#ef4444', icon:Crown },
 };
 
 function msgs()      { try { return JSON.parse(localStorage.getItem('aria_msgs')||'[]'); } catch { return []; } }
@@ -39,7 +41,7 @@ function toUser(id, p) {
     whatsappNumber: p.whatsappNumber || '',
     onTrial:        p.onTrial        ?? true,
     trialEnds:      p.trialEnds      || null,
-    monthlyPrice:   p.monthlyPrice   || 99,
+    monthlyPrice:   p.monthlyPrice   || 5000,
     active:         p.active         ?? true,
     googleConnected:p.googleConnected || false,
     createdAt:      p.createdAt?.toDate?.()?.toISOString() || p.createdAt || null,
@@ -91,9 +93,11 @@ export default function AdminDashboard() {
     trial:     users.filter(u=>u.active&&u.onTrial).length,
     cancelled: users.filter(u=>!u.active).length,
     byPlan: {
-      personal: users.filter(u=>u.plan==='personal'&&u.active).length,
-      business: users.filter(u=>u.plan==='business'&&u.active).length,
-      premium:  users.filter(u=>u.plan==='premium'&&u.active).length,
+      individual:      users.filter(u=>u.plan==='individual'&&u.active).length,
+      corporate_mini:  users.filter(u=>u.plan==='corporate_mini'&&u.active).length,
+      corporate:       users.filter(u=>u.plan==='corporate'&&u.active).length,
+      major_corporate: users.filter(u=>u.plan==='major_corporate'&&u.active).length,
+      enterprise:      users.filter(u=>u.plan==='enterprise'&&u.active).length,
     },
   };
 
@@ -110,7 +114,7 @@ export default function AdminDashboard() {
 
   const doSetPlan = async (userId, plan) => {
     setSaving(true);
-    const ok = await updateUserDoc(userId, { plan, monthlyPrice: PLAN_META[plan]?.price || 99 });
+    const ok = await updateUserDoc(userId, { plan, monthlyPrice: PLAN_META[plan]?.price || 5000 });
     if (ok) toast.success(`Plan → ${plan}`);
     setSaving(false);
     refresh();

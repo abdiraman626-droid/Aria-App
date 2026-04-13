@@ -4,17 +4,21 @@ import { Link } from 'react-router-dom';
 import { usePlan } from '../hooks/usePlan';
 
 const META = {
-  business: { color: '#8B5CF6', label: 'Business', price: 'KES 299/mo' },
-  premium:  { color: '#f59e0b', label: 'Premium',  price: 'KES 500/mo' },
+  corporate_mini:  { color: '#8B5CF6', label: 'Corporate Mini',  price: 'KSH 15,000/mo' },
+  corporate:       { color: '#22c55e', label: 'Corporate',       price: 'KSH 30,000/mo' },
+  major_corporate: { color: '#f59e0b', label: 'Major Corporate', price: 'KSH 100,000/mo' },
+  enterprise:      { color: '#ef4444', label: 'Enterprise',      price: 'KSH 250,000/mo' },
 };
 
-export default function UpgradePrompt({ feature, requiredPlan = 'business', compact = false }) {
-  const { isPremium, isBusiness } = usePlan();
-  // User already has access — don't show prompt
-  if (isPremium) return null;
-  if (isBusiness && requiredPlan === 'business') return null;
+export default function UpgradePrompt({ feature, requiredPlan = 'corporate_mini', compact = false }) {
+  const { plan } = usePlan();
+  const planOrder = ['individual', 'corporate_mini', 'corporate', 'major_corporate', 'enterprise'];
+  const userIdx = planOrder.indexOf(plan);
+  const requiredIdx = planOrder.indexOf(requiredPlan);
+  // User already has access
+  if (userIdx >= requiredIdx) return null;
 
-  const p = META[requiredPlan] || META.business;
+  const p = META[requiredPlan] || META.corporate_mini;
 
   if (compact) {
     return (

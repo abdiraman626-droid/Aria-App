@@ -7,9 +7,11 @@ import toast from 'react-hot-toast';
 import { sanitize } from '../lib/sanitize';
 
 const PLANS = [
-  { id:'personal', label:'Personal',  price:99,  desc:'1 user' },
-  { id:'business', label:'Business',  price:299, desc:'5 users', popular:true },
-  { id:'premium',  label:'Premium',   price:500, desc:'Unlimited' },
+  { id:'individual',      label:'Individual',      price:'5,000',   desc:'1–3 people' },
+  { id:'corporate_mini',  label:'Corporate Mini',  price:'15,000',  desc:'5–10 people', popular:true },
+  { id:'corporate',       label:'Corporate',       price:'30,000',  desc:'10–50 people' },
+  { id:'major_corporate', label:'Major Corporate', price:'100,000', desc:'Up to 500' },
+  { id:'enterprise',      label:'Enterprise',      price:'250,000', desc:'500+' },
 ];
 
 // Google G icon SVG
@@ -28,7 +30,7 @@ export default function Signup() {
   const { signup, loginWithGoogle } = useAuth();
   const [params] = useSearchParams();
 
-  const [form,        setForm]        = useState({ name:'', email:'', phone:'', password:'', plan: params.get('plan') || 'business' });
+  const [form,        setForm]        = useState({ name:'', email:'', phone:'', password:'', plan: params.get('plan') || 'individual' });
   const [show,        setShow]        = useState(false);
   const [loading,     setLoading]     = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -89,16 +91,16 @@ export default function Signup() {
           </div>
 
           {/* Plan selector */}
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8, marginBottom:20 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(100px, 1fr))', gap:8, marginBottom:20 }}>
             {PLANS.map(p => (
               <button key={p.id} type="button" onClick={() => setForm(f => ({ ...f, plan:p.id }))}
                 style={{ padding:'10px 8px', borderRadius:14, border:`1px solid ${form.plan===p.id?'#4F6EF7':'var(--border)'}`, background: form.plan===p.id?'rgba(79,110,247,0.1)':'var(--bg-card2)', cursor:'pointer', position:'relative' }}>
                 {p.popular && <div style={{ position:'absolute', top:-8, left:'50%', transform:'translateX(-50%)', background:'#8B5CF6', color:'#fff', fontSize:9, fontWeight:700, padding:'2px 8px', borderRadius:100, whiteSpace:'nowrap' }}>POPULAR</div>}
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2 }}>
-                  <span style={{ fontSize:13, fontWeight:700, color: form.plan===p.id?'#4F6EF7':'#fff' }}>{p.label}</span>
+                  <span style={{ fontSize:12, fontWeight:700, color: form.plan===p.id?'#4F6EF7':'#fff' }}>{p.label}</span>
                   {form.plan===p.id && <Check size={11} color="#4F6EF7"/>}
                 </div>
-                <div style={{ fontSize:12, color:'var(--text-muted)' }}>${p.price}/mo</div>
+                <div style={{ fontSize:11, color:'var(--text-muted)' }}>KSH {p.price}/mo</div>
               </button>
             ))}
           </div>

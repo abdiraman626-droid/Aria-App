@@ -1,35 +1,49 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Check, Star, Mic, MessageCircle, Calendar, Mail, Globe, Zap, Shield, Crown, X } from 'lucide-react';
+import { ArrowRight, Check, Star, Mic, MessageCircle, Calendar, Mail, Globe, Zap, Shield, Crown, X, Building2, Building } from 'lucide-react';
+
+const KSH_TO_USD = 130;
 
 const PLANS = [
   {
-    id: 'personal', name: 'Personal', price: 99, icon: Star,
-    color: '#4F6EF7', desc: 'For individual professionals',
-    features: ['1 user', 'Voice briefings (EN + SW)', 'Gmail & Calendar sync', 'WhatsApp reminders', '20 reminders/month', '7-day free trial'],
-    notIncluded: ['Team management', 'M-Pesa integration', 'Account manager'],
+    id: 'individual', name: 'Individual', price: 5000, icon: Star,
+    color: '#4F6EF7', desc: '1–3 people',
+    features: ['Built-in calendar (manual scheduling)', 'AI assistant', 'WhatsApp notifications', 'Multi-language: English, Somali, Arabic', '7-day free trial'],
+    notIncluded: ['Email summaries', 'Meeting recorder', 'Analytics'],
   },
   {
-    id: 'business', name: 'Business', price: 299, icon: Zap, popular: true,
-    color: '#8B5CF6', desc: 'For growing teams',
-    features: ['5 users', 'Everything in Personal', 'Team management', 'Client reminders', 'Weekly summaries', 'Priority support', 'Unlimited reminders', '7-day free trial'],
-    notIncluded: ['M-Pesa integration', 'Account manager'],
+    id: 'corporate_mini', name: 'Corporate Mini', price: 15000, priceNote: '/person', icon: Zap, popular: true,
+    color: '#8B5CF6', desc: '5–10 people',
+    features: ['Everything in Individual', 'Email summaries', 'Google Calendar sync', 'Team admin dashboard', 'Member invites by email', '7-day free trial'],
+    notIncluded: ['Voice (Rachel AI)', 'Meeting recorder'],
   },
   {
-    id: 'premium', name: 'Premium', price: 500, icon: Crown,
-    color: '#f59e0b', desc: 'For enterprises',
-    features: ['Unlimited users', 'Everything in Business', 'Custom AI voice', 'M-Pesa integration', 'Dedicated account manager', 'Monthly strategy call', '7-day free trial'],
+    id: 'corporate', name: 'Corporate', price: 30000, icon: Building,
+    color: '#22c55e', desc: '10–50 people',
+    features: ['Everything in Corporate Mini', 'Voice (Rachel AI)', 'Meeting recorder + transcription', 'Priority support', '7-day free trial'],
+    notIncluded: ['Advanced analytics', 'Automated workflows'],
+  },
+  {
+    id: 'major_corporate', name: 'Major Corporate', price: 100000, icon: Crown,
+    color: '#f59e0b', desc: 'Up to 500 people',
+    features: ['Everything in Corporate', 'Advanced analytics dashboard', 'Automated weekly meeting reports', 'Multi-department management', 'Staff training videos', '7-day free trial'],
+    notIncluded: ['Executive dashboard', 'Automated workflows'],
+  },
+  {
+    id: 'enterprise', name: 'Enterprise', price: 250000, icon: Building2,
+    color: '#ef4444', desc: '500+ people',
+    features: ['Everything in Major Corporate', 'Executive dashboard', 'Monthly AI-generated strategy reports', 'Automated workflows', 'Direct WhatsApp support line', '7-day free trial'],
     notIncluded: [],
   },
 ];
 
 const FEATURES = [
-  { icon: Mic,            title: 'Lamin Voice Briefings', desc: 'Every morning, ARIA greets you by name and reads your full schedule aloud in English or Swahili.' },
+  { icon: Mic,            title: 'Voice Briefings', desc: 'Every morning, ARIA greets you by name and reads your full schedule aloud.' },
   { icon: MessageCircle,  title: 'WhatsApp Reminders',    desc: 'Reminders delivered to your WhatsApp — the app you already use all day.' },
   { icon: Calendar,       title: 'Google Calendar Sync',  desc: 'Connect once. All your meetings appear automatically, no manual entry needed.' },
   { icon: Mail,           title: 'Gmail Intelligence',    desc: 'ARIA scans your inbox and surfaces urgent emails in your morning briefing.' },
-  { icon: Globe,          title: 'English & Swahili',     desc: 'Switch languages instantly. ARIA speaks and responds in both.' },
+  { icon: Globe,          title: 'English, Somali & Arabic', desc: 'Switch languages instantly. ARIA speaks and responds in all three.' },
   { icon: Shield,         title: 'Secure & Private',      desc: 'Your data never leaves your account. Enterprise-grade encryption throughout.' },
 ];
 
@@ -40,18 +54,23 @@ const TESTIMONIALS = [
 ];
 
 const TABLE = [
-  { feature: 'Users',               personal: '1',         business: '5',           premium: 'Unlimited' },
-  { feature: 'Reminders/month',     personal: '20',        business: 'Unlimited',   premium: 'Unlimited' },
-  { feature: 'Voice briefings',     personal: true,        business: true,          premium: true },
-  { feature: 'English & Swahili',   personal: true,        business: true,          premium: true },
-  { feature: 'WhatsApp reminders',  personal: true,        business: true,          premium: true },
-  { feature: 'Gmail & Calendar',    personal: true,        business: true,          premium: true },
-  { feature: 'Team management',     personal: false,       business: true,          premium: true },
-  { feature: 'Weekly summaries',    personal: false,       business: true,          premium: true },
-  { feature: 'Priority support',    personal: false,       business: true,          premium: true },
-  { feature: 'Custom voice',        personal: false,       business: false,         premium: true },
-  { feature: 'M-Pesa integration',  personal: false,       business: false,         premium: true },
-  { feature: 'Account manager',     personal: false,       business: false,         premium: true },
+  { feature: 'People',                   individual: '1–3',  corporate_mini: '5–10',  corporate: '10–50', major_corporate: 'Up to 500', enterprise: '500+' },
+  { feature: 'AI assistant',             individual: true,    corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'WhatsApp notifications',   individual: true,    corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Multi-language',           individual: true,    corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Email summaries',          individual: false,   corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Google Calendar sync',     individual: false,   corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Team admin dashboard',     individual: false,   corporate_mini: true,    corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Voice (Rachel AI)',        individual: false,   corporate_mini: false,   corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Meeting recorder',         individual: false,   corporate_mini: false,   corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Priority support',         individual: false,   corporate_mini: false,   corporate: true,    major_corporate: true,        enterprise: true },
+  { feature: 'Advanced analytics',       individual: false,   corporate_mini: false,   corporate: false,   major_corporate: true,        enterprise: true },
+  { feature: 'Weekly meeting reports',   individual: false,   corporate_mini: false,   corporate: false,   major_corporate: true,        enterprise: true },
+  { feature: 'Multi-department mgmt',    individual: false,   corporate_mini: false,   corporate: false,   major_corporate: true,        enterprise: true },
+  { feature: 'Executive dashboard',      individual: false,   corporate_mini: false,   corporate: false,   major_corporate: false,       enterprise: true },
+  { feature: 'Strategy reports',         individual: false,   corporate_mini: false,   corporate: false,   major_corporate: false,       enterprise: true },
+  { feature: 'Automated workflows',      individual: false,   corporate_mini: false,   corporate: false,   major_corporate: false,       enterprise: true },
+  { feature: 'WhatsApp support line',    individual: false,   corporate_mini: false,   corporate: false,   major_corporate: false,       enterprise: true },
 ];
 
 function FadeUp({ children, delay = 0, className = '' }) {
@@ -75,9 +94,12 @@ function Cell({ v }) {
 }
 
 export default function Landing() {
-  const [annual, setAnnual] = useState(false);
+  const [usd, setUsd] = useState(false);
 
-  const price = (p) => annual ? Math.round(p * 0.8) : p;
+  const fmtPrice = (p) => {
+    if (usd) return `$${Math.round(p / KSH_TO_USD).toLocaleString()}`;
+    return `KSH ${p.toLocaleString()}`;
+  };
 
   return (
     <div style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}>
@@ -121,13 +143,13 @@ export default function Landing() {
           >
             <Link to="/login"  className="btn btn-ghost btn-lg">Sign In</Link>
             <Link to="/signup" className="btn btn-ghost btn-lg">Sign Up</Link>
-            <Link to="/signup?plan=personal" className="btn btn-primary btn-lg">
+            <Link to="/signup?plan=individual" className="btn btn-primary btn-lg">
               Start Free Trial <ArrowRight size={20} />
             </Link>
           </motion.div>
           <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.6 }}
             style={{ marginTop:16, fontSize:14, color:'var(--text-muted)' }}>
-            No credit card required · Cancel anytime · Plans from $99/month
+            No credit card required · Cancel anytime · Plans from KSH 5,000/month
           </motion.p>
 
           {/* App Mockup */}
@@ -144,7 +166,7 @@ export default function Landing() {
                   </div>
                   <div style={{ textAlign:'left' }}>
                     <div style={{ fontSize:13, fontWeight:700, fontFamily:'var(--font-head)', color:'#fff' }}>Good morning, Amina</div>
-                    <div style={{ fontSize:11, color:'var(--text-muted)' }}>Reading briefing with Lamin...</div>
+                    <div style={{ fontSize:11, color:'var(--text-muted)' }}>Reading briefing with Rachel...</div>
                   </div>
                 </div>
                 <div style={{ display:'flex', gap:3, alignItems:'flex-end', height:20 }}>
@@ -232,24 +254,24 @@ export default function Landing() {
             <p style={{ fontSize:12, fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:'var(--blue)', marginBottom:12 }}>PRICING</p>
             <h2 style={{ fontFamily:'var(--font-head)', fontSize:'clamp(32px,4vw,52px)', fontWeight:800, letterSpacing:'-0.02em', marginBottom:12 }}>Simple, honest pricing</h2>
             <p style={{ fontSize:18, color:'var(--text-secondary)', marginBottom:28 }}>7-day free trial on all plans · No credit card required</p>
-            {/* Annual toggle */}
+            {/* KSH / USD toggle */}
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl" style={{ background:'var(--bg-card)', border:'1px solid var(--border)' }}>
-              <span style={{ fontSize:14, color: annual?'var(--text-muted)':'#fff' }}>Monthly</span>
-              <button onClick={() => setAnnual(!annual)}
-                style={{ width:44, height:24, borderRadius:12, background: annual?'var(--blue)':'var(--bg-card2)', position:'relative', border:'1px solid var(--border)', cursor:'pointer', transition:'background 0.2s' }}>
-                <span style={{ position:'absolute', top:2, left: annual?22:2, width:18, height:18, borderRadius:'50%', background:'#fff', transition:'left 0.2s' }} />
+              <span style={{ fontSize:14, fontWeight: !usd?700:400, color: !usd?'#fff':'var(--text-muted)' }}>KSH</span>
+              <button onClick={() => setUsd(!usd)}
+                style={{ width:44, height:24, borderRadius:12, background: usd?'var(--blue)':'var(--bg-card2)', position:'relative', border:'1px solid var(--border)', cursor:'pointer', transition:'background 0.2s' }}>
+                <span style={{ position:'absolute', top:2, left: usd?22:2, width:18, height:18, borderRadius:'50%', background:'#fff', transition:'left 0.2s' }} />
               </button>
-              <span style={{ fontSize:14, color: annual?'#fff':'var(--text-muted)' }}>Annual <span style={{ color:'#22c55e', fontWeight:600 }}>-20%</span></span>
+              <span style={{ fontSize:14, fontWeight: usd?700:400, color: usd?'#fff':'var(--text-muted)' }}>USD</span>
             </div>
           </FadeUp>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:20, marginBottom:48 }}>
             {PLANS.map((plan, i) => (
-              <FadeUp key={plan.id} delay={i*0.1}>
+              <FadeUp key={plan.id} delay={i*0.08}>
                 <div
                   className="card"
                   style={{
-                    padding:'32px 28px',
+                    padding:'28px 24px',
                     position:'relative',
                     border: plan.popular ? `1px solid ${plan.color}44` : '1px solid var(--border)',
                     background: plan.popular ? `${plan.color}08` : 'var(--bg-card)',
@@ -261,16 +283,15 @@ export default function Landing() {
                       MOST POPULAR
                     </div>
                   )}
-                  <div style={{ width:44, height:44, borderRadius:14, background:`${plan.color}18`, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:20 }}>
-                    <plan.icon size={20} style={{ color:plan.color }} />
+                  <div style={{ width:40, height:40, borderRadius:12, background:`${plan.color}18`, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:16 }}>
+                    <plan.icon size={18} style={{ color:plan.color }} />
                   </div>
-                  <p style={{ fontSize:12, fontWeight:700, letterSpacing:'0.1em', color:'var(--text-muted)', marginBottom:6, textTransform:'uppercase' }}>{plan.name}</p>
+                  <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.1em', color:'var(--text-muted)', marginBottom:6, textTransform:'uppercase' }}>{plan.name}</p>
                   <div style={{ display:'flex', alignItems:'baseline', gap:4, marginBottom:4 }}>
-                    <span style={{ fontFamily:'var(--font-head)', fontSize:52, fontWeight:800, letterSpacing:'-0.03em' }}>${price(plan.price)}</span>
-                    <span style={{ fontSize:14, color:'var(--text-muted)' }}>/month</span>
+                    <span style={{ fontFamily:'var(--font-head)', fontSize:32, fontWeight:800, letterSpacing:'-0.03em' }}>{fmtPrice(plan.price)}</span>
+                    <span style={{ fontSize:13, color:'var(--text-muted)' }}>/mo{plan.priceNote || ''}</span>
                   </div>
-                  {annual && <p style={{ fontSize:13, color:'#22c55e', marginBottom:4 }}>Billed ${price(plan.price)*12}/year</p>}
-                  <p style={{ fontSize:14, color:'var(--text-muted)', marginBottom:24 }}>{plan.desc}</p>
+                  <p style={{ fontSize:14, color:'var(--text-muted)', marginBottom:20 }}>{plan.desc}</p>
 
                   <ul style={{ listStyle:'none', marginBottom:28, display:'flex', flexDirection:'column', gap:10 }}>
                     {plan.features.map(f => (
@@ -311,36 +332,37 @@ export default function Landing() {
           {/* Comparison table */}
           <FadeUp>
             <h3 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800, textAlign:'center', marginBottom:32 }}>Full comparison</h3>
-            <div className="card" style={{ overflow:'hidden', padding:0 }}>
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', borderBottom:'1px solid var(--border)' }}>
-                <div style={{ padding:'16px 20px' }} />
-                {PLANS.map(p => (
-                  <div key={p.id} style={{ padding:'16px 12px', textAlign:'center', borderLeft:'1px solid var(--border)' }}>
-                    <p style={{ fontWeight:700, fontSize:14, color: p.color }}>{p.name}</p>
-                    <p style={{ fontSize:13, color:'var(--text-muted)' }}>${p.price}/mo</p>
-                  </div>
-                ))}
-              </div>
-              {TABLE.map((row, i) => (
-                <div key={row.feature} style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', borderBottom: i<TABLE.length-1 ? '1px solid var(--border)' : 'none', background: i%2===1 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
-                  <div style={{ padding:'13px 20px', fontSize:14, color:'var(--text-secondary)' }}>{row.feature}</div>
-                  {['personal','business','premium'].map(k => (
-                    <div key={k} style={{ padding:'13px 12px', textAlign:'center', borderLeft:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-                      <Cell v={row[k]} />
+            <div className="card" style={{ overflow:'auto', padding:0 }}>
+              <div style={{ minWidth:700 }}>
+                <div style={{ display:'grid', gridTemplateColumns:'1.5fr repeat(5, 1fr)', borderBottom:'1px solid var(--border)' }}>
+                  <div style={{ padding:'16px 20px' }} />
+                  {PLANS.map(p => (
+                    <div key={p.id} style={{ padding:'14px 8px', textAlign:'center', borderLeft:'1px solid var(--border)' }}>
+                      <p style={{ fontWeight:700, fontSize:12, color: p.color }}>{p.name}</p>
+                      <p style={{ fontSize:11, color:'var(--text-muted)' }}>{fmtPrice(p.price)}/mo</p>
                     </div>
                   ))}
                 </div>
-              ))}
-              {/* CTA row */}
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', background:'var(--bg-card2)', padding:'16px 0' }}>
-                <div />
-                {PLANS.map(p => (
-                  <div key={p.id} style={{ padding:'0 12px', borderLeft:'1px solid var(--border)' }}>
-                    <Link to={`/signup?plan=${p.id}`} className="btn btn-sm w-full" style={{ background: p.popular?p.color:'transparent', border:`1px solid ${p.popular?p.color:'var(--border)'}`, color: p.popular?'#fff':'var(--text-muted)', fontSize:12 }}>
-                      Get {p.name}
-                    </Link>
+                {TABLE.map((row, i) => (
+                  <div key={row.feature} style={{ display:'grid', gridTemplateColumns:'1.5fr repeat(5, 1fr)', borderBottom: i<TABLE.length-1 ? '1px solid var(--border)' : 'none', background: i%2===1 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
+                    <div style={{ padding:'11px 20px', fontSize:13, color:'var(--text-secondary)' }}>{row.feature}</div>
+                    {['individual','corporate_mini','corporate','major_corporate','enterprise'].map(k => (
+                      <div key={k} style={{ padding:'11px 8px', textAlign:'center', borderLeft:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                        <Cell v={row[k]} />
+                      </div>
+                    ))}
                   </div>
                 ))}
+                <div style={{ display:'grid', gridTemplateColumns:'1.5fr repeat(5, 1fr)', background:'var(--bg-card2)', padding:'14px 0' }}>
+                  <div />
+                  {PLANS.map(p => (
+                    <div key={p.id} style={{ padding:'0 8px', borderLeft:'1px solid var(--border)' }}>
+                      <Link to={`/signup?plan=${p.id}`} className="btn btn-sm w-full" style={{ background: p.popular?p.color:'transparent', border:`1px solid ${p.popular?p.color:'var(--border)'}`, color: p.popular?'#fff':'var(--text-muted)', fontSize:11 }}>
+                        Get {p.name}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </FadeUp>

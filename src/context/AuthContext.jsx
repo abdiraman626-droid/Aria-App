@@ -20,12 +20,14 @@ import { initPushNotifications } from '../services/notifications';
 const AuthContext = createContext(null);
 
 export const PLAN_META = {
-  personal: { label: 'Personal', price: 99,  color: '#4F6EF7', reminderLimit: 20  },
-  business: { label: 'Business', price: 299, color: '#8B5CF6', reminderLimit: null },
-  premium:  { label: 'Premium',  price: 500, color: '#f59e0b', reminderLimit: null },
+  individual:     { label: 'Individual',      price: 5000,   color: '#4F6EF7', reminderLimit: null },
+  corporate_mini: { label: 'Corporate Mini',  price: 15000,  color: '#8B5CF6', reminderLimit: null },
+  corporate:      { label: 'Corporate',       price: 30000,  color: '#22c55e', reminderLimit: null },
+  major_corporate:{ label: 'Major Corporate', price: 100000, color: '#f59e0b', reminderLimit: null },
+  enterprise:     { label: 'Enterprise',      price: 250000, color: '#ef4444', reminderLimit: null },
 };
 
-const PLAN_PRICES = { personal: 99, business: 299, premium: 500 };
+const PLAN_PRICES = { individual: 5000, corporate_mini: 15000, corporate: 30000, major_corporate: 100000, enterprise: 250000 };
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
@@ -41,13 +43,13 @@ function mergeUser(fbUser, profile) {
     email:               fbUser.email,
     emailConfirmedAt:    fbUser.email,
     name:                profile?.name             || fbUser.displayName || fbUser.email?.split('@')[0] || '',
-    plan:                profile?.plan             || 'personal',
+    plan:                profile?.plan             || 'individual',
     whatsappNumber:      profile?.whatsappNumber   || '',
     googleConnected:     profile?.googleConnected  || false,
     googleEmail:         profile?.googleEmail      || null,
     onTrial:             profile?.onTrial          ?? true,
     trialEnds:           profile?.trialEnds        || null,
-    monthlyPrice:        profile?.monthlyPrice     || 99,
+    monthlyPrice:        profile?.monthlyPrice     || 5000,
     active:              profile?.active           ?? true,
     avatar:              (profile?.name || fbUser.displayName || fbUser.email || '?')[0].toUpperCase(),
     onboardingCompleted: profile?.onboardingCompleted ?? false,
@@ -77,7 +79,7 @@ export function AuthProvider({ children }) {
           profile = {
             name:                fbUser.displayName || fbUser.email?.split('@')[0] || '',
             email:               fbUser.email,
-            plan:                'personal',
+            plan:                'individual',
             whatsappNumber:      '',
             googleConnected:     false,
             googleEmail:         null,
@@ -120,7 +122,7 @@ export function AuthProvider({ children }) {
     return result;
   };
 
-  const signup = async ({ name, email, password, plan = 'personal', phone = '' }) => {
+  const signup = async ({ name, email, password, plan = 'individual', phone = '' }) => {
     const { user: fbUser } = await createUserWithEmailAndPassword(auth, email, password);
 
     // Create Firestore profile
@@ -133,7 +135,7 @@ export function AuthProvider({ children }) {
       googleEmail:         null,
       onTrial:             true,
       trialEnds:           new Date(Date.now() + 7 * 864e5).toISOString(),
-      monthlyPrice:        PLAN_PRICES[plan] || 99,
+      monthlyPrice:        PLAN_PRICES[plan] || 5000,
       active:              true,
       onboardingCompleted: false,
       createdAt:           serverTimestamp(),
@@ -149,7 +151,18 @@ export function AuthProvider({ children }) {
     provider.addScope('https://www.googleapis.com/auth/calendar.readonly');
     provider.setCustomParameters({ prompt: 'consent', access_type: 'offline' });
 
-    const result = await signInWithPopup(auth, provider);
+    // Attempt popup with one automatic retry if user closes it
+    let result;
+    try {
+      result = await signInWithPopup(auth, provider);
+    } catch (err) {
+      if (err.code === 'auth/popup-closed-by-user') {
+        result = await signInWithPopup(auth, provider);
+      } else {
+        throw err;
+      }
+    }
+
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const googleAccessToken = credential?.accessToken;
 

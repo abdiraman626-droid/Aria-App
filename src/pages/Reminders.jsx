@@ -32,7 +32,7 @@ export default function Reminders() {
   const { reminders, toggle, remove, update } = useReminders();
   const { t } = useLang();
   const { user } = useAuth();
-  const { reminderLimit, isPersonal, canAddReminder } = usePlan();
+  const { reminderLimit, isIndividual, canAddReminder } = usePlan();
 
   const [tab,           setTab]          = useState('Upcoming');
   const [search,        setSearch]        = useState('');
@@ -45,8 +45,8 @@ export default function Reminders() {
 
   const usedCount  = reminders.length;
   const pct        = reminderLimit !== Infinity ? Math.min(100, (usedCount / reminderLimit) * 100) : 0;
-  const atLimit    = isPersonal && !canAddReminder(usedCount);
-  const nearLimit  = isPersonal && reminderLimit !== Infinity && pct >= 80 && !atLimit;
+  const atLimit    = isIndividual && !canAddReminder(usedCount);
+  const nearLimit  = isIndividual && reminderLimit !== Infinity && pct >= 80 && !atLimit;
 
   const filtered = reminders.filter(r => {
     if (search && !r.title.toLowerCase().includes(search.toLowerCase())) return false;
@@ -69,13 +69,13 @@ export default function Reminders() {
     await svc.speak(text);
   };
 
-  const { isBusiness, isPremium, hasMpesa } = usePlan();
+  const { hasMpesa, hasTeam } = usePlan();
 
   const markPaid = async (r) => {
     await update(r.id, { paymentConfirmed: true, paymentConfirmedAt: new Date().toISOString() });
     toast.success('Payment marked as confirmed');
   };
-  const canWhatsAppAny = isBusiness || isPremium;
+  const canWhatsAppAny = hasTeam;
 
   const buildWhatsAppMsg = (r) => {
     const d = new Date(r.dateTime);
@@ -126,7 +126,7 @@ export default function Reminders() {
             </div>
 
             {/* Reminder usage counter */}
-            {isPersonal && reminderLimit !== Infinity && (
+            {isIndividual && reminderLimit !== Infinity && (
               <div style={{
                 padding: '10px 16px', borderRadius: 12, marginBottom: 16,
                 background: atLimit ? 'rgba(239,68,68,0.06)' : nearLimit ? 'rgba(245,158,11,0.06)' : 'var(--bg-card)',

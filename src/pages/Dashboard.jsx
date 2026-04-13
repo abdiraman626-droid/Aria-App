@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { useReminders } from '../context/RemindersContext';
 import { useLang } from '../context/LangContext';
 import { usePlan } from '../hooks/usePlan';
-import { voice, VOICES, LAMIN_ID } from '../services/voice';
+import { voice, VOICES, RACHEL_ID } from '../services/voice';
 import { fetchCalendarEvents, fetchGmailMessages, summarizeEmails, getToken } from '../services/google';
 import { requestNotificationPermission, checkDueReminders, checkUrgentReminders } from '../services/notifications';
 import BottomNav from '../components/BottomNav';
@@ -43,7 +43,8 @@ export default function Dashboard() {
   const { user, trialDaysLeft, logout } = useAuth();
   const { reminders, upcoming, todayReminders } = useReminders();
   const { t, lang } = useLang();
-  const { reminderLimit, isPersonal, isPremium, hasTeam } = usePlan();
+  const { reminderLimit, isIndividual, isMajorCorporate, isEnterprise, hasTeam, hasMeetingRecorder } = usePlan();
+  const showPremiumBadge = isMajorCorporate || isEnterprise;
   const { showWelcome, welcomeMsg, dismissWelcome } = useTour();
   const navigate = useNavigate();
   const [avatarOpen, setAvatarOpen] = useState(false);
@@ -155,7 +156,7 @@ export default function Dashboard() {
     svc.onStart = () => setPlaying(true);
     svc.onEnd   = () => setPlaying(false);
     const text = svc.briefing(user, upcoming, lang);
-    toast.success('Playing briefing with Lamin...', { icon: '🎙️' });
+    toast.success('Playing briefing with Rachel...', { icon: '🎙️' });
     try { await svc.speak(text, lang); } catch { setPlaying(false); }
   };
 
@@ -219,7 +220,7 @@ export default function Dashboard() {
               <p style={{ fontSize: 15, color: 'var(--text-muted)' }}>
                 {new Date().toLocaleDateString('en-KE', { weekday: 'long', month: 'long', day: 'numeric' })}
               </p>
-              {isPremium && (
+              {showPremiumBadge && (
                 <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 9px', borderRadius: 20, background: 'rgba(245,158,11,0.12)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.25)', display: 'flex', alignItems: 'center', gap: 4 }}>
                   👑 Premium
                 </span>
@@ -254,7 +255,7 @@ export default function Dashboard() {
           </motion.div>
 
           {/* ── Reminder usage counter (Personal plan) ── */}
-          {isPersonal && reminderLimit !== Infinity && (
+          {!hasMeetingRecorder && reminderLimit !== Infinity && (
             <motion.div
               initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
               style={{
@@ -332,7 +333,7 @@ export default function Dashboard() {
             {playing ? 'ARIA is speaking... tap to stop' : 'Tap for your morning briefing'}
           </p>
           <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
-            {(VOICES.find(v => v.id === (localStorage.getItem('aria_voice_id') || LAMIN_ID))?.name || 'Lamin')} voice · ElevenLabs · Auto-plays 7–11am
+            {(VOICES.find(v => v.id === (localStorage.getItem('aria_voice_id') || RACHEL_ID))?.name || 'Rachel')} voice · ElevenLabs · Auto-plays 7–11am
           </p>
         </motion.div>
 
@@ -343,29 +344,29 @@ export default function Dashboard() {
             style={{
               width: '100%', display: 'flex', alignItems: 'center', gap: 14,
               padding: '16px 20px', borderRadius: 18, textDecoration: 'none',
-              background: isPersonal
+              background: !hasMeetingRecorder
                 ? 'var(--bg-card)'
                 : 'linear-gradient(135deg,rgba(79,110,247,0.12),rgba(139,92,246,0.12))',
               borderWidth: 1, borderStyle: 'solid',
-              borderColor: isPersonal ? 'var(--border)' : 'rgba(79,110,247,0.25)',
-              opacity: isPersonal ? 0.75 : 1,
+              borderColor: !hasMeetingRecorder ? 'var(--border)' : 'rgba(79,110,247,0.25)',
+              opacity: !hasMeetingRecorder ? 0.75 : 1,
             }}
           >
             <div style={{ width: 44, height: 44, borderRadius: 14, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: isPersonal ? 'var(--bg-card2)' : 'rgba(79,110,247,0.15)' }}>
-              {isPersonal ? <Lock size={18} style={{ color: 'var(--text-muted)' }} /> : <Video size={18} style={{ color: 'var(--blue)' }} />}
+              background: !hasMeetingRecorder ? 'var(--bg-card2)' : 'rgba(79,110,247,0.15)' }}>
+              {!hasMeetingRecorder ? <Lock size={18} style={{ color: 'var(--text-muted)' }} /> : <Video size={18} style={{ color: 'var(--blue)' }} />}
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ fontWeight: 700, fontSize: 15, color: isPersonal ? 'var(--text-secondary)' : '#fff', marginBottom: 2 }}>
+              <p style={{ fontWeight: 700, fontSize: 15, color: !hasMeetingRecorder ? 'var(--text-secondary)' : '#fff', marginBottom: 2 }}>
                 Meetings
               </p>
               <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>
-                {isPersonal
+                {!hasMeetingRecorder
                   ? 'Upgrade to Business to record & summarize meetings'
                   : 'Record, transcribe & summarize meetings with AI'}
               </p>
             </div>
-            {isPersonal ? (
+            {!hasMeetingRecorder ? (
               <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: 'rgba(139,92,246,0.12)', color: '#8B5CF6', border: '1px solid rgba(139,92,246,0.2)', flexShrink: 0 }}>
                 Business+
               </span>

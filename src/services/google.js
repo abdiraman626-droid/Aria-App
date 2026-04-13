@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, browserLocalPersistence, setPersistence } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
 
@@ -38,27 +38,36 @@ export function getProfile() {
 // ─── Connect Google (popup-based) ───────────────────────────────────────────
 
 export async function connectGoogle() {
-  // 1. Build provider with Gmail + Calendar scopes
+  // Ensure session persists across browser restarts
+  await setPersistence(auth, browserLocalPersistence);
+
   const provider = new GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/gmail.readonly');
   provider.addScope('https://www.googleapis.com/auth/calendar.readonly');
   provider.setCustomParameters({ prompt: 'consent', access_type: 'offline' });
 
-  // 2. Sign in via popup
-  const result = await signInWithPopup(auth, provider);
+  // Attempt popup with one automatic retry if the user closes it
+  let result;
+  try {
+    result = await signInWithPopup(auth, provider);
+  } catch (err) {
+    if (err.code === 'auth/popup-closed-by-user') {
+      // Retry once — user may have closed accidentally
+      result = await signInWithPopup(auth, provider);
+    } else {
+      throw err;
+    }
+  }
 
-  // 3. Extract the Google access token
   const credential = GoogleAuthProvider.credentialFromResult(result);
   const googleAccessToken = credential.accessToken;
   if (!googleAccessToken) throw new Error('no_access_token');
 
   const expiry = Date.now() + 3600 * 1000;
 
-  // 4. Save to localStorage for immediate use
   localStorage.setItem(TOKEN_KEY,  googleAccessToken);
   localStorage.setItem(EXPIRY_KEY, String(expiry));
 
-  // 5. Save to Firestore so the token persists across sessions
   const uid = result.user.uid;
   await updateDoc(doc(db, 'users', uid), {
     googleConnected:   true,
@@ -67,7 +76,6 @@ export async function connectGoogle() {
     googleTokenExpiry: expiry,
   });
 
-  // 6. Fetch Google profile for display
   let profile = result.user;
   try {
     const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {

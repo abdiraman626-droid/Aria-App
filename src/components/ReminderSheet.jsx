@@ -46,7 +46,8 @@ function maxDate() {
 export default function ReminderSheet({ open, onClose, editing, initial }) {
   const { add, update, reminders } = useReminders();
   const { members, clients }       = useTeam();
-  const { canAddReminder, reminderLimit, plan, hasTeam, hasMpesa, isPremium } = usePlan();
+  const { canAddReminder, reminderLimit, plan, hasTeam, hasMpesa, isCorporate, isMajorCorporate, isEnterprise } = usePlan();
+  const isPremium = isCorporate || isMajorCorporate || isEnterprise;
 
   const [title,         setTitle]         = useState('');
   const [desc,          setDesc]          = useState('');
@@ -84,7 +85,7 @@ export default function ReminderSheet({ open, onClose, editing, initial }) {
     e.preventDefault();
     if (!title.trim()) { toast.error('Add a title'); return; }
     if (atLimit) {
-      toast.error(`Personal plan limit: ${reminderLimit} reminders. Upgrade to Business.`);
+      toast.error(`Reminder limit reached: ${reminderLimit}. Upgrade your plan.`);
       return;
     }
     const data = {

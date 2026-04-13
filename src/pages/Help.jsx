@@ -5,7 +5,7 @@ import { usePlan } from '../hooks/usePlan';
 import BottomNav from '../components/BottomNav';
 import { Link } from 'react-router-dom';
 
-const PLAN_COLORS = { personal: '#4F6EF7', business: '#8B5CF6', premium: '#f59e0b' };
+const PLAN_COLORS = { individual: '#4F6EF7', corporate_mini: '#8B5CF6', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
 
 function Accordion({ question, answer, icon: Icon, accent }) {
   const [open, setOpen] = useState(false);
@@ -151,7 +151,7 @@ export default function Help() {
               <Accordion
                 icon={Bell} accent="#4F6EF7"
                 question="How does the reminder limit work on Personal plan?"
-                answer="Personal plan allows up to 20 active reminders. You'll see a usage bar on your Dashboard and Reminders page. When you reach the limit, creating new reminders is blocked until you delete old ones or upgrade to Business."
+                answer="Individual plan includes unlimited reminders. You'll see your reminders on your Dashboard and Reminders page. When you reach the limit, creating new reminders is blocked until you delete old ones or upgrade to Business."
               />
             </Section>
           )}
@@ -213,7 +213,7 @@ export default function Help() {
               <Accordion
                 icon={Mic} accent="#f59e0b"
                 question="How do I use custom AI voices?"
-                answer="Go to Settings → Voice. Premium users see a 5-voice grid: Lamin, Rachel, Daniel (all plans) plus Matilda and Liam (Premium only). Tap Preview on any voice to hear a sample. Tap the card to select it. Click Save Voice Settings. Your selection applies to all Voice Briefings and reminder readings."
+                answer="Go to Settings → Voice. Corporate plan and above can use Rachel AI voice plus Daniel. Premium voices Matilda and Liam are available on Major Corporate and Enterprise plans. Tap Preview to hear a sample, tap the card to select, then click Save."
               />
             </Section>
           )}

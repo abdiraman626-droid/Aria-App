@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mic, MessageCircle, Calendar, Globe, Save, Eye, EyeOff, Play, LogOut, Crown, Zap, Star, CheckCircle, RefreshCw, ExternalLink, Loader2, Users, CreditCard, Link2, Mail, Square, Lock, BookOpen } from 'lucide-react';
+import { User, Mic, MessageCircle, Calendar, Globe, Save, Eye, EyeOff, Play, LogOut, Crown, Zap, Star, CheckCircle, RefreshCw, ExternalLink, Loader2, Users, CreditCard, Link2, Mail, Square, Lock, BookOpen, Building, Building2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useLang } from '../context/LangContext';
 import { usePlan } from '../hooks/usePlan';
-import { voice, VOICES, LAMIN_ID, MATILDA_ID, LIAM_ID } from '../services/voice';
+import { voice, VOICES, RACHEL_ID, MATILDA_ID, LIAM_ID } from '../services/voice';
 import { connectGoogle, disconnectGoogle, getProfile } from '../services/google';
 import { useNavigate, Link } from 'react-router-dom';
 import BottomNav from '../components/BottomNav';
@@ -12,8 +12,8 @@ import UpgradePrompt from '../components/UpgradePrompt';
 import HintIcon from '../components/HintIcon';
 import toast from 'react-hot-toast';
 
-const PLAN_ICONS  = { personal: Star, business: Zap, premium: Crown };
-const PLAN_COLORS = { personal: '#4F6EF7', business: '#8B5CF6', premium: '#f59e0b' };
+const PLAN_ICONS  = { individual: Star, corporate_mini: Zap, corporate: Building, major_corporate: Crown, enterprise: Building2 };
+const PLAN_COLORS = { individual: '#4F6EF7', corporate_mini: '#8B5CF6', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
 
 function Section({ icon: Icon, title, children, accent, locked }) {
   return (
@@ -53,7 +53,7 @@ export default function Settings() {
   const [name,          setName]          = useState(user?.name || '');
   const [whatsapp,      setWhatsapp]      = useState(user?.whatsappNumber || '');
   const [elKey,         setElKey]         = useState(localStorage.getItem('aria_el_key') || import.meta.env.VITE_ELEVENLABS_API_KEY || '');
-  const [voiceId,       setVoiceId]       = useState(localStorage.getItem('aria_voice_id') || LAMIN_ID);
+  const [voiceId,       setVoiceId]       = useState(localStorage.getItem('aria_voice_id') || RACHEL_ID);
   const [showKey,       setShowKey]       = useState(false);
   const [testing,       setTesting]       = useState(false);
   const [testingId,     setTestingId]     = useState(null); // which voice is being previewed
@@ -149,7 +149,7 @@ export default function Settings() {
                 <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
                   {user?.onTrial
                     ? `Free trial · ${Math.max(0, Math.ceil((new Date(user.trialEnds) - Date.now()) / 864e5))} days left`
-                    : `$${user?.monthlyPrice || 0}/month`
+                    : `KSH ${(user?.monthlyPrice || 0).toLocaleString()}/month`
                   }
                 </p>
               </div>

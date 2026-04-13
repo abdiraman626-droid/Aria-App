@@ -39,11 +39,13 @@ export default function Terms() {
 
       <LSection title="4. Subscription Plans & Pricing" />
       <LSub>4.1 Plans</LSub>
-      <LP>ARIA is offered on three subscription tiers:</LP>
+      <LP>ARIA is offered on five subscription tiers:</LP>
       <LList items={[
-        'Personal — KES 99/month — 1 user, 20 reminders/month, voice briefings, Gmail & Calendar sync',
-        'Business — KES 299/month — 5 users, unlimited reminders, team management, priority support',
-        'Premium — KES 500/month — Unlimited users, custom AI voice, M-Pesa integration, dedicated account manager',
+        'Individual — KSH 5,000/month — 1–3 people, AI assistant, WhatsApp notifications, multi-language support',
+        'Corporate Mini — KSH 15,000/person/month — 5–10 people, email summaries, Google Calendar sync, team admin',
+        'Corporate — KSH 30,000/month — 10–50 people, voice (Rachel AI), meeting recorder + transcription, priority support',
+        'Major Corporate — KSH 100,000/month — up to 500 people, advanced analytics, weekly meeting reports, multi-department management',
+        'Enterprise — KSH 250,000/month — 500+ people, executive dashboard, AI strategy reports, automated workflows, direct WhatsApp support',
       ]} />
 
       <LSub>4.2 Free Trial</LSub>
@@ -53,7 +55,7 @@ export default function Terms() {
 
       <LSub>4.3 Billing</LSub>
       <LP>
-        Subscriptions are billed monthly. Payment is collected via M-Pesa or other accepted payment methods at the start of each billing cycle. Prices are listed in Kenyan Shillings (KES) and are inclusive of any applicable taxes.
+        Subscriptions are billed monthly. Payment is collected via M-Pesa or other accepted payment methods at the start of each billing cycle. Prices are listed in Kenyan Shillings (KSH) and are inclusive of any applicable taxes.
       </LP>
       <LP>
         We reserve the right to change subscription prices with 30 days notice. Price changes will be communicated by email and in-app notification before they take effect.

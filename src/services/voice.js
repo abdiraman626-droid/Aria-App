@@ -1,12 +1,10 @@
 // ── ElevenLabs Voice Service ─────────────────────────────
-export const LAMIN_ID   = 'hILdTfuUq4LRBMrxHERr'; // Deep, Calm, Composed
 export const RACHEL_ID  = 'EXAVITQu4vr4xnSDxMaL';
 export const DANIEL_ID  = 'onwK4e9ZLuTAKqWW03F9';
 export const MATILDA_ID = 'XrExE9yKIg1WjnnlVkGX'; // Premium
 export const LIAM_ID    = 'TX3LPaxmHKxFdv7VOQHJ'; // Premium
 
 export const VOICES = [
-  { id: LAMIN_ID,   name: 'Lamin',   desc: 'Deep, Calm · African Male',       premium: false },
   { id: RACHEL_ID,  name: 'Rachel',  desc: 'Warm, Clear · Female',            premium: false },
   { id: DANIEL_ID,  name: 'Daniel',  desc: 'Steady · Broadcaster Male',       premium: false },
   { id: MATILDA_ID, name: 'Matilda', desc: 'Expressive · Australian Female',  premium: true  },
@@ -24,7 +22,7 @@ class VoiceService {
   }
 
   get apiKey() { return localStorage.getItem('aria_el_key') || import.meta.env.VITE_ELEVENLABS_API_KEY || ''; }
-  get voiceId() { return localStorage.getItem('aria_voice_id') || import.meta.env.VITE_ELEVENLABS_VOICE_ID || LAMIN_ID; }
+  get voiceId() { return localStorage.getItem('aria_voice_id') || import.meta.env.VITE_ELEVENLABS_VOICE_ID || RACHEL_ID; }
 
   stop() {
     if (this.source) { try { this.source.stop(); } catch {} this.source = null; }
