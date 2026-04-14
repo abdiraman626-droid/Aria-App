@@ -1,25 +1,24 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, Bell, Mic, Settings, Users, Video, Calendar } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
 import { usePlan } from '../hooks/usePlan';
-
-const TABS = {
-  home:     { to: '/dashboard', icon: Home,     label: 'Home'      },
-  remind:   { to: '/reminders', icon: Bell,     label: 'Reminders' },
-  calendar: { to: '/calendar',  icon: Calendar, label: 'Calendar'  },
-  voice:    { to: '/voice',     icon: Mic,      label: 'Voice'     },
-  settings: { to: '/settings',  icon: Settings, label: 'Settings'  },
-  team:     { to: '/team',      icon: Users,    label: 'Team'      },
-  meetings: { to: '/meetings',  icon: Video,    label: 'Meetings'  },
-};
+import { useLang } from '../context/LangContext';
 
 export default function BottomNav() {
   const location = useLocation();
   const { hasTeam, hasMeetingRecorder } = usePlan();
+  const { t } = useLang();
 
-  // All plans: Home, Calendar, Reminders, Voice, Settings
-  // Team plans add Team; Meeting plans add Meetings
+  const TABS = {
+    home:     { to: '/dashboard', icon: Home,     label: t('home')      },
+    remind:   { to: '/reminders', icon: Bell,     label: t('reminders') },
+    calendar: { to: '/calendar',  icon: Calendar, label: t('calendar')  },
+    voice:    { to: '/voice',     icon: Mic,      label: t('voice')     },
+    settings: { to: '/settings',  icon: Settings, label: t('settings')  },
+    team:     { to: '/team',      icon: Users,    label: t('team')      },
+    meetings: { to: '/meetings',  icon: Video,    label: t('meetings')  },
+  };
+
   const tabs = [
     TABS.home,
     TABS.calendar,
@@ -28,7 +27,7 @@ export default function BottomNav() {
     ...(hasMeetingRecorder ? [TABS.meetings] : []),
     TABS.voice,
     TABS.settings,
-  ].slice(0, 6); // cap at 6 tabs max
+  ].slice(0, 6);
 
   return (
     <nav

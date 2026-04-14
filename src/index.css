@@ -187,3 +187,9 @@ select.input { appearance: none; cursor: pointer; }
 /* ── Utility ─────────────────────────────────────────────── */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── RTL support (Arabic) ───────────────────────────────── */
+[dir="rtl"] { text-align: right; }
+[dir="rtl"] .flex { direction: rtl; }
+[dir="rtl"] .input { text-align: right; }
+[dir="rtl"] .label { text-align: right; }

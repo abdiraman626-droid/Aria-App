@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, ChevronLeft, ChevronRight, X, Clock, MapPin, FileText, Trash2, Edit3, Loader2, Link2Off, RefreshCw, Calendar as CalIcon } from 'lucide-react';
 import { useCalendar } from '../context/CalendarContext';
 import { usePlan } from '../hooks/usePlan';
+import { useLang } from '../context/LangContext';
 import { fetchCalendarEvents, getToken } from '../services/google';
 import { useAuth } from '../context/AuthContext';
 import BottomNav from '../components/BottomNav';
@@ -11,7 +12,7 @@ import toast from 'react-hot-toast';
 
 const EVENT_COLORS = ['#4F6EF7', '#8B5CF6', '#22c55e', '#f59e0b', '#ef4444', '#ec4899'];
 
-function EventSheet({ open, onClose, onSave, editing }) {
+function EventSheet({ open, onClose, onSave, editing, t }) {
   const [title, setTitle]   = useState('');
   const [date, setDate]     = useState('');
   const [time, setTime]     = useState('');
@@ -58,7 +59,7 @@ function EventSheet({ open, onClose, onSave, editing }) {
             <div className="flex justify-center pt-3 pb-1"><div className="w-10 h-1 rounded-full" style={{ background: 'var(--border)' }} /></div>
             <div className="px-6 pt-2 pb-8">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, fontWeight: 700 }}>{editing ? 'Edit Event' : 'New Event'}</h2>
+                <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, fontWeight: 700 }}>{editing ? t('edit_event') : t('new_event')}</h2>
                 <button onClick={onClose} className="p-2 rounded-xl" style={{ background: 'var(--bg-card2)', color: 'var(--text-muted)', border: 'none', cursor: 'pointer' }}><X size={16} /></button>
               </div>
 
@@ -94,7 +95,7 @@ function EventSheet({ open, onClose, onSave, editing }) {
               </div>
 
               <button onClick={submit} disabled={saving} className="btn btn-primary btn-lg w-full" style={{ marginTop: 20 }}>
-                {saving ? <Loader2 size={18} className="animate-spin" /> : editing ? 'Update Event' : 'Add Event'}
+                {saving ? <Loader2 size={18} className="animate-spin" /> : editing ? t('save') : t('add_event')}
               </button>
             </div>
           </motion.div>
@@ -107,7 +108,8 @@ function EventSheet({ open, onClose, onSave, editing }) {
 export default function CalendarPage() {
   const { user } = useAuth();
   const { events, addEvent, updateEvent, removeEvent } = useCalendar();
-  const { hasEmailSummaries } = usePlan(); // Corporate Mini+ gets Google Calendar sync
+  const { hasEmailSummaries } = usePlan();
+  const { t } = useLang();
   const hasGoogleSync = hasEmailSummaries; // same tier gate
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -180,10 +182,10 @@ export default function CalendarPage() {
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '0 20px' }}>
         <div style={{ paddingTop: 60, paddingBottom: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>Calendar</h1>
+            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>{t('calendar')}</h1>
             <button onClick={() => { setEditing(null); setSheetOpen(true); }}
               className="btn btn-primary btn-sm" style={{ gap: 6 }}>
-              <Plus size={16} /> New Event
+              <Plus size={16} /> {t('new_event')}
             </button>
           </div>
 
@@ -248,10 +250,10 @@ export default function CalendarPage() {
             {selectedEvents.length === 0 ? (
               <div className="card" style={{ padding: '32px 20px', textAlign: 'center' }}>
                 <CalIcon size={28} style={{ color: 'var(--text-muted)', margin: '0 auto 10px' }} />
-                <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 14 }}>No events on this day</p>
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 14 }}>{t('no_events_day')}</p>
                 <button onClick={() => { setEditing(null); setSheetOpen(true); }}
                   className="btn btn-sm btn-ghost" style={{ gap: 6 }}>
-                  <Plus size={14} /> Add Event
+                  <Plus size={14} /> {t('add_event')}
                 </button>
               </div>
             ) : (
@@ -309,21 +311,21 @@ export default function CalendarPage() {
           {!hasGoogleSync && (
             <div className="card" style={{ padding: '16px 20px', textAlign: 'center', border: '1px solid var(--border)', marginBottom: 16 }}>
               <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                Google Calendar sync available on Corporate Mini and above
+                {t('google_sync_upgrade')}
               </p>
             </div>
           )}
           {hasGoogleSync && !isGoogleConnected && (
             <div className="card" style={{ padding: '16px 20px', textAlign: 'center', border: '1px solid var(--border)', marginBottom: 16 }}>
               <Link2Off size={18} style={{ color: 'var(--text-muted)', margin: '0 auto 8px' }} />
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 10 }}>Connect Google in Settings to sync your calendar</p>
-              <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', fontSize: 12 }}>Go to Settings</a>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 10 }}>{t('connect_google_cal')}</p>
+              <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', fontSize: 12 }}>{t('go_to_settings')}</a>
             </div>
           )}
         </div>
       </div>
 
-      <EventSheet open={sheetOpen} onClose={() => { setSheetOpen(false); setEditing(null); }} onSave={handleSave} editing={editing} />
+      <EventSheet open={sheetOpen} onClose={() => { setSheetOpen(false); setEditing(null); }} onSave={handleSave} editing={editing} t={t} />
       <BottomNav />
     </div>
   );

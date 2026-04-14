@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mic, MessageCircle, Calendar, Globe, Save, Eye, EyeOff, Play, LogOut, Crown, Zap, Star, CheckCircle, RefreshCw, ExternalLink, Loader2, Users, CreditCard, Link2, Mail, Square, Lock, BookOpen, Building, Building2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useLang } from '../context/LangContext';
+import { useLang, LANGUAGES } from '../context/LangContext';
 import { usePlan } from '../hooks/usePlan';
 import { voice, VOICES, RACHEL_ID, MATILDA_ID, LIAM_ID } from '../services/voice';
 import { connectGoogle, disconnectGoogle, getProfile } from '../services/google';
@@ -184,13 +184,13 @@ export default function Settings() {
           </Section>
 
           {/* Language */}
-          <Section icon={Globe} title="Language" accent="#22c55e">
-            <Row label="Interface & Voice Language" hint="Affects all text and voice briefings">
-              <div style={{ display: 'flex', gap: 8 }}>
-                {[['en', 'English'], ['sw', 'Kiswahili']].map(([code, label]) => (
-                  <button key={code} onClick={() => { setLang(code); localStorage.setItem('aria_lang', code); }}
-                    style={{ padding: '8px 18px', borderRadius: 12, border: `1px solid ${lang === code ? '#22c55e' : 'var(--border)'}`, background: lang === code ? 'rgba(34,197,94,0.1)' : 'var(--bg-card2)', color: lang === code ? '#22c55e' : 'var(--text-muted)', fontWeight: 600, fontSize: 14, cursor: 'pointer', transition: 'all 0.2s' }}>
-                    {label}
+          <Section icon={Globe} title={t('language')} accent="#22c55e">
+            <Row label={t('interface_language')} hint="Affects all text, buttons, and voice briefings">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                {LANGUAGES.map(l => (
+                  <button key={l.code} onClick={() => setLang(l.code)}
+                    style={{ padding: '10px 14px', borderRadius: 12, border: `1px solid ${lang === l.code ? '#22c55e' : 'var(--border)'}`, background: lang === l.code ? 'rgba(34,197,94,0.1)' : 'var(--bg-card2)', color: lang === l.code ? '#22c55e' : 'var(--text-muted)', fontWeight: 600, fontSize: 14, cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+                    <span style={{ fontSize: 18 }}>{l.flag}</span> {l.label}
                   </button>
                 ))}
               </div>

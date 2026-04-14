@@ -213,7 +213,7 @@ export default function Dashboard() {
           {user?.onTrial && trialDaysLeft > 0 && (
             <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
               className="badge badge-blue" style={{ marginBottom: 16, fontSize: 13 }}>
-              Free trial: {trialDaysLeft} day{trialDaysLeft !== 1 ? 's' : ''} remaining
+              {t('free_trial_banner')}: {trialDaysLeft} {t('days_remaining')}
             </motion.div>
           )}
 
@@ -426,9 +426,9 @@ export default function Dashboard() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
             <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 18, fontWeight: 700 }}>
               <Calendar size={17} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 8, color: 'var(--blue)' }} />
-              Upcoming Events
+              {t('upcoming_events')}
             </h2>
-            <Link to="/calendar" style={{ fontSize: 13, color: 'var(--blue)', textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
+            <Link to="/calendar" style={{ fontSize: 13, color: 'var(--blue)', textDecoration: 'none', fontWeight: 600 }}>{t('view_all')} →</Link>
           </div>
 
           {(() => {
@@ -446,9 +446,9 @@ export default function Dashboard() {
 
             if (merged.length === 0) return (
               <div className="card" style={{ padding: '24px', textAlign: 'center' }}>
-                <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>No upcoming events</p>
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>{t('no_upcoming')}</p>
                 <Link to="/calendar" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', gap: 6 }}>
-                  <Calendar size={14} /> Add Event
+                  <Calendar size={14} /> {t('add_event')}
                 </Link>
               </div>
             );
@@ -487,7 +487,7 @@ export default function Dashboard() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
             <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 18, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Mail size={17} style={{ verticalAlign: 'middle', color: 'var(--purple)' }} />
-              Gmail
+              {t('gmail')}
               <HintIcon hint="ARIA reads your Gmail and categorizes emails as Urgent, People, or Companies. Tap 'Create Reminder' on urgent emails to auto-fill a reminder from the email subject." position="bottom" />
             </h2>
             {isGoogleConnected && emailLoading && <RefreshCw size={14} className="animate-spin" style={{ color: 'var(--text-muted)' }} />}
@@ -497,7 +497,7 @@ export default function Dashboard() {
             <div className="card" style={{ padding: '28px 24px', textAlign: 'center', border: '1px solid var(--border)' }}>
               <Link2Off size={26} style={{ color: 'var(--text-muted)', margin: '0 auto 10px' }} />
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 14 }}>
-                Connect Google in Settings to see your real inbox
+                {t('connect_google_cal')}
               </p>
               <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex' }}>
                 Go to Settings →
@@ -508,13 +508,13 @@ export default function Dashboard() {
             <div className="card" style={{ padding: '28px 24px', textAlign: 'center', border: '1px solid var(--border)' }}>
               <RefreshCw size={26} style={{ color: 'var(--text-muted)', margin: '0 auto 10px' }} />
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 6 }}>
-                Google session expired
+                {t('google_session_expired')}
               </p>
               <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 14 }}>
                 Reconnect in Settings to refresh your inbox
               </p>
               <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex' }}>
-                Reconnect Google →
+                {t('reconnect')} →
               </a>
             </div>
 
@@ -527,12 +527,12 @@ export default function Dashboard() {
 
           ) : emailError ? (
             <div className="card" style={{ padding: '28px', textAlign: 'center' }}>
-              <p style={{ fontSize: 15, color: '#ef4444' }}>Failed to load emails. Try refreshing.</p>
+              <p style={{ fontSize: 15, color: '#ef4444' }}>{t('failed_load_emails')}</p>
             </div>
 
           ) : emails.length === 0 ? (
             <div className="card" style={{ padding: '28px', textAlign: 'center' }}>
-              <p style={{ fontSize: 15, color: 'var(--text-muted)' }}>Inbox is empty — you're all caught up!</p>
+              <p style={{ fontSize: 15, color: 'var(--text-muted)' }}>{t('no_emails')}</p>
             </div>
 
           ) : (
@@ -573,7 +573,7 @@ export default function Dashboard() {
 
                         <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5 }}>
                           {summarizing && !emailSummaries[em.id]
-                            ? <span style={{ opacity: 0.5 }}>Summarizing…</span>
+                            ? <span style={{ opacity: 0.5 }}>{t('summarizing')}</span>
                             : (emailSummaries[em.id] || em.snippet)
                           }
                         </p>
