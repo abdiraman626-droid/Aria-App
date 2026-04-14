@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mic, Plus, Calendar, Mail, ArrowRight, Bell, Clock, RefreshCw, Link2Off, Volume2, Square, Lock, X, Video, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useReminders } from '../context/RemindersContext';
+import { useCalendar } from '../context/CalendarContext';
 import { useLang } from '../context/LangContext';
 import { usePlan } from '../hooks/usePlan';
 import { voice, VOICES, RACHEL_ID } from '../services/voice';
@@ -42,6 +43,7 @@ function timeAgo(iso) {
 export default function Dashboard() {
   const { user, trialDaysLeft, logout } = useAuth();
   const { reminders, upcoming, todayReminders } = useReminders();
+  const { upcoming: upcomingCalEvents } = useCalendar();
   const { t, lang } = useLang();
   const { reminderLimit, isIndividual, isMajorCorporate, isEnterprise, hasTeam, hasMeetingRecorder } = usePlan();
   const showPremiumBadge = isMajorCorporate || isEnterprise;
@@ -419,69 +421,65 @@ export default function Dashboard() {
           )}
         </motion.section>
 
-        {/* ── Calendar Events ───────────────────────────────────────── */}
+        {/* ── Calendar Events (manual + Google merged) ────────────────── */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ marginTop: 28 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
             <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 18, fontWeight: 700 }}>
               <Calendar size={17} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 8, color: 'var(--blue)' }} />
-              Calendar
+              Upcoming Events
             </h2>
-            {isGoogleConnected && calLoading && <RefreshCw size={14} className="animate-spin" style={{ color: 'var(--text-muted)' }} />}
+            <Link to="/calendar" style={{ fontSize: 13, color: 'var(--blue)', textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
           </div>
 
-          {!isGoogleConnected ? (
-            <div className="card" style={{ padding: '24px', textAlign: 'center', border: '1px solid var(--border)' }}>
-              <Link2Off size={24} style={{ color: 'var(--text-muted)', margin: '0 auto 10px' }} />
-              <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>
-                Connect Google in Settings to see your real calendar events
-              </p>
-              <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex' }}>
-                Go to Settings →
-              </a>
-            </div>
-          ) : !hasValidToken || calError === 'no_token' || calError === 'token_expired' ? (
-            <div className="card" style={{ padding: '24px', textAlign: 'center', border: '1px solid var(--border)' }}>
-              <RefreshCw size={24} style={{ color: 'var(--text-muted)', margin: '0 auto 10px' }} />
-              <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>
-                Google session expired — reconnect in Settings
-              </p>
-              <a href="/settings" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex' }}>
-                Reconnect Google →
-              </a>
-            </div>
-          ) : calLoading ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {[1, 2, 3].map(i => (
-                <div key={i} className="card" style={{ padding: '14px 20px', height: 64, opacity: 0.4 }} />
-              ))}
-            </div>
-          ) : calEvents.length === 0 ? (
-            <div className="card" style={{ padding: '24px', textAlign: 'center' }}>
-              <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>No upcoming events in the next 7 days</p>
-            </div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {calEvents.map(ev => {
-                const d = new Date(ev.start.dateTime || ev.start.date);
-                return (
-                  <div key={ev.id} className="card" style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <div style={{ textAlign: 'center', width: 40, flexShrink: 0 }}>
-                      <p style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600 }}>{format(d, 'MMM').toUpperCase()}</p>
-                      <p style={{ fontSize: 20, fontWeight: 800, lineHeight: 1, fontFamily: 'var(--font-head)' }}>{format(d, 'd')}</p>
+          {(() => {
+            // Merge manual calendar events + Google Calendar events
+            const merged = [
+              ...upcomingCalEvents.slice(0, 5).map(e => ({ id: e.id, title: e.title, dateTime: e.dateTime, notes: e.notes, source: 'manual', type: e.type })),
+              ...calEvents.map(e => ({ id: e.id, title: e.summary, dateTime: e.start.dateTime || e.start.date, notes: e.location, source: 'google' })),
+            ].sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime)).slice(0, 5);
+
+            if (calLoading) return (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {[1, 2, 3].map(i => <div key={i} className="card" style={{ padding: '14px 20px', height: 64, opacity: 0.4 }} />)}
+              </div>
+            );
+
+            if (merged.length === 0) return (
+              <div className="card" style={{ padding: '24px', textAlign: 'center' }}>
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>No upcoming events</p>
+                <Link to="/calendar" className="btn btn-sm btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', gap: 6 }}>
+                  <Calendar size={14} /> Add Event
+                </Link>
+              </div>
+            );
+
+            return (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {merged.map(ev => {
+                  const d = new Date(ev.dateTime);
+                  return (
+                    <div key={ev.id} className="card" style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 14 }}>
+                      <div style={{ textAlign: 'center', width: 40, flexShrink: 0 }}>
+                        <p style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600 }}>{format(d, 'MMM').toUpperCase()}</p>
+                        <p style={{ fontSize: 20, fontWeight: 800, lineHeight: 1, fontFamily: 'var(--font-head)' }}>{format(d, 'd')}</p>
+                      </div>
+                      <div style={{ width: 1, height: 36, background: 'var(--border)' }} />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <p style={{ fontWeight: 600, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{ev.title}</p>
+                          {ev.source === 'google' && <span style={{ fontSize: 9, fontWeight: 600, padding: '2px 6px', borderRadius: 4, background: 'rgba(66,133,244,0.12)', color: '#4285F4', flexShrink: 0 }}>Google</span>}
+                        </div>
+                        <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+                          {format(d, 'h:mm a')}
+                          {ev.notes ? ` · ${ev.notes}` : ''}
+                        </p>
+                      </div>
                     </div>
-                    <div style={{ width: 1, height: 36, background: 'var(--border)' }} />
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ fontWeight: 600, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ev.summary}</p>
-                      <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                        {ev.start.dateTime ? format(d, 'h:mm a') : 'All day'}
-                        {ev.location ? ` · ${ev.location}` : ''}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+                  );
+                })}
+              </div>
+            );
+          })()}
         </motion.section>
 
         {/* ── Gmail (Smart) ─────────────────────────────────────────── */}

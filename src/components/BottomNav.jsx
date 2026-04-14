@@ -1,28 +1,34 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Bell, Mic, Settings, Users, Video } from 'lucide-react';
+import { Home, Bell, Mic, Settings, Users, Video, Calendar } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { usePlan } from '../hooks/usePlan';
 
-const MEETINGS_TAB = { to: '/meetings', icon: Video,    label: 'Meetings'  };
-const TEAM_TAB     = { to: '/team',     icon: Users,    label: 'Team'      };
-
-const BASE_TABS = [
-  { to: '/dashboard', icon: Home,     label: 'Home'      },
-  { to: '/reminders', icon: Bell,     label: 'Reminders' },
-  { to: '/voice',     icon: Mic,      label: 'Voice'     },
-  { to: '/settings',  icon: Settings, label: 'Settings'  },
-];
+const TABS = {
+  home:     { to: '/dashboard', icon: Home,     label: 'Home'      },
+  remind:   { to: '/reminders', icon: Bell,     label: 'Reminders' },
+  calendar: { to: '/calendar',  icon: Calendar, label: 'Calendar'  },
+  voice:    { to: '/voice',     icon: Mic,      label: 'Voice'     },
+  settings: { to: '/settings',  icon: Settings, label: 'Settings'  },
+  team:     { to: '/team',      icon: Users,    label: 'Team'      },
+  meetings: { to: '/meetings',  icon: Video,    label: 'Meetings'  },
+};
 
 export default function BottomNav() {
   const location = useLocation();
-  const { user } = useAuth();
-  const isTeamPlan = user?.plan === 'business' || user?.plan === 'premium';
+  const { hasTeam, hasMeetingRecorder } = usePlan();
 
-  // Personal: Home, Reminders, Meetings, Voice, Settings (5)
-  // Business/Premium: Home, Reminders, Team, Meetings, Voice (5)
-  const tabs = isTeamPlan
-    ? [BASE_TABS[0], BASE_TABS[1], TEAM_TAB, MEETINGS_TAB, BASE_TABS[2], BASE_TABS[3]]
-    : [BASE_TABS[0], BASE_TABS[1], MEETINGS_TAB, BASE_TABS[2], BASE_TABS[3]];
+  // All plans: Home, Calendar, Reminders, Voice, Settings
+  // Team plans add Team; Meeting plans add Meetings
+  const tabs = [
+    TABS.home,
+    TABS.calendar,
+    TABS.remind,
+    ...(hasTeam ? [TABS.team] : []),
+    ...(hasMeetingRecorder ? [TABS.meetings] : []),
+    TABS.voice,
+    TABS.settings,
+  ].slice(0, 6); // cap at 6 tabs max
 
   return (
     <nav

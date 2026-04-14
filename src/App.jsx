@@ -5,9 +5,11 @@ import { RemindersProvider } from './context/RemindersContext';
 import { TeamProvider } from './context/TeamContext';
 import { LangProvider } from './context/LangContext';
 import { TourProvider } from './context/TourContext';
+import { CalendarProvider } from './context/CalendarContext';
 import Tour from './components/Tour';
 
-import Landing    from './pages/Landing';
+import Landing       from './pages/Landing';
+import CalendarPage  from './pages/CalendarPage';
 import Login      from './pages/Login';
 import Signup     from './pages/Signup';
 import Join       from './pages/Join';
@@ -60,6 +62,7 @@ export default function App() {
       <AuthProvider>
         <RemindersProvider>
           <TeamProvider>
+            <CalendarProvider>
             <TourProvider>
             <BrowserRouter>
               <AuthGate>
@@ -102,6 +105,7 @@ export default function App() {
                 <Route path="/settings"  element={<PrivateRoute><Settings /></PrivateRoute>} />
                 <Route path="/team"      element={<PrivateRoute><Team /></PrivateRoute>} />
                 <Route path="/clients"   element={<PrivateRoute><Clients /></PrivateRoute>} />
+                <Route path="/calendar"  element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
                 <Route path="/meetings"  element={<PrivateRoute><Meetings /></PrivateRoute>} />
 
                 {/* Fallback */}
@@ -111,6 +115,7 @@ export default function App() {
               </AuthGate>
             </BrowserRouter>
             </TourProvider>
+            </CalendarProvider>
           </TeamProvider>
         </RemindersProvider>
       </AuthProvider>

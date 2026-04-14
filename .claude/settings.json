@@ -6,7 +6,9 @@
       "Bash(brew install:*)",
       "Bash(npx vite:*)",
       "Bash(git push:*)",
-      "Bash(node -c /Users/abdirahmanmohamed/aria-app/src/pages/Dashboard.jsx)"
+      "Bash(node -c /Users/abdirahmanmohamed/aria-app/src/pages/Dashboard.jsx)",
+      "Read(//Users/abdirahmanmohamed/zak-clothing/**)",
+      "Bash(npm install:*)"
     ]
   }
 }
