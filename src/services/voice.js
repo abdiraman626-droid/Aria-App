@@ -83,32 +83,64 @@ class VoiceService {
     });
   }
 
-  briefing(user, reminders, lang = 'en') {
+  briefing(user, reminders, calendarEvents = [], lang = 'en') {
     const h = new Date().getHours();
-    const grEn = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
-    const grSw = h < 12 ? 'Habari za asubuhi' : h < 17 ? 'Habari za mchana' : 'Habari za jioni';
-    const name = user.name.split(' ')[0];
-    const top = reminders.slice(0, 4);
+    const name = (user.name || '').split(' ')[0] || '';
+
+    // Merge reminders + calendar events, sort by time, take top 5
+    const all = [
+      ...reminders.map(r => ({ title: r.title, dateTime: r.dateTime, src: 'reminder' })),
+      ...calendarEvents.map(e => ({ title: e.title, dateTime: e.dateTime, src: 'event' })),
+    ].sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime)).slice(0, 5);
+
+    const greetings = {
+      en: h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening',
+      sw: h < 12 ? 'Habari za asubuhi' : h < 17 ? 'Habari za mchana' : 'Habari za jioni',
+      so: h < 12 ? 'Subax wanaagsan' : h < 17 ? 'Galab wanaagsan' : 'Fiid wanaagsan',
+      ar: h < 12 ? 'صباح الخير' : 'مساء الخير',
+    };
+    const gr = greetings[lang] || greetings.en;
 
     if (lang === 'sw') {
-      let t = `${grSw}, ${name}! Mimi ni ARIA. `;
-      if (!top.length) return t + 'Huna vikumbusho leo. Siku njema!';
-      t += `Una vikumbusho ${top.length} leo. `;
-      top.forEach((r, i) => {
+      let s = `${gr}, ${name}! Mimi ni ARIA. `;
+      if (!all.length) return s + 'Ratiba yako ni wazi leo. Siku njema!';
+      s += `Una vitu ${all.length} kwenye ratiba yako. `;
+      all.forEach((r, i) => {
         const time = new Date(r.dateTime).toLocaleTimeString('sw-KE', { hour: 'numeric', minute: '2-digit' });
-        t += `${i+1}. ${r.title}, saa ${time}. `;
+        s += `${i + 1}. ${r.title}, saa ${time}. `;
       });
-      return t + 'Nitakusaidia kukumbuka kila kitu. Siku njema!';
+      return s + 'Siku njema!';
+    }
+    if (lang === 'so') {
+      let s = `${gr}, ${name}! Waxaan ahay ARIA. `;
+      if (!all.length) return s + 'Jadwalkaagu waa madhan yahay maanta. Maalin wanaagsan!';
+      s += `Waxaad leedahay ${all.length} shay jadwalkaaga. `;
+      all.forEach((r, i) => {
+        const time = new Date(r.dateTime).toLocaleTimeString('en-KE', { hour: 'numeric', minute: '2-digit' });
+        s += `${i + 1}. ${r.title}, ${time}. `;
+      });
+      return s + 'Maalin wanaagsan!';
+    }
+    if (lang === 'ar') {
+      let s = `${gr}، ${name}! أنا ARIA. `;
+      if (!all.length) return s + 'جدولك فارغ اليوم. يوم سعيد!';
+      s += `لديك ${all.length} عناصر في جدولك. `;
+      all.forEach((r, i) => {
+        const time = new Date(r.dateTime).toLocaleTimeString('ar-SA', { hour: 'numeric', minute: '2-digit' });
+        s += `${i + 1}. ${r.title}، ${time}. `;
+      });
+      return s + 'يوم موفق!';
     }
 
-    let t = `${grEn}, ${name}! I'm ARIA, your AI assistant. `;
-    if (!top.length) return t + "Your schedule is clear today. Have a productive day!";
-    t += `You have ${top.length} item${top.length > 1 ? 's' : ''} on your schedule. `;
-    top.forEach((r, i) => {
+    // English (default)
+    let s = `${gr}, ${name}! I'm ARIA, your AI assistant. `;
+    if (!all.length) return s + "Your schedule is clear today. Have a productive day!";
+    s += `You have ${all.length} item${all.length > 1 ? 's' : ''} on your schedule. `;
+    all.forEach((r, i) => {
       const time = new Date(r.dateTime).toLocaleTimeString('en-KE', { hour: 'numeric', minute: '2-digit' });
-      t += `${i+1}. ${r.title}, at ${time}. `;
+      s += `${i + 1}. ${r.title}, at ${time}. `;
     });
-    return t + "I'll keep you on track. Let's have a great day.";
+    return s + "I'll keep you on track. Let's have a great day.";
   }
 }
 

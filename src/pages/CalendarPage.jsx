@@ -7,7 +7,7 @@ import { useLang } from '../context/LangContext';
 import { fetchCalendarEvents, getToken } from '../services/google';
 import { useAuth } from '../context/AuthContext';
 import BottomNav from '../components/BottomNav';
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isSameMonth, addMonths, subMonths, isToday } from 'date-fns';
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, addMonths, subMonths, isToday } from 'date-fns';
 import toast from 'react-hot-toast';
 
 const EVENT_COLORS = ['#4F6EF7', '#8B5CF6', '#22c55e', '#f59e0b', '#ef4444', '#ec4899'];
@@ -224,7 +224,7 @@ export default function CalendarPage() {
                     style={{
                       aspectRatio: '1', borderRadius: 12, border: 'none', cursor: 'pointer',
                       background: selected ? '#4F6EF7' : today ? 'rgba(79,110,247,0.12)' : 'transparent',
-                      color: selected ? '#fff' : today ? '#4F6EF7' : isSameMonth(day, currentMonth) ? '#fff' : 'var(--text-muted)',
+                      color: selected ? '#fff' : today ? '#4F6EF7' : '#fff',
                       fontWeight: selected || today ? 700 : 400, fontSize: 14, position: 'relative',
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2,
                     }}>

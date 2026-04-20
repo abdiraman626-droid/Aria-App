@@ -8,7 +8,8 @@
       "Bash(git push:*)",
       "Bash(node -c /Users/abdirahmanmohamed/aria-app/src/pages/Dashboard.jsx)",
       "Read(//Users/abdirahmanmohamed/zak-clothing/**)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

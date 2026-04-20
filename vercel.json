@@ -3,7 +3,8 @@
     "api/transcribe-start.js": { "maxDuration": 15 },
     "api/transcribe-poll.js":  { "maxDuration": 10 },
     "api/summarize.js":        { "maxDuration": 30 },
-    "api/summarize-emails.js": { "maxDuration": 30 }
+    "api/summarize-emails.js": { "maxDuration": 30 },
+    "api/voice-chat.js":       { "maxDuration": 15 }
   },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }

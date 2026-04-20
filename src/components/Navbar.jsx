@@ -7,7 +7,13 @@ import { useLang } from '../context/LangContext';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
-  const { lang, toggle } = useLang();
+  const { lang, setLang } = useLang();
+  const nextLang = () => {
+    const order = ['en', 'sw', 'so', 'ar'];
+    const next = order[(order.indexOf(lang) + 1) % order.length];
+    setLang(next);
+  };
+  const langLabel = { en: 'English', sw: 'Kiswahili', so: 'Soomaali', ar: 'العربية' };
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
@@ -34,9 +40,9 @@ export default function Navbar() {
               <a href="#pricing" className="text-sm hover:text-white transition-colors" style={{ color: 'var(--text-secondary)' }}>Pricing</a>
             </>
           )}
-          <button onClick={toggle} className="flex items-center gap-1.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
+          <button onClick={nextLang} className="flex items-center gap-1.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
             <Globe size={15} />
-            {lang === 'en' ? 'SW' : 'EN'}
+            {langLabel[lang]}
           </button>
           {user ? (
             <div className="relative">
@@ -103,8 +109,8 @@ export default function Navbar() {
             <div className="px-6 py-4 flex flex-col gap-4">
               <a href="#features" onClick={() => setMenuOpen(false)} className="text-white py-1">Features</a>
               <a href="#pricing" onClick={() => setMenuOpen(false)} className="text-white py-1">Pricing</a>
-              <button onClick={() => { toggle(); }} className="text-left py-1" style={{ color: 'var(--text-secondary)' }}>
-                Language: {lang === 'en' ? 'English → Swahili' : 'Kiswahili → English'}
+              <button onClick={nextLang} className="text-left py-1" style={{ color: 'var(--text-secondary)' }}>
+                Language: {langLabel[lang]}
               </button>
               <Link to="/login" onClick={() => setMenuOpen(false)} className="btn btn-ghost w-full">Sign In</Link>
               <Link to="/signup" onClick={() => setMenuOpen(false)} className="btn btn-primary w-full">Start Free Trial</Link>

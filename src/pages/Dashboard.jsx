@@ -111,7 +111,7 @@ export default function Dashboard() {
     svc.onStart = () => setPlaying(true);
     svc.onEnd   = () => setPlaying(false);
     setTimeout(() => {
-      const text = svc.briefing(user, upcoming, lang);
+      const text = svc.briefing(user, upcoming, upcomingCalEvents, lang);
       svc.speak(text, lang).catch(() => setPlaying(false));
     }, 900);
   }, [user?.id]);
@@ -157,7 +157,7 @@ export default function Dashboard() {
     if (playing) { svc.stop(); setPlaying(false); return; }
     svc.onStart = () => setPlaying(true);
     svc.onEnd   = () => setPlaying(false);
-    const text = svc.briefing(user, upcoming, lang);
+    const text = svc.briefing(user, upcoming, upcomingCalEvents, lang);
     toast.success('Playing briefing with Rachel...', { icon: '🎙️' });
     try { await svc.speak(text, lang); } catch { setPlaying(false); }
   };
