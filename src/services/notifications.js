@@ -114,7 +114,7 @@ export function sendEmailReminder(reminder, toEmail) {
     `Hi,\n\nThis is your ARIA reminder:\n\n📌 ${reminder.title}\n` +
     (reminder.description ? `\n${reminder.description}\n` : '') +
     `\n📅 ${dateStr} at ${timeStr}\n\n` +
-    `Sent by ARIA — Your AI Reminder Assistant\nhttps://aria-app-one.vercel.app`
+    `Sent by ARIA Life — AI Business Assistant\nhttps://arialife.app`
   );
   window.open(`mailto:${toEmail}?subject=${subject}&body=${body}`);
   return true;

@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mic, Square, Volume2, Clock, Sparkles } from 'lucide-react';
+const VoiceOrb = lazy(() => import('../components/VoiceOrb'));
 import { useAuth } from '../context/AuthContext';
 import { useReminders } from '../context/RemindersContext';
 import { useCalendar } from '../context/CalendarContext';
@@ -208,38 +209,15 @@ export default function Voice() {
           </p>
         </motion.div>
 
-        {/* Giant Mic Button */}
+        {/* 3D Voice Orb */}
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', delay: 0.2 }} style={{ position: 'relative', marginBottom: 32 }}>
-          {(state === 'listening' || state === 'speaking') && (
-            <>
-              <motion.div animate={{ scale: [1, 1.4], opacity: [0.3, 0] }} transition={{ duration: 1.5, repeat: Infinity }}
-                style={{ position: 'absolute', inset: -20, borderRadius: '50%', background: `${stateConfig.color}33` }} />
-              <motion.div animate={{ scale: [1, 1.25], opacity: [0.2, 0] }} transition={{ duration: 1.5, delay: 0.3, repeat: Infinity }}
-                style={{ position: 'absolute', inset: -8, borderRadius: '50%', background: `${stateConfig.color}22` }} />
-            </>
-          )}
-          <button onClick={startListening}
-            style={{
-              width: 160, height: 160, borderRadius: '50%', border: 'none', cursor: 'pointer',
-              background: `linear-gradient(135deg, ${stateConfig.color}, ${stateConfig.color}cc)`,
-              boxShadow: `0 0 0 0 ${stateConfig.color}44, 0 24px 80px ${stateConfig.color}44`,
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8,
-              transition: 'all 0.3s', position: 'relative',
-            }}>
-            {state === 'listening' ? (
-              <div style={{ display: 'flex', gap: 5, alignItems: 'flex-end', height: 40 }}>
-                {[0, 1, 2, 3, 4, 5].map(i => (
-                  <div key={i} className="eq-bar" style={{ animationDelay: `${i * 0.1}s`, background: '#fff', height: 8 }} />
-                ))}
-              </div>
-            ) : state === 'speaking' ? (
-              <Volume2 size={56} color="#fff" />
-            ) : state === 'thinking' ? (
-              <Sparkles size={48} color="#fff" style={{ animation: 'spin 1s linear infinite' }} />
-            ) : (
+          <Suspense fallback={
+            <button onClick={startListening} style={{ width: 160, height: 160, borderRadius: '50%', border: 'none', cursor: 'pointer', background: `linear-gradient(135deg, ${stateConfig.color}, ${stateConfig.color}cc)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Mic size={56} color="#fff" />
-            )}
-          </button>
+            </button>
+          }>
+            <VoiceOrb state={state} size={180} onClick={startListening} />
+          </Suspense>
         </motion.div>
 
         <motion.p animate={{ opacity: 1 }} initial={{ opacity: 0 }}

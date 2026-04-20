@@ -1,10 +1,11 @@
 {
-  "name": "ARIA — AI Reminder Assistant",
-  "short_name": "ARIA",
-  "description": "Your AI-powered reminder assistant with voice briefings for Kenyan professionals",
-  "start_url": "/",
+  "name": "ARIA Life — AI Business Assistant",
+  "short_name": "ARIA Life",
+  "description": "Your AI-powered business assistant — voice scheduling, email summaries, meeting transcription, and strategy planning.",
+  "start_url": "https://arialife.app/",
+  "id": "arialife-app",
   "display": "standalone",
-  "background_color": "#0A0A0F",
+  "background_color": "#060611",
   "theme_color": "#4F6EF7",
   "orientation": "portrait",
   "icons": [

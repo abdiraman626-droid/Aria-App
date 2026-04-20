@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Star, Mic, MessageCircle, Calendar, Mail, Globe, Zap, Shield, Crown, X, Building2, Building, Play, Lightbulb, BarChart3, Video, Menu } from 'lucide-react';
+const ParticleField = lazy(() => import('../components/ParticleField'));
 
 const KSH_TO_USD = 130;
 
@@ -183,8 +184,12 @@ export default function Landing() {
 
       {/* ── Hero ────────────────────────────────────────────── */}
       <section style={{ paddingTop: 120, paddingBottom: 100, position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '5%', left: '50%', transform: 'translateX(-50%)', width: 900, height: 600, background: 'radial-gradient(ellipse, rgba(79,110,247,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', top: '30%', right: '10%', width: 400, height: 400, background: 'radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        {/* Particle field background */}
+        <Suspense fallback={null}>
+          <ParticleField count={50} color="#4F6EF7" />
+        </Suspense>
+        <div style={{ position: 'absolute', top: '5%', left: '50%', transform: 'translateX(-50%)', width: 900, height: 600, background: 'radial-gradient(ellipse, rgba(79,110,247,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '30%', right: '10%', width: 400, height: 400, background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
