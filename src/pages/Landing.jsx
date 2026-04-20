@@ -57,7 +57,7 @@ const DEMOS = [
     desc: 'ARIA reads your Gmail inbox and creates AI-powered summaries — who sent it, what they need, and what action to take.',
     mockup: [
       { from: 'Safaricom Finance', subject: 'Q4 Invoice Due', summary: 'Safaricom Finance sent the Q4 invoice for KSH 450,000. Payment due by Friday. Action: Approve and forward to accounts.' },
-      { from: 'David Ochieng', subject: 'Partnership Proposal', summary: 'David from Mombasa Capital proposes a joint venture for coastal expansion. Action: Review terms and schedule a call.' },
+      { from: 'David Chen', subject: 'Partnership Proposal', summary: 'David from Pacific Capital proposes a joint venture for regional expansion. Action: Review terms and schedule a call.' },
     ],
   },
   {
@@ -74,8 +74,8 @@ const DEMOS = [
     icon: Lightbulb, color: '#f59e0b', title: 'AI Strategy Advisor',
     desc: 'Get business plans, marketing strategies, financial projections, and competitor analysis — powered by Claude AI.',
     mockup: [
-      { label: 'You', text: '"Create a marketing strategy for a SaaS product in East Africa"', side: 'right' },
-      { label: 'ARIA', text: '## Marketing Strategy\n**Target:** SMEs in Kenya, Tanzania, Uganda\n**Channels:** WhatsApp Business, LinkedIn, industry events\n**Budget:** KSH 200K/month for 6 months...', side: 'left' },
+      { label: 'You', text: '"Create a marketing strategy for a SaaS product targeting SMEs"', side: 'right' },
+      { label: 'ARIA', text: '## Marketing Strategy\n**Target:** SMEs in growth markets\n**Channels:** WhatsApp Business, LinkedIn, industry events\n**Budget:** KSH 200K/month for 6 months...', side: 'left' },
     ],
   },
   {
@@ -139,7 +139,7 @@ export default function Landing() {
             <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 20px', borderRadius: 100, background: 'var(--bg-card)', border: '1px solid var(--border)', fontSize: 13, color: 'var(--text-secondary)', marginBottom: 32 }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', animation: 'pulse-ring 2s infinite' }} />
-              Trusted by professionals across East Africa & beyond
+              Trusted by professionals and enterprise teams worldwide
             </motion.div>
 
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
@@ -149,7 +149,7 @@ export default function Landing() {
 
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               style={{ fontSize: 'clamp(16px, 2vw, 20px)', color: 'var(--text-secondary)', maxWidth: 600, lineHeight: 1.7, marginBottom: 40 }}>
-              Voice scheduling, AI email summaries, meeting transcription, and strategy planning — all in one platform built for African and global enterprise teams.
+              Voice scheduling, AI email summaries, meeting transcription, and strategy planning — all in one platform built for enterprise teams everywhere.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
@@ -435,7 +435,7 @@ export default function Landing() {
             </div>
             <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 18 }}>ARIA</span>
           </div>
-          <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>© {new Date().getFullYear()} ARIA Life. Built for Africa & beyond.</p>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>© {new Date().getFullYear()} ARIA Life. Built for teams worldwide.</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 20px' }}>
             <Link to="/privacy" style={{ fontSize: 13, color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy</Link>
             <Link to="/terms" style={{ fontSize: 13, color: 'var(--text-muted)', textDecoration: 'none' }}>Terms</Link>
