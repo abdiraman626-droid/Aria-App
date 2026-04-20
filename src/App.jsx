@@ -10,6 +10,7 @@ import Tour from './components/Tour';
 
 import Landing       from './pages/Landing';
 import CalendarPage  from './pages/CalendarPage';
+import Strategy      from './pages/Strategy';
 import Login      from './pages/Login';
 import Signup     from './pages/Signup';
 import Join       from './pages/Join';
@@ -106,6 +107,7 @@ export default function App() {
                 <Route path="/team"      element={<PrivateRoute><Team /></PrivateRoute>} />
                 <Route path="/clients"   element={<PrivateRoute><Clients /></PrivateRoute>} />
                 <Route path="/calendar"  element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
+                <Route path="/strategy"  element={<PrivateRoute><Strategy /></PrivateRoute>} />
                 <Route path="/meetings"  element={<PrivateRoute><Meetings /></PrivateRoute>} />
 
                 {/* Fallback */}

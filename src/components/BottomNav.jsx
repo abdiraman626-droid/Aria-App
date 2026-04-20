@@ -1,33 +1,31 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Bell, Mic, Settings, Users, Video, Calendar } from 'lucide-react';
+import { Home, Bell, Mic, Settings, Users, Video, Calendar, Lightbulb } from 'lucide-react';
 import { usePlan } from '../hooks/usePlan';
 import { useLang } from '../context/LangContext';
 
 export default function BottomNav() {
   const location = useLocation();
   const { hasTeam, hasMeetingRecorder } = usePlan();
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   const TABS = {
-    home:     { to: '/dashboard', icon: Home,     label: t('home')      },
-    remind:   { to: '/reminders', icon: Bell,     label: t('reminders') },
-    calendar: { to: '/calendar',  icon: Calendar, label: t('calendar')  },
-    voice:    { to: '/voice',     icon: Mic,      label: t('voice')     },
-    settings: { to: '/settings',  icon: Settings, label: t('settings')  },
-    team:     { to: '/team',      icon: Users,    label: t('team')      },
-    meetings: { to: '/meetings',  icon: Video,    label: t('meetings')  },
+    home:     { to: '/dashboard', icon: Home,      label: t('home')      },
+    calendar: { to: '/calendar',  icon: Calendar,  label: t('calendar')  },
+    remind:   { to: '/reminders', icon: Bell,      label: t('reminders') },
+    strategy: { to: '/strategy',  icon: Lightbulb, label: lang === 'ar' ? 'استراتيجية' : lang === 'so' ? 'Istiraatiiji' : lang === 'sw' ? 'Mkakati' : 'Strategy' },
+    voice:    { to: '/voice',     icon: Mic,       label: t('voice')     },
+    settings: { to: '/settings',  icon: Settings,  label: t('settings')  },
   };
 
   const tabs = [
     TABS.home,
     TABS.calendar,
     TABS.remind,
-    ...(hasTeam ? [TABS.team] : []),
-    ...(hasMeetingRecorder ? [TABS.meetings] : []),
+    TABS.strategy,
     TABS.voice,
     TABS.settings,
-  ].slice(0, 6);
+  ];
 
   return (
     <nav
