@@ -16,6 +16,7 @@ import CalendarPage  from './pages/CalendarPage';
 import Strategy      from './pages/Strategy';
 import Analytics     from './pages/Analytics';
 import Departments   from './pages/Departments';
+import Suggestions   from './pages/Suggestions';
 import Login      from './pages/Login';
 import Signup     from './pages/Signup';
 import Join       from './pages/Join';
@@ -123,6 +124,7 @@ export default function App() {
                 <Route path="/strategy"     element={<PrivateRoute><Strategy /></PrivateRoute>} />
                 <Route path="/analytics"    element={<PrivateRoute><Analytics /></PrivateRoute>} />
                 <Route path="/departments"  element={<PrivateRoute><Departments /></PrivateRoute>} />
+                <Route path="/suggestions" element={<PrivateRoute><Suggestions /></PrivateRoute>} />
                 <Route path="/meetings"  element={<PrivateRoute><Meetings /></PrivateRoute>} />
 
                 {/* Fallback */}

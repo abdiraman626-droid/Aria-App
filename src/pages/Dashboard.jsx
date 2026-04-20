@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, Plus, Calendar, Mail, ArrowRight, Bell, Clock, RefreshCw, Link2Off, Volume2, Square, Lock, X, Video, LogOut, Settings, MessageSquare, Send, Loader2 } from 'lucide-react';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+import { Mic, Plus, Calendar, Mail, ArrowRight, Bell, Clock, RefreshCw, Link2Off, Volume2, Square, Lock, X, Video, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useReminders } from '../context/RemindersContext';
 import { useCalendar } from '../context/CalendarContext';
@@ -81,29 +79,6 @@ export default function Dashboard() {
       return () => clearTimeout(timer);
     }
   }, [showWelcomeAnim]);
-
-  const [suggestionOpen, setSuggestionOpen] = useState(false);
-  const [suggestionText, setSuggestionText] = useState('');
-  const [suggestionSending, setSuggestionSending] = useState(false);
-
-  const submitSuggestion = async () => {
-    if (!suggestionText.trim()) return;
-    setSuggestionSending(true);
-    try {
-      await addDoc(collection(db, 'suggestions'), {
-        userId: user?.id, userName: user?.name, userEmail: user?.email,
-        type: 'feedback', message: suggestionText.trim(),
-        createdAt: serverTimestamp(), status: 'new',
-      });
-      fetch('/api/submit-suggestion', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userName: user?.name, userEmail: user?.email, type: 'feedback', message: suggestionText.trim() }),
-      }).catch(() => {});
-      toast.success('Thank you for your feedback!');
-      setSuggestionText(''); setSuggestionOpen(false);
-    } catch { toast.error('Failed to submit'); }
-    finally { setSuggestionSending(false); }
-  };
   const hasValidToken      = !!getToken();
 
   const h     = new Date().getHours();
@@ -413,47 +388,6 @@ export default function Dashboard() {
             {(VOICES.find(v => v.id === (localStorage.getItem('aria_voice_id') || RACHEL_ID))?.name || 'Rachel')} voice · ElevenLabs · Auto-plays 7–11am
           </p>
         </motion.div>
-
-        {/* ── Suggestion Button ─────────────────────────────────────── */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
-          style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
-          <button onClick={() => setSuggestionOpen(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 12, background: 'rgba(79,110,247,0.08)', border: '1px solid rgba(79,110,247,0.2)', cursor: 'pointer', color: 'var(--blue)', fontSize: 13, fontWeight: 600 }}>
-            <MessageSquare size={15} /> {lang === 'ar' ? 'اقتراح' : lang === 'so' ? 'Talo' : lang === 'sw' ? 'Pendekezo' : 'Suggestion'}
-          </button>
-        </motion.div>
-
-        {/* Suggestion Modal */}
-        <AnimatePresence>
-          {suggestionOpen && (
-            <>
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="fixed inset-0 z-40" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }} onClick={() => setSuggestionOpen(false)} />
-              <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
-                transition={{ type: 'spring', stiffness: 300, damping: 35 }}
-                className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl"
-                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', maxHeight: '70svh', overflowY: 'auto' }}>
-                <div className="flex justify-center pt-3 pb-1"><div className="w-10 h-1 rounded-full" style={{ background: 'var(--border)' }} /></div>
-                <div className="px-6 pt-2 pb-8">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                    <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 18, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <MessageSquare size={18} style={{ color: 'var(--blue)' }} /> {lang === 'ar' ? 'صندوق الاقتراحات' : lang === 'so' ? 'Sanduuqa Talooyinka' : lang === 'sw' ? 'Sanduku la Mapendekezo' : 'Suggestion Box'}
-                    </h2>
-                    <button onClick={() => setSuggestionOpen(false)} style={{ background: 'var(--bg-card2)', border: 'none', borderRadius: 10, padding: 8, cursor: 'pointer', color: 'var(--text-muted)' }}><X size={16} /></button>
-                  </div>
-                  <textarea className="input" rows={4} value={suggestionText} onChange={e => setSuggestionText(e.target.value)}
-                    placeholder={lang === 'ar' ? 'اكتب اقتراحك...' : lang === 'so' ? 'Qor talodaada...' : lang === 'sw' ? 'Andika pendekezo...' : 'Share feedback, ideas, or report a bug...'}
-                    style={{ resize: 'vertical', marginBottom: 14 }} />
-                  <button onClick={submitSuggestion} disabled={suggestionSending || !suggestionText.trim()}
-                    className="btn btn-primary w-full" style={{ gap: 8 }}>
-                    {suggestionSending ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
-                    {lang === 'ar' ? 'إرسال' : lang === 'so' ? 'Dir' : lang === 'sw' ? 'Tuma' : 'Submit'}
-                  </button>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
 
         {/* ── Meeting Recorder shortcut ────────────────────────────── */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} style={{ marginBottom: 28 }}>

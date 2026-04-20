@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Bell, Mic, Settings, Users, Video, Calendar, Lightbulb, BarChart3 } from 'lucide-react';
+import { Home, Bell, Mic, Settings, Users, Video, Calendar, Lightbulb, BarChart3, MessageSquare } from 'lucide-react';
 import { usePlan } from '../hooks/usePlan';
 import { useLang } from '../context/LangContext';
 
@@ -10,12 +10,12 @@ export default function BottomNav() {
   const { t, lang } = useLang();
 
   const TABS = {
-    home:     { to: '/dashboard', icon: Home,      label: t('home')      },
-    calendar: { to: '/calendar',  icon: Calendar,  label: t('calendar')  },
-    meetings: { to: '/meetings',  icon: Video,     label: t('meetings')  },
-    strategy: { to: '/strategy',  icon: Lightbulb, label: lang === 'ar' ? 'استراتيجية' : lang === 'so' ? 'Istiraatiiji' : lang === 'sw' ? 'Mkakati' : 'Strategy' },
-    voice:    { to: '/voice',     icon: Mic,       label: t('voice')     },
-    settings: { to: '/settings',  icon: Settings,  label: t('settings')  },
+    home:       { to: '/dashboard',   icon: Home,           label: t('home')      },
+    calendar:   { to: '/calendar',    icon: Calendar,       label: t('calendar')  },
+    meetings:   { to: '/meetings',    icon: Video,          label: t('meetings')  },
+    strategy:   { to: '/strategy',    icon: Lightbulb,      label: lang === 'ar' ? 'استراتيجية' : lang === 'so' ? 'Istiraatiiji' : lang === 'sw' ? 'Mkakati' : 'Strategy' },
+    suggest:    { to: '/suggestions', icon: MessageSquare,  label: lang === 'ar' ? 'اقتراح' : lang === 'so' ? 'Talo' : lang === 'sw' ? 'Pendekezo' : 'Feedback' },
+    settings:   { to: '/settings',    icon: Settings,       label: t('settings')  },
   };
 
   const tabs = [
@@ -23,7 +23,7 @@ export default function BottomNav() {
     TABS.calendar,
     TABS.meetings,
     TABS.strategy,
-    TABS.voice,
+    TABS.suggest,
     TABS.settings,
   ];
 
