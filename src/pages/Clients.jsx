@@ -92,7 +92,7 @@ function ClientSheet({ open, onClose, editing }) {
 
 export default function Clients() {
   const { clients, removeClient, loading, generatePortalToken } = useTeam();
-  const { hasTeam, isPersonal, hasClientPortal } = usePlan();
+  const { hasTeam, hasClientPortal } = usePlan();
   const [search,       setSearch]       = useState('');
   const [sheetOpen,    setSheetOpen]    = useState(false);
   const [editing,      setEditing]      = useState(null);
@@ -116,17 +116,7 @@ export default function Clients() {
     }
   };
 
-  if (isPersonal) {
-    return (
-      <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)' }}>
-        <div style={{ maxWidth: 600, margin: '0 auto', padding: '72px 20px 0' }}>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, marginBottom: 24 }}>Clients</h1>
-          <UpgradePrompt feature="Client management & reminders" requiredPlan="business" />
-        </div>
-        <BottomNav />
-      </div>
-    );
-  }
+  // Feature gate removed for testing — all plans can access Clients
 
   const filtered = clients.filter(c =>
     !search || c.name.toLowerCase().includes(search.toLowerCase()) || c.phone?.includes(search) || c.email?.toLowerCase().includes(search.toLowerCase())

@@ -1,17 +1,27 @@
 import { useAuth } from '../context/AuthContext';
 
+// ══════════════════════════════════════════════════════════════════════
+// TESTING MODE: All features unlocked on all plans.
+// TODO: Restore proper gating when payments are integrated.
+// ═══════��═══════════════════��══════════════════════════════════════════
+const ALL_UNLOCKED = {
+  reminders: Infinity, team: true, teamLimit: Infinity, whatsapp: true,
+  mpesa: true, customVoice: true, clientPortal: true, emailSummaries: true,
+  meetingRecorder: true, analytics: true, workflows: true,
+};
+
 const LIMITS = {
-  individual:      { reminders: Infinity, team: false, teamLimit: 3,        whatsapp: false, mpesa: false, customVoice: false, clientPortal: false, emailSummaries: false, meetingRecorder: false, analytics: false, workflows: false },
-  corporate_mini:  { reminders: Infinity, team: true,  teamLimit: 10,       whatsapp: true,  mpesa: false, customVoice: false, clientPortal: true,  emailSummaries: true,  meetingRecorder: false, analytics: false, workflows: false },
-  corporate:       { reminders: Infinity, team: true,  teamLimit: 50,       whatsapp: true,  mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: false, workflows: false },
-  major_corporate: { reminders: Infinity, team: true,  teamLimit: 500,      whatsapp: true,  mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: true,  workflows: false },
-  enterprise:      { reminders: Infinity, team: true,  teamLimit: Infinity, whatsapp: true,  mpesa: true,  customVoice: true,  clientPortal: true,  emailSummaries: true,  meetingRecorder: true,  analytics: true,  workflows: true  },
+  individual:      ALL_UNLOCKED,
+  corporate_mini:  ALL_UNLOCKED,
+  corporate:       ALL_UNLOCKED,
+  major_corporate: ALL_UNLOCKED,
+  enterprise:      ALL_UNLOCKED,
 };
 
 export function usePlan() {
   const { user, PLAN_META } = useAuth();
   const plan    = user?.plan || 'individual';
-  const limits  = LIMITS[plan] || LIMITS.individual;
+  const limits  = LIMITS[plan] || ALL_UNLOCKED;
   const meta    = PLAN_META[plan]  || PLAN_META.individual;
 
   return {
@@ -35,9 +45,7 @@ export function usePlan() {
     isCorporate:     plan === 'corporate',
     isMajorCorporate:plan === 'major_corporate',
     isEnterprise:    plan === 'enterprise',
-    canAddReminder: (currentCount) =>
-      limits.reminders === Infinity || currentCount < limits.reminders,
-    canAddMember: (currentCount) =>
-      limits.teamLimit === Infinity || currentCount < limits.teamLimit,
+    canAddReminder: () => true,
+    canAddMember:   () => true,
   };
 }

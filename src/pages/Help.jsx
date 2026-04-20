@@ -73,7 +73,7 @@ function Section({ title, plan, color, icon: Icon, children }) {
 }
 
 export default function Help() {
-  const { plan, isPersonal, isBusiness, isPremium } = usePlan();
+  const { plan, isIndividual, isCorporate, isEnterprise } = usePlan();
   const [activeTab, setActiveTab] = useState('all');
 
   const tabs = [
@@ -103,7 +103,7 @@ export default function Help() {
 
           {/* Plan badge */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 12px', borderRadius: 20, background: `${PLAN_COLORS[plan]}14`, border: `1px solid ${PLAN_COLORS[plan]}25`, marginBottom: 24 }}>
-            {isPremium ? <Crown size={12} style={{ color: '#f59e0b' }} /> : isBusiness ? <Zap size={12} style={{ color: '#8B5CF6' }} /> : <Star size={12} style={{ color: '#4F6EF7' }} />}
+            {isEnterprise ? <Crown size={12} style={{ color: '#f59e0b' }} /> : isCorporate ? <Zap size={12} style={{ color: '#8B5CF6' }} /> : <Star size={12} style={{ color: '#4F6EF7' }} />}
             <span style={{ fontSize: 12, fontWeight: 700, color: PLAN_COLORS[plan] }}>
               You're on the {plan[0].toUpperCase() + plan.slice(1)} plan
             </span>

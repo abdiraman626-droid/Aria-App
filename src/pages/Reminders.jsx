@@ -79,24 +79,37 @@ export default function Reminders() {
 
   const buildWhatsAppMsg = (r) => {
     const d = new Date(r.dateTime);
-    return encodeURIComponent(`🔔 *ARIA Reminder*\n\n*${r.title}*\n${r.description || ''}\n\n📅 ${format(d, 'EEEE, MMM d')} at ${format(d, 'h:mm a')}\n\n_Sent by ARIA_`);
+    return `🔔 *ARIA Reminder*\n\n*${r.title}*\n${r.description || ''}\n\n📅 ${format(d, 'EEEE, MMM d')} at ${format(d, 'h:mm a')}\n\n_Sent by ARIA_`;
   };
 
-  const sendWhatsApp = (r) => {
-    if (canWhatsAppAny) {
-      // Business/Premium: show number picker pre-filled with own number
-      setCustomNumber(user?.whatsappNumber || '');
-      setWaTarget(r);
-    } else {
-      // Personal: send only to own number
-      if (!user?.whatsappNumber) { toast.error('Add WhatsApp number in Settings'); return; }
-      window.open(`https://wa.me/${user.whatsappNumber.replace(/\D/g, '')}?text=${buildWhatsAppMsg(r)}`);
+  const sendViaWasender = async (phone, message) => {
+    try {
+      const res = await fetch('/api/send-whatsapp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, message }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to send');
+      }
+      toast.success('WhatsApp reminder sent!');
+    } catch (err) {
+      // Fallback to wa.me link if server-side fails
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encoded}`);
     }
   };
 
-  const confirmWhatsApp = () => {
+  const sendWhatsApp = (r) => {
+    setCustomNumber(user?.whatsappNumber || '');
+    setWaTarget(r);
+  };
+
+  const confirmWhatsApp = async () => {
     if (!customNumber.trim()) { toast.error('Enter a phone number'); return; }
-    window.open(`https://wa.me/${customNumber.replace(/\D/g, '')}?text=${buildWhatsAppMsg(waTarget)}`);
+    const msg = buildWhatsAppMsg(waTarget);
+    await sendViaWasender(customNumber, msg);
     setWaTarget(null);
     setCustomNumber('');
   };

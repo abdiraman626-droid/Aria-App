@@ -4,7 +4,8 @@
     "api/transcribe-poll.js":  { "maxDuration": 10 },
     "api/summarize.js":        { "maxDuration": 30 },
     "api/summarize-emails.js": { "maxDuration": 30 },
-    "api/voice-chat.js":       { "maxDuration": 15 }
+    "api/voice-chat.js":       { "maxDuration": 15 },
+    "api/send-whatsapp.js":    { "maxDuration": 10 }
   },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }

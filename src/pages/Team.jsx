@@ -21,7 +21,7 @@ const PRIORITY_COLOR = { high: '#ef4444', medium: '#f59e0b', low: '#22c55e' };
 export default function Team() {
   const { user } = useAuth();
   const { members, clients, loading, activeCount, teamLimit, inviteMember, removeMember, refresh } = useTeam();
-  const { hasTeam, isPersonal, isPremium } = usePlan();
+  const { hasTeam, isEnterprise } = usePlan();
 
   const [inviteEmail,    setInviteEmail]    = useState('');
   const [inviting,       setInviting]       = useState(false);
@@ -104,17 +104,7 @@ export default function Team() {
     window.open(`mailto:${user.email}?subject=${subject}&body=${encodeURIComponent(body)}`);
   };
 
-  if (isPersonal) {
-    return (
-      <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)' }}>
-        <div style={{ maxWidth: 600, margin: '0 auto', padding: '72px 20px 0' }}>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, marginBottom: 24 }}>Team</h1>
-          <UpgradePrompt feature="Team management & collaboration" requiredPlan="business" />
-        </div>
-        <BottomNav />
-      </div>
-    );
-  }
+  // Feature gate removed for testing — all plans can access Team
 
   return (
     <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)' }}>
@@ -126,7 +116,7 @@ export default function Team() {
             <div>
               <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em' }}>Team</h1>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 2 }}>
-                {activeCount}{isPremium ? '' : ` of 5`} member{activeCount !== 1 ? 's' : ''} · {clients.length} client{clients.length !== 1 ? 's' : ''}
+                {activeCount} member{activeCount !== 1 ? 's' : ''} · {clients.length} client{clients.length !== 1 ? 's' : ''}
               </p>
             </div>
             <button onClick={generateWeeklySummary} className="btn btn-ghost btn-sm">
@@ -143,34 +133,25 @@ export default function Team() {
               <div>
                 <p style={{ fontWeight: 700, fontSize: 15 }}>Invite Team Member</p>
                 <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                  {isPremium
-                    ? `${activeCount} member${activeCount !== 1 ? 's' : ''} · Unlimited`
-                    : activeCount < 5 ? `${5 - activeCount} invite${5 - activeCount !== 1 ? 's' : ''} remaining` : 'Team full (5/5)'
-                  }
+                  {`${activeCount} member${activeCount !== 1 ? 's' : ''} · Unlimited invites`}
                 </p>
               </div>
             </div>
 
-            {(isPremium || activeCount < 5) ? (
-              <form onSubmit={handleInvite} style={{ display: 'flex', gap: 10 }}>
-                <input
-                  className="input"
-                  type="email"
-                  value={inviteEmail}
-                  onChange={e => setInviteEmail(e.target.value)}
-                  placeholder="colleague@company.co.ke"
-                  style={{ flex: 1 }}
-                />
-                <button type="submit" disabled={inviting || !inviteEmail.trim()} className="btn btn-primary btn-sm">
-                  {inviting ? <RefreshCw size={13} className="animate-spin" /> : <Plus size={14} />}
-                  Invite
-                </button>
-              </form>
-            ) : (
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', fontStyle: 'italic' }}>
-                Remove a member to invite someone new.
-              </p>
-            )}
+            <form onSubmit={handleInvite} style={{ display: 'flex', gap: 10 }}>
+              <input
+                className="input"
+                type="email"
+                value={inviteEmail}
+                onChange={e => setInviteEmail(e.target.value)}
+                placeholder="colleague@company.co.ke"
+                style={{ flex: 1 }}
+              />
+              <button type="submit" disabled={inviting || !inviteEmail.trim()} className="btn btn-primary btn-sm">
+                {inviting ? <RefreshCw size={13} className="animate-spin" /> : <Plus size={14} />}
+                Invite
+              </button>
+            </form>
 
             {/* How it works */}
             <div style={{ marginTop: 14, padding: '10px 14px', borderRadius: 10, background: 'var(--bg-card2)', fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6 }}>

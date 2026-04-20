@@ -14,10 +14,9 @@ export function TeamProvider({ children }) {
   const [clients,  setClients]  = useState([]);
   const [loading,  setLoading]  = useState(false);
 
-  const isTeamPlan = user?.plan === 'business' || user?.plan === 'premium';
-
+  // All plans unlocked for testing — load team data for any plan
   useEffect(() => {
-    if (!user?.id || !isTeamPlan) { setMembers([]); setClients([]); return; }
+    if (!user?.id) { setMembers([]); setClients([]); return; }
     setLoading(true);
     Promise.all([
       getDocs(query(collection(db, 'team_members'), where('ownerId', '==', user.id))),
@@ -32,7 +31,7 @@ export function TeamProvider({ children }) {
   }, [user?.id, user?.plan]);
 
   const refresh = async () => {
-    if (!user?.id || !isTeamPlan) return;
+    if (!user?.id) return;
     const [mSnap, cSnap] = await Promise.all([
       getDocs(query(collection(db, 'team_members'), where('ownerId', '==', user.id))),
       getDocs(query(collection(db, 'clients'),      where('ownerId', '==', user.id))),
@@ -46,7 +45,7 @@ export function TeamProvider({ children }) {
   // ── Team members ────────────────────────────────────────────────────────────
 
   const activeCount = members.filter(m => m.status === 'active').length;
-  const teamLimit   = user?.plan === 'premium' ? Infinity : 5;
+  const teamLimit   = Infinity; // Unlocked for testing
 
   const inviteMember = async (email) => {
     if (teamLimit !== Infinity && activeCount >= teamLimit)
