@@ -1,5 +1,7 @@
+import { useState, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import PageTransition from './components/PageTransition';
+import SplashScreen from './components/SplashScreen';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { RemindersProvider } from './context/RemindersContext';
@@ -61,7 +63,15 @@ function AdminRoute({ children }) {
 }
 
 export default function App() {
+  const [splashDone, setSplashDone] = useState(
+    () => !!localStorage.getItem('aria_splash_seen')
+  );
+  const handleSplashComplete = useCallback(() => setSplashDone(true), []);
+
   return (
+    <>
+    <SplashScreen onComplete={handleSplashComplete} />
+    {splashDone && (
     <LangProvider>
       <AuthProvider>
         <RemindersProvider>
@@ -127,5 +137,7 @@ export default function App() {
         </RemindersProvider>
       </AuthProvider>
     </LangProvider>
+    )}
+    </>
   );
 }
