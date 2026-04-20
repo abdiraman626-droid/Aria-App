@@ -1,46 +1,138 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Users can only read/write their own profile
+
+    // ═══════════════════════════════════════════════════════════
+    // BLOCK ALL by default — every collection must have explicit rules
+    // ═══════════════════════════════════════════════════════════
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // ─── Helper functions ──────────────────────────────────────
+    function isAuth() {
+      return request.auth != null;
+    }
+    function isOwner(userId) {
+      return isAuth() && request.auth.uid == userId;
+    }
+    function isAdmin() {
+      return isAuth() && request.auth.token.email == 'abdiraman626@gmail.com';
+    }
+
+    // ─── users ─────────────────────────────────────────────────
+    // Only the owner can read/write their own profile
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if isOwner(userId);
     }
-    // Users can read/write their own meetings
-    match /meetings/{meetingId} {
-      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+
+    // ─── reminders ─────────────────────────────────────────────
+    // Owner can CRUD their own reminders
+    // Team members can READ reminders assigned to them
+    match /reminders/{reminderId} {
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow read:   if isAuth() && (
+        resource.data.userId == request.auth.uid ||
+        resource.data.assignedTo == request.auth.uid
+      );
+      allow update, delete: if isAuth() && resource.data.userId == request.auth.uid;
     }
-    // Suggestions — users can create and read their own
-    match /suggestions/{suggestionId} {
-      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
-    }
-    // Departments — owner can manage
-    match /departments/{deptId} {
-      allow read, write: if request.auth != null && resource.data.ownerId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.ownerId == request.auth.uid;
-      allow read: if request.auth != null;
-    }
-    // Activity logs — owner can read, system writes
-    match /activity_logs/{logId} {
-      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
-    }
-    // Saved strategies — users can only access their own
-    match /strategies/{strategyId} {
-      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
-    }
-    // Calendar events — users can only access their own
+
+    // ─── calendar_events ───────────────────────────────────────
+    // Only owner can CRUD their own calendar events
     match /calendar_events/{eventId} {
-      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if isAuth() && resource.data.userId == request.auth.uid;
     }
-    // Transcription status docs — user can read/write their own (docId contains no userId,
-    // but the Cloud Function writes here; allow any authenticated user to read/write
-    // their own temp docs. The docId is unguessable (timestamp + random).
+
+    // ─── meetings ──────────────────────────────────────────────
+    // Only owner can CRUD their own meetings
+    match /meetings/{meetingId} {
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if isAuth() && resource.data.userId == request.auth.uid;
+    }
+
+    // ─── meetings_temp ─────────────────────────────────────────
+    // Transcription temp docs — any authenticated user can read/write
+    // (Cloud Function writes these, docId is unguessable)
     match /meetings_temp/{docId} {
-      allow read, write: if request.auth != null;
+      allow read, write: if isAuth();
+    }
+
+    // ─── strategies ────────────────────────────────────────────
+    // Only owner can CRUD their own strategies
+    match /strategies/{strategyId} {
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if isAuth() && resource.data.userId == request.auth.uid;
+    }
+
+    // ─── suggestions ───────────────────────────────────────────
+    // Any authenticated user can create (submit feedback)
+    // Only admin can read all suggestions
+    // Users can read their own suggestions
+    match /suggestions/{suggestionId} {
+      allow create: if isAuth();
+      allow read: if isAuth() && (
+        resource.data.userId == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    // ─── team_members ──────────────────────────────────────────
+    // Owner (admin) can CRUD team members they created
+    // Team members can read their own invite (for join flow)
+    // Anyone authenticated can read by inviteToken (join page lookup)
+    match /team_members/{memberId} {
+      allow create: if isAuth() && request.resource.data.ownerId == request.auth.uid;
+      allow read:   if isAuth() && (
+        resource.data.ownerId == request.auth.uid ||
+        resource.data.memberId == request.auth.uid ||
+        resource.data.invitedEmail == request.auth.token.email
+      );
+      allow update: if isAuth() && (
+        resource.data.ownerId == request.auth.uid ||
+        resource.data.invitedEmail == request.auth.token.email
+      );
+      allow delete: if isAuth() && resource.data.ownerId == request.auth.uid;
+    }
+
+    // ─── clients ───────────────────────────────────────────────
+    // Only the owner (team admin) can CRUD clients
+    match /clients/{clientId} {
+      allow create: if isAuth() && request.resource.data.ownerId == request.auth.uid;
+      allow read, update, delete: if isAuth() && resource.data.ownerId == request.auth.uid;
+    }
+
+    // ─── client_portal_tokens ──────────────────────────────────
+    // Owner can create/read tokens for their clients
+    // Anyone authenticated can read (portal uses token lookup)
+    match /client_portal_tokens/{tokenId} {
+      allow create: if isAuth() && request.resource.data.ownerId == request.auth.uid;
+      allow read:   if isAuth();
+    }
+
+    // ─── client_requests ───────────────────────────────────────
+    // Anyone authenticated can create (client portal submissions)
+    // Owner can read requests for their clients
+    match /client_requests/{requestId} {
+      allow create: if isAuth();
+      allow read:   if isAuth() && resource.data.ownerId == request.auth.uid;
+    }
+
+    // ─── departments ───────────────────────────────────────────
+    // Owner can CRUD departments they created
+    // Any authenticated user in the org can read (for assignment display)
+    match /departments/{deptId} {
+      allow create: if isAuth() && request.resource.data.ownerId == request.auth.uid;
+      allow read:   if isAuth();
+      allow update, delete: if isAuth() && resource.data.ownerId == request.auth.uid;
+    }
+
+    // ─── activity_logs ─────────────────────────────────────────
+    // Users can create and read their own activity logs
+    match /activity_logs/{logId} {
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow read:   if isAuth() && resource.data.userId == request.auth.uid;
     }
   }
 }

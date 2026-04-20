@@ -15,7 +15,9 @@
       "Bash(curl -s http://localhost:5174/)",
       "Bash(grep -c \"ParticleField\" dist/assets/index-*.js)",
       "Bash(grep -c \"VoiceOrb\" dist/assets/index-*.js)",
-      "Bash(grep -l \"ParticleField\\\\|offsetWidth\\\\|mousemove\" dist/assets/*.js)"
+      "Bash(grep -l \"ParticleField\\\\|offsetWidth\\\\|mousemove\" dist/assets/*.js)",
+      "Bash(firebase deploy *)",
+      "Bash(npx firebase-tools *)"
     ]
   }
 }
