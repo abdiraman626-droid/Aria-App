@@ -482,6 +482,24 @@ export default function Dashboard() {
           })()}
         </motion.section>
 
+        {/* ── Quick Management Links ───────────────────────────────── */}
+        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }} style={{ marginTop: 28 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+            <Link to="/analytics" className="card" style={{ padding: '14px 12px', textAlign: 'center', textDecoration: 'none' }}>
+              <span style={{ fontSize: 20, display: 'block', marginBottom: 4 }}>📊</span>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600 }}>{lang === 'ar' ? 'التحليلات' : lang === 'so' ? 'Falanqayn' : lang === 'sw' ? 'Uchambuzi' : 'Analytics'}</span>
+            </Link>
+            <Link to="/departments" className="card" style={{ padding: '14px 12px', textAlign: 'center', textDecoration: 'none' }}>
+              <span style={{ fontSize: 20, display: 'block', marginBottom: 4 }}>🏢</span>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600 }}>{lang === 'ar' ? 'الأقسام' : lang === 'so' ? 'Qaybaha' : lang === 'sw' ? 'Idara' : 'Departments'}</span>
+            </Link>
+            <Link to="/team" className="card" style={{ padding: '14px 12px', textAlign: 'center', textDecoration: 'none' }}>
+              <span style={{ fontSize: 20, display: 'block', marginBottom: 4 }}>👥</span>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600 }}>{t('team')}</span>
+            </Link>
+          </div>
+        </motion.section>
+
         {/* ── Gmail (Smart) ─────────────────────────────────────────── */}
         <motion.section id="tour-gmail" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} style={{ marginTop: 28, paddingBottom: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
