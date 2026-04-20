@@ -9,7 +9,13 @@
       "Bash(node -c /Users/abdirahmanmohamed/aria-app/src/pages/Dashboard.jsx)",
       "Read(//Users/abdirahmanmohamed/zak-clothing/**)",
       "Bash(npm install:*)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\('framer-motion:', p.dependencies['framer-motion']\\); console.log\\('three:', p.dependencies['three']\\); console.log\\('@react-three/fiber:', p.dependencies['@react-three/fiber']\\); console.log\\('@react-three/drei:', p.dependencies['@react-three/drei']\\);\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174/)",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(grep -c \"ParticleField\" dist/assets/index-*.js)",
+      "Bash(grep -c \"VoiceOrb\" dist/assets/index-*.js)",
+      "Bash(grep -l \"ParticleField\\\\|offsetWidth\\\\|mousemove\" dist/assets/*.js)"
     ]
   }
 }

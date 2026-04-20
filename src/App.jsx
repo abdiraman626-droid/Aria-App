@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import PageTransition from './components/PageTransition';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { RemindersProvider } from './context/RemindersContext';
@@ -51,7 +52,7 @@ function AuthGate({ children }) {
 function PrivateRoute({ children }) {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
-  return children;
+  return <PageTransition>{children}</PageTransition>;
 }
 
 function AdminRoute({ children }) {
