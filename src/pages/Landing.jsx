@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Check, Star, Mic, MessageCircle, Calendar, Mail, Globe, Zap, Shield, Crown, X, Building2, Building, Play, Lightbulb, BarChart3, Video } from 'lucide-react';
+import { ArrowRight, Check, Star, Mic, MessageCircle, Calendar, Mail, Globe, Zap, Shield, Crown, X, Building2, Building, Play, Lightbulb, BarChart3, Video, Menu } from 'lucide-react';
 
 const KSH_TO_USD = 130;
 
@@ -118,6 +118,7 @@ function Cell({ v }) {
 
 export default function Landing() {
   const [usd, setUsd] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
   const fmtPrice = (p) => usd ? `$${Math.round(p / KSH_TO_USD).toLocaleString()}` : `KSH ${p.toLocaleString()}`;
 
   return (
@@ -128,6 +129,57 @@ export default function Landing() {
         Start Free — 7 Day Trial · No Credit Card Required ·
         <Link to="/signup" className="underline font-bold ml-2 hover:no-underline">Get started →</Link>
       </div>
+
+      {/* ── Navigation Bar ──────────────────────────────────── */}
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(10,10,15,0.88)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {/* Logo */}
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+            <div style={{ width: 34, height: 34, borderRadius: 10, background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Mic size={15} color="#fff" />
+            </div>
+            <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 20, color: '#fff', letterSpacing: '-0.02em' }}>ARIA</span>
+          </Link>
+
+          {/* Desktop nav links + auth buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 28 }} className="hidden md:flex">
+            <a href="#demos" style={{ fontSize: 14, color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500, transition: 'color 0.2s' }}>Demos</a>
+            <a href="#pricing" style={{ fontSize: 14, color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500, transition: 'color 0.2s' }}>Pricing</a>
+            <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
+            <Link to="/login" style={{
+              padding: '8px 20px', borderRadius: 10, border: '1px solid var(--border)', background: 'transparent',
+              color: 'var(--text-secondary)', fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'all 0.2s',
+            }}>
+              Sign In
+            </Link>
+            <Link to="/signup" style={{
+              padding: '8px 20px', borderRadius: 10, border: 'none', background: '#4F6EF7',
+              color: '#fff', fontSize: 14, fontWeight: 600, textDecoration: 'none', boxShadow: '0 2px 12px rgba(79,110,247,0.35)',
+              transition: 'all 0.2s',
+            }}>
+              Sign Up
+            </Link>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', padding: 8 }}>
+            {mobileMenu ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+
+        {/* Mobile menu dropdown */}
+        {mobileMenu && (
+          <div className="md:hidden" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-card)', padding: '16px 24px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <a href="#demos" onClick={() => setMobileMenu(false)} style={{ fontSize: 15, color: '#fff', textDecoration: 'none', padding: '6px 0' }}>Demos</a>
+              <a href="#pricing" onClick={() => setMobileMenu(false)} style={{ fontSize: 15, color: '#fff', textDecoration: 'none', padding: '6px 0' }}>Pricing</a>
+              <div style={{ height: 1, background: 'var(--border)', margin: '4px 0' }} />
+              <Link to="/login" onClick={() => setMobileMenu(false)} className="btn btn-ghost w-full" style={{ justifyContent: 'center' }}>Sign In</Link>
+              <Link to="/signup" onClick={() => setMobileMenu(false)} className="btn btn-primary w-full" style={{ justifyContent: 'center' }}>Sign Up</Link>
+            </div>
+          </div>
+        )}
+      </nav>
 
       {/* ── Hero ────────────────────────────────────────────── */}
       <section style={{ paddingTop: 120, paddingBottom: 100, position: 'relative', overflow: 'hidden' }}>
