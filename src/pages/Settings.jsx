@@ -46,8 +46,10 @@ function Row({ label, hint, children }) {
 
 export default function Settings() {
   const { user, updateUser, logout, PLAN_META } = useAuth();
-  const { lang, setLang } = useLang();
-  const { hasTeam, hasMpesa, hasCustomVoice, hasClientPortal, isPersonal, isBusiness, isPremium } = usePlan();
+  const { lang, setLang, t } = useLang();
+  const { plan, hasTeam, hasMpesa, hasCustomVoice, hasClientPortal, isIndividual, isCorporate, isMajorCorporate, isEnterprise } = usePlan();
+  const hasPriority = isCorporate || isMajorCorporate || isEnterprise;
+  const isPremium = hasCustomVoice; // for voice premium gate
   const navigate = useNavigate();
 
   const [name,          setName]          = useState(user?.name || '');
@@ -126,7 +128,7 @@ export default function Settings() {
     <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)' }}>
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '72px 20px 0' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 24 }}>Settings</h1>
+          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 24 }}>{t('settings')}</h1>
 
           {/* Plan card */}
           <div className="card" style={{ padding: '20px 24px', marginBottom: 16, background: `${planColor}08`, border: `1px solid ${planColor}30`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
@@ -138,9 +140,9 @@ export default function Settings() {
                 <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <p style={{ fontWeight: 700, fontSize: 16 }}>
-                    {user?.plan ? `${user.plan[0].toUpperCase() + user.plan.slice(1)} Plan` : 'Free'}
+                    {PLAN_META[user?.plan]?.label || 'Individual'} Plan
                   </p>
-                  {(user?.plan === 'business' || user?.plan === 'premium') && (
+                  {hasPriority && (
                     <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 20, background: 'rgba(34,197,94,0.12)', color: '#22c55e', border: '1px solid rgba(34,197,94,0.2)' }}>
                       ⚡ Priority Support
                     </span>
@@ -155,18 +157,18 @@ export default function Settings() {
               </div>
               </div>
             </div>
-            {user?.plan !== 'premium' && (
-              <Link to="/signup?plan=premium" className="btn btn-sm" style={{ background: planColor, color: '#fff', border: 'none' }}>
-                Upgrade
+            {!isEnterprise && (
+              <Link to="/signup?plan=corporate_mini" className="btn btn-sm" style={{ background: planColor, color: '#fff', border: 'none' }}>
+                {t('upgrade')}
               </Link>
             )}
           </div>
 
           {/* Profile */}
-          <Section icon={User} title="Profile" accent="#4F6EF7">
+          <Section icon={User} title={t('profile')} accent="#4F6EF7">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div>
-                <label className="label">Full Name</label>
+                <label className="label">{t('full_name')}</label>
                 <input className="input" value={name} onChange={e => setName(e.target.value)} />
               </div>
               <div>
@@ -174,11 +176,11 @@ export default function Settings() {
                 <input className="input" value={user?.email || ''} disabled style={{ opacity: 0.5, cursor: 'not-allowed' }} />
               </div>
               <div>
-                <label className="label">WhatsApp Number</label>
+                <label className="label">{t('whatsapp_number')}</label>
                 <input className="input" type="tel" value={whatsapp} onChange={e => setWhatsapp(e.target.value)} placeholder="+254 7XX XXX XXX" />
               </div>
               <button onClick={saveProfile} className="btn btn-primary btn-sm" style={{ alignSelf: 'flex-start' }}>
-                <Save size={14} /> Save Profile
+                <Save size={14} /> {t('save_profile')}
               </button>
             </div>
           </Section>
@@ -316,7 +318,7 @@ export default function Settings() {
           <Section icon={Users} title={<span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>Team Management <HintIcon hint="Invite colleagues by email, share a join link, and assign reminders to team members. Business: up to 5 members. Premium: unlimited." /></span>} accent={hasTeam ? '#8B5CF6' : '#6b7280'}>
             {hasTeam ? (
               <>
-                <Row label="Team Members" hint={isPremium ? 'Unlimited team members' : 'Up to 5 team members'}>
+                <Row label="Team Members" hint={isEnterprise ? 'Unlimited team members' : `Up to ${isIndividual ? 3 : isCorporate ? 50 : isMajorCorporate ? 500 : 10} members`}>
                   <Link to="/team" className="btn btn-sm" style={{ background: '#8B5CF6', color: '#fff', border: 'none', textDecoration: 'none' }}>
                     <Users size={13} /> Manage Team
                   </Link>
@@ -331,7 +333,7 @@ export default function Settings() {
                 </Row>
               </>
             ) : (
-              <UpgradePrompt feature="Team collaboration & shared reminders" requiredPlan="business" />
+              <UpgradePrompt feature="Team collaboration & shared reminders" requiredPlan="corporate_mini" />
             )}
           </Section>
 
@@ -347,7 +349,7 @@ export default function Settings() {
                 </Row>
               </>
             ) : (
-              <UpgradePrompt feature="M-Pesa payment tracking & reminders" requiredPlan="premium" />
+              <UpgradePrompt feature="M-Pesa payment tracking & reminders" requiredPlan="corporate" />
             )}
           </Section>
 
@@ -365,21 +367,21 @@ export default function Settings() {
                 </Row>
               </>
             ) : (
-              <UpgradePrompt feature="Client self-service portal" requiredPlan="premium" />
+              <UpgradePrompt feature="Client self-service portal" requiredPlan="corporate_mini" />
             )}
           </Section>
 
           {/* Support */}
           <div className="card" style={{ padding: '20px 24px', marginBottom: 16 }}>
-            {(user?.plan === 'business' || user?.plan === 'premium') ? (
+            {hasPriority ? (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <p style={{ fontWeight: 700, fontSize: 15 }}>Priority Support</p>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>Dedicated support for {user.plan} plan users</p>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>Dedicated support for {PLAN_META[plan]?.label || plan} plan</p>
                 </div>
                 <a
-                  href="mailto:support@ariaassistant.co.ke?subject=Support Request — ARIA Premium"
-                  style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 12, background: user.plan === 'premium' ? '#f59e0b' : '#8B5CF6', color: user.plan === 'premium' ? '#000' : '#fff', textDecoration: 'none', fontWeight: 700, fontSize: 13 }}>
+                  href="mailto:support@ariaassistant.co.ke?subject=Support Request — ARIA"
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 12, background: planColor, color: '#fff', textDecoration: 'none', fontWeight: 700, fontSize: 13 }}>
                   <Mail size={13} /> Contact Support
                 </a>
               </div>
@@ -423,7 +425,7 @@ export default function Settings() {
           <div className="card" style={{ padding: '20px 24px', marginBottom: 32, border: '1px solid rgba(239,68,68,0.15)' }}>
             <button onClick={() => { logout(); navigate('/login'); }}
               style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 15, color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
-              <LogOut size={16} /> Sign Out
+              <LogOut size={16} /> {t('sign_out')}
             </button>
           </div>
         </motion.div>
