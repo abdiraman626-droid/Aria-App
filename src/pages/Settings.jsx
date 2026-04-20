@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mic, MessageCircle, Calendar, Globe, Save, Eye, EyeOff, Play, LogOut, Crown, Zap, Star, CheckCircle, RefreshCw, ExternalLink, Loader2, Users, CreditCard, Link2, Mail, Square, Lock, BookOpen, Building, Building2 } from 'lucide-react';
+import { User, Mic, MessageCircle, Calendar, Globe, Save, Eye, EyeOff, Play, LogOut, Crown, Zap, Star, CheckCircle, RefreshCw, ExternalLink, Loader2, Users, CreditCard, Link2, Mail, Square, Lock, BookOpen, Building, Building2, MessageSquare, X, Send } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 import { useAuth } from '../context/AuthContext';
 import { useLang, LANGUAGES } from '../context/LangContext';
 import { usePlan } from '../hooks/usePlan';
@@ -62,6 +65,10 @@ export default function Settings() {
   const [googleConn,    setGoogleConn]    = useState(user?.googleConnected || false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const googleProfile = getProfile();
+  const [suggestionOpen, setSuggestionOpen] = useState(false);
+  const [suggestionType, setSuggestionType] = useState('feedback');
+  const [suggestionText, setSuggestionText] = useState('');
+  const [suggestionSending, setSuggestionSending] = useState(false);
 
   // Sync with context — user may load after this component mounts
   useEffect(() => {
@@ -115,6 +122,35 @@ export default function Settings() {
     } finally {
       setGoogleLoading(false);
     }
+  };
+
+  const submitSuggestion = async () => {
+    if (!suggestionText.trim()) { toast.error('Please write your suggestion'); return; }
+    setSuggestionSending(true);
+    try {
+      // Save to Firestore
+      await addDoc(collection(db, 'suggestions'), {
+        userId: user?.id || null,
+        userName: user?.name || 'Anonymous',
+        userEmail: user?.email || '',
+        type: suggestionType,
+        message: suggestionText.trim(),
+        createdAt: serverTimestamp(),
+        status: 'new',
+      });
+      // Send email notification (best-effort)
+      fetch('/api/submit-suggestion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userName: user?.name, userEmail: user?.email,
+          type: suggestionType, message: suggestionText.trim(),
+        }),
+      }).catch(() => {});
+      toast.success('Thank you for your feedback!');
+      setSuggestionText(''); setSuggestionType('feedback'); setSuggestionOpen(false);
+    } catch { toast.error('Failed to submit. Try again.'); }
+    finally { setSuggestionSending(false); }
   };
 
   const handleDisconnectGoogle = () => {
@@ -403,6 +439,81 @@ export default function Settings() {
               <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>View →</span>
             </div>
           </Link>
+
+          {/* Suggestion Box */}
+          <button onClick={() => setSuggestionOpen(true)} style={{ width: '100%', textDecoration: 'none' }}>
+            <div className="card" style={{ padding: '16px 24px', marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', border: '1px solid rgba(79,110,247,0.2)', background: 'rgba(79,110,247,0.04)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <MessageSquare size={16} style={{ color: 'var(--blue)' }} />
+                <span style={{ fontWeight: 600, fontSize: 15, color: '#fff' }}>
+                  {lang === 'ar' ? 'صندوق الاقتراحات' : lang === 'so' ? 'Sanduuqa Talooyinka' : lang === 'sw' ? 'Sanduku la Mapendekezo' : 'Suggestion Box'}
+                </span>
+              </div>
+              <span style={{ fontSize: 12, color: 'var(--blue)', fontWeight: 600 }}>
+                {lang === 'ar' ? 'أرسل' : lang === 'so' ? 'Dir' : lang === 'sw' ? 'Tuma' : 'Submit'} →
+              </span>
+            </div>
+          </button>
+
+          {/* Suggestion Modal */}
+          <AnimatePresence>
+            {suggestionOpen && (
+              <>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-40" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }} onClick={() => setSuggestionOpen(false)} />
+                <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 35 }}
+                  className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl"
+                  style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', maxHeight: '85svh', overflowY: 'auto' }}>
+                  <div className="flex justify-center pt-3 pb-1"><div className="w-10 h-1 rounded-full" style={{ background: 'var(--border)' }} /></div>
+                  <div className="px-6 pt-2 pb-8">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <MessageSquare size={20} style={{ color: 'var(--blue)' }} />
+                        <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, fontWeight: 700 }}>
+                          {lang === 'ar' ? 'صندوق الاقتراحات' : lang === 'so' ? 'Sanduuqa Talooyinka' : lang === 'sw' ? 'Sanduku la Mapendekezo' : 'Suggestion Box'}
+                        </h2>
+                      </div>
+                      <button onClick={() => setSuggestionOpen(false)} className="p-2 rounded-xl" style={{ background: 'var(--bg-card2)', color: 'var(--text-muted)', border: 'none', cursor: 'pointer' }}><X size={16} /></button>
+                    </div>
+
+                    <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 18, lineHeight: 1.6 }}>
+                      {lang === 'ar' ? 'شاركنا ملاحظاتك أو طلبا�� الميزات أو تقارير الأخطاء.' : lang === 'so' ? 'Nala wadaag ra\'yigaaga, codsiyada sifooyinka, ama warbixinaha cilladaha.' : lang === 'sw' ? 'Shiriki maoni yako, maombi ya vipengele, au ripoti za hitilafu.' : 'Share your feedback, feature requests, or bug reports with us.'}
+                    </p>
+
+                    {/* Type selector */}
+                    <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+                      {[
+                        { id: 'feedback', label: lang === 'ar' ? 'ملاحظات' : lang === 'so' ? 'Ra\'yi' : lang === 'sw' ? 'Maoni' : 'Feedback', emoji: '💬' },
+                        { id: 'feature', label: lang === 'ar' ? 'طلب ميزة' : lang === 'so' ? 'Codsi' : lang === 'sw' ? 'Ombi' : 'Feature', emoji: '💡' },
+                        { id: 'bug', label: lang === 'ar' ? 'خطأ' : lang === 'so' ? 'Cillad' : lang === 'sw' ? 'Hitilafu' : 'Bug', emoji: '🐛' },
+                      ].map(opt => (
+                        <button key={opt.id} onClick={() => setSuggestionType(opt.id)}
+                          style={{ flex: 1, padding: '10px 0', borderRadius: 10, border: `1px solid ${suggestionType === opt.id ? 'var(--blue)' : 'var(--border)'}`, background: suggestionType === opt.id ? 'rgba(79,110,247,0.1)' : 'transparent', color: suggestionType === opt.id ? 'var(--blue)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                          {opt.emoji} {opt.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    <textarea
+                      className="input"
+                      rows={5}
+                      value={suggestionText}
+                      onChange={e => setSuggestionText(e.target.value)}
+                      placeholder={lang === 'ar' ? 'اكتب اقتراحك هنا...' : lang === 'so' ? 'Halkan ku qor talodaada...' : lang === 'sw' ? 'Andika pendekezo lako hapa...' : 'Write your suggestion here...'}
+                      style={{ resize: 'vertical', marginBottom: 16 }}
+                    />
+
+                    <button onClick={submitSuggestion} disabled={suggestionSending || !suggestionText.trim()}
+                      className="btn btn-primary btn-lg w-full" style={{ gap: 8 }}>
+                      {suggestionSending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+                      {lang === 'ar' ? 'إرسال' : lang === 'so' ? 'Dir' : lang === 'sw' ? 'Tuma' : 'Submit'}
+                    </button>
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
 
           {/* Legal links */}
           <div className="card" style={{ padding: '16px 24px', marginBottom: 16 }}>

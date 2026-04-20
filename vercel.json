@@ -7,7 +7,8 @@
     "api/voice-chat.js":       { "maxDuration": 15 },
     "api/send-whatsapp.js":    { "maxDuration": 10 },
     "api/strategy-chat.js":    { "maxDuration": 60 },
-    "api/weekly-report.js":    { "maxDuration": 30 }
+    "api/weekly-report.js":    { "maxDuration": 30 },
+    "api/submit-suggestion.js": { "maxDuration": 15 }
   },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }

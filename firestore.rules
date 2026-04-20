@@ -10,6 +10,11 @@ service cloud.firestore {
       allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
       allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
     }
+    // Suggestions — users can create and read their own
+    match /suggestions/{suggestionId} {
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    }
     // Departments — owner can manage
     match /departments/{deptId} {
       allow read, write: if request.auth != null && resource.data.ownerId == request.auth.uid;
