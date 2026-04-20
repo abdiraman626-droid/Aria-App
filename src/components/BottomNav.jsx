@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Bell, Mic, Settings, Users, Video, Calendar, Lightbulb } from 'lucide-react';
+import { Home, Bell, Mic, Settings, Users, Video, Calendar, Lightbulb, BarChart3 } from 'lucide-react';
 import { usePlan } from '../hooks/usePlan';
 import { useLang } from '../context/LangContext';
 
@@ -12,7 +12,7 @@ export default function BottomNav() {
   const TABS = {
     home:     { to: '/dashboard', icon: Home,      label: t('home')      },
     calendar: { to: '/calendar',  icon: Calendar,  label: t('calendar')  },
-    remind:   { to: '/reminders', icon: Bell,      label: t('reminders') },
+    meetings: { to: '/meetings',  icon: Video,     label: t('meetings')  },
     strategy: { to: '/strategy',  icon: Lightbulb, label: lang === 'ar' ? 'استراتيجية' : lang === 'so' ? 'Istiraatiiji' : lang === 'sw' ? 'Mkakati' : 'Strategy' },
     voice:    { to: '/voice',     icon: Mic,       label: t('voice')     },
     settings: { to: '/settings',  icon: Settings,  label: t('settings')  },
@@ -21,7 +21,7 @@ export default function BottomNav() {
   const tabs = [
     TABS.home,
     TABS.calendar,
-    TABS.remind,
+    TABS.meetings,
     TABS.strategy,
     TABS.voice,
     TABS.settings,

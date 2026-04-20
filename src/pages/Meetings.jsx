@@ -198,7 +198,7 @@ export default function Meetings() {
     setMeetings(prev => [meeting, ...prev]);
   };
 
-  if (!hasTeam) return <LockedPage />;
+  // Feature gate removed for testing — all plans have access
 
   return (
     <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)' }}>
