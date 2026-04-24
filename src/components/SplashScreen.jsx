@@ -112,10 +112,11 @@ export default function SplashScreen({ onComplete }) {
           <h1 style={{
             fontFamily: "'Syne', sans-serif",
             fontSize: 'clamp(40px, 10vw, 64px)',
-            fontWeight: 800,
-            letterSpacing: '-0.03em',
+            fontWeight: 700,
+            letterSpacing: '0.3em',
             color: '#fff',
             lineHeight: 1,
+            WebkitFontSmoothing: 'antialiased',
           }}>
             {typed}
             {typed.length < 4 && (
@@ -136,12 +137,13 @@ export default function SplashScreen({ onComplete }) {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           style={{
             fontFamily: "'Syne', sans-serif",
-            fontSize: 'clamp(14px, 3vw, 18px)',
-            fontWeight: 600,
-            letterSpacing: '0.25em',
+            fontSize: 'clamp(13px, 2.5vw, 16px)',
+            fontWeight: 700,
+            letterSpacing: '0.3em',
             color: '#7c3aed',
-            marginTop: 6,
+            marginTop: 8,
             position: 'relative', zIndex: 2,
+            WebkitFontSmoothing: 'antialiased',
           }}
         >
           LIFE
