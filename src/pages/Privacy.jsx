@@ -5,15 +5,15 @@ export default function Privacy() {
     <LegalPage title="Privacy Policy" lastUpdated="25 March 2026">
 
       <LBox color="#3b82f6">
-        We built ARIA for Kenyan business professionals who trust us with their schedules, contacts, and communications. We take that trust seriously. This policy explains exactly what data we collect, why we collect it, and how you can control it.
+        We built ARIA for business professionals who trust us with their schedules, contacts, and communications. We take that trust seriously. This policy explains exactly what data we collect, why we collect it, and how you can control it.
       </LBox>
 
       <LSection title="1. Who We Are" />
       <LP>
-        ARIA Assistant is a product of ARIA Assistant Ltd., a company registered in Nairobi, Kenya. References to "ARIA", "we", "us", or "our" in this policy refer to ARIA Assistant Ltd.
+        ARIA Life is a product of ARIA Life Inc., a company registered in San Francisco, CA. References to "ARIA", "we", "us", or "our" in this policy refer to ARIA Life Inc.
       </LP>
       <LP>
-        Contact: <a href="mailto:support@ariaassistant.co.ke" style={{ color: 'var(--blue)' }}>support@ariaassistant.co.ke</a>
+        Contact: <a href="mailto:support@arialife.app" style={{ color: 'var(--blue)' }}>support@arialife.app</a>
       </LP>
 
       <LSection title="2. Data We Collect" />
@@ -118,11 +118,11 @@ export default function Privacy() {
         'Policy: Contact WasenderAPI for their privacy terms',
       ]} />
 
-      <LSub>M-Pesa / Safaricom (Payments)</LSub>
+      <LSub>Stripe (Payments)</LSub>
       <LList items={[
         'Purpose: Process monthly subscription payments',
         'Data shared: Phone number and payment amount; ARIA does not store M-Pesa PINs or card numbers',
-        'Policy: safaricom.co.ke/privacy-policy',
+        'Policy: stripe.com/privacy',
       ]} />
 
       <LSub>Vercel (Hosting)</LSub>
@@ -145,13 +145,13 @@ export default function Privacy() {
       <LList items={[
         'Access: Request a copy of all data we hold about you',
         'Correction: Update your name, phone number, or email from Settings',
-        'Deletion: Delete your account from Settings → Account, or email us at support@ariaassistant.co.ke',
+        'Deletion: Delete your account from Settings → Account, or email us at support@arialife.app',
         'Export: Request a JSON export of your reminders and profile data',
         'Disconnect Google: Revoke Google access from Settings → Integrations at any time',
         'Opt out of WhatsApp messages: Remove your number from Settings → Notifications',
       ]} />
       <LP>
-        To exercise any of these rights, email <a href="mailto:support@ariaassistant.co.ke" style={{ color: 'var(--blue)' }}>support@ariaassistant.co.ke</a>. We respond within 5 business days.
+        To exercise any of these rights, email <a href="mailto:support@arialife.app" style={{ color: 'var(--blue)' }}>support@arialife.app</a>. We respond within 5 business days.
       </LP>
 
       <LSection title="8. Children's Privacy" />
@@ -167,9 +167,9 @@ export default function Privacy() {
       <LSection title="10. Contact" />
       <LP>
         Questions about this privacy policy? Email us at{' '}
-        <a href="mailto:support@ariaassistant.co.ke" style={{ color: 'var(--blue)' }}>support@ariaassistant.co.ke</a>.
+        <a href="mailto:support@arialife.app" style={{ color: 'var(--blue)' }}>support@arialife.app</a>.
         <br />
-        ARIA Assistant Ltd. · Nairobi, Kenya
+        ARIA Life Inc. · San Francisco, CA
       </LP>
 
     </LegalPage>

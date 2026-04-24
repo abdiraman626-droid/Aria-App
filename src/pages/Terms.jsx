@@ -13,7 +13,7 @@ export default function Terms() {
         ARIA ("the Service") is an AI-powered business assistant that delivers morning voice briefings, manages reminders, syncs with Google Calendar and Gmail, and sends notifications via WhatsApp. ARIA is offered as a monthly subscription software-as-a-service (SaaS) product.
       </LP>
       <LP>
-        ARIA Assistant Ltd. ("Company", "we", "us") is registered in Nairobi, Kenya. These Terms of Service ("Terms") govern your use of ARIA and form a binding agreement between you and the Company.
+        ARIA Life Inc. ("Company", "we", "us") is registered in San Francisco, CA. These Terms of Service ("Terms") govern your use of ARIA and form a binding agreement between you and the Company.
       </LP>
 
       <LSection title="2. Eligibility" />
@@ -22,7 +22,7 @@ export default function Terms() {
         'You are at least 18 years old',
         'You are using ARIA for lawful business or personal productivity purposes',
         'You have the authority to accept these Terms on behalf of any organisation you represent',
-        'Your use complies with all applicable Kenyan and international laws',
+        'Your use complies with all applicable US and international laws',
       ]} />
 
       <LSection title="3. Account Responsibilities" />
@@ -30,7 +30,7 @@ export default function Terms() {
       <LList items={[
         'Provide accurate, complete, and current information when creating your account',
         'Keep your password secure and not share your account credentials with others',
-        'Notify us immediately at support@ariaassistant.co.ke if you suspect unauthorised access to your account',
+        'Notify us immediately at support@arialife.app if you suspect unauthorised access to your account',
         'Use ARIA only for its intended purpose — managing your personal or business schedule and communications',
         'Not attempt to reverse-engineer, scrape, or exploit any part of the ARIA platform',
         'Not upload or submit any content that is illegal, defamatory, or violates the rights of others',
@@ -55,7 +55,7 @@ export default function Terms() {
 
       <LSub>4.3 Billing</LSub>
       <LP>
-        Subscriptions are billed monthly. Payment is collected via M-Pesa or other accepted payment methods at the start of each billing cycle. Prices are listed in Kenyan Shillings (KSH) and are inclusive of any applicable taxes.
+        Subscriptions are billed monthly. Payment is collected via M-Pesa or other accepted payment methods at the start of each billing cycle. Prices are listed in applicable Shillings (KSH) and are inclusive of any applicable taxes.
       </LP>
       <LP>
         We reserve the right to change subscription prices with 30 days notice. Price changes will be communicated by email and in-app notification before they take effect.
@@ -66,7 +66,7 @@ export default function Terms() {
         We offer a 7-day free trial on all plans so you can evaluate ARIA before paying. After the trial period ends and a payment has been processed, <strong>we do not issue refunds</strong> for the current billing period. If you cancel, your access continues until the end of the paid period.
       </LBox>
       <LP>
-        Exceptions: If you experience a technical failure that prevents you from using the service for more than 72 consecutive hours due to our fault, you may be eligible for a prorated credit. Contact support@ariaassistant.co.ke within 14 days of the incident.
+        Exceptions: If you experience a technical failure that prevents you from using the service for more than 72 consecutive hours due to our fault, you may be eligible for a prorated credit. Contact support@arialife.app within 14 days of the incident.
       </LP>
 
       <LSub>4.5 Cancellation</LSub>
@@ -94,7 +94,7 @@ export default function Terms() {
 
       <LSection title="6. Intellectual Property" />
       <LP>
-        ARIA and all its content, features, and functionality — including the software, voice models, UI design, and branding — are owned by ARIA Assistant Ltd. and protected by Kenyan and international intellectual property law.
+        ARIA and all its content, features, and functionality — including the software, voice models, UI design, and branding — are owned by ARIA Life Inc. and protected by US and international intellectual property law.
       </LP>
       <LP>
         Your subscription grants you a limited, non-exclusive, non-transferable licence to use the Service for your own business or personal purposes. You may not copy, modify, distribute, sell, or lease any part of ARIA.
@@ -105,7 +105,7 @@ export default function Terms() {
 
       <LSection title="7. Third-Party Services" />
       <LP>
-        ARIA integrates with Google, ElevenLabs, WasenderAPI, and M-Pesa/Safaricom. Your use of those integrations is also governed by the respective third parties' terms of service. We are not responsible for disruptions, changes, or failures in third-party services.
+        ARIA integrates with Google, ElevenLabs, WasenderAPI, and Stripe. Your use of those integrations is also governed by the respective third parties' terms of service. We are not responsible for disruptions, changes, or failures in third-party services.
       </LP>
 
       <LSection title="8. Availability & Service Levels" />
@@ -115,7 +115,7 @@ export default function Terms() {
 
       <LSection title="9. Limitation of Liability" />
       <LBox color="#f59e0b">
-        To the maximum extent permitted by Kenyan law, ARIA Assistant Ltd. shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including but not limited to loss of profits, data, business opportunities, or reputation — arising from your use of or inability to use the Service.
+        To the maximum extent permitted by applicable law, ARIA Life Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including but not limited to loss of profits, data, business opportunities, or reputation — arising from your use of or inability to use the Service.
       </LBox>
       <LP>
         Our total cumulative liability to you for any claims under these Terms shall not exceed the amount you paid us in the 3 months prior to the claim arising.
@@ -131,7 +131,7 @@ export default function Terms() {
 
       <LSection title="11. Governing Law & Disputes" />
       <LP>
-        These Terms are governed by the laws of the Republic of Kenya. Any disputes arising from these Terms or your use of ARIA shall first be attempted to be resolved through good-faith negotiation. If unresolved within 30 days, disputes shall be subject to the jurisdiction of the courts of Nairobi, Kenya.
+        These Terms are governed by the laws of the State of California. Any disputes arising from these Terms or your use of ARIA shall first be attempted to be resolved through good-faith negotiation. If unresolved within 30 days, disputes shall be subject to the jurisdiction of the courts of San Francisco, California.
       </LP>
 
       <LSection title="12. Changes to These Terms" />
@@ -142,9 +142,9 @@ export default function Terms() {
       <LSection title="13. Contact" />
       <LP>
         Questions about these Terms? Email{' '}
-        <a href="mailto:support@ariaassistant.co.ke" style={{ color: 'var(--blue)' }}>support@ariaassistant.co.ke</a>.
+        <a href="mailto:support@arialife.app" style={{ color: 'var(--blue)' }}>support@arialife.app</a>.
         <br />
-        ARIA Assistant Ltd. · Nairobi, Kenya
+        ARIA Life Inc. · San Francisco, CA
       </LP>
 
     </LegalPage>

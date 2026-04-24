@@ -30,7 +30,7 @@ export default function LegalPage({ title, lastUpdated, children }) {
         <div style={{ marginBottom: 40, paddingBottom: 32, borderBottom: '1px solid var(--border)' }}>
           <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(28px,4vw,44px)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 10 }}>{title}</h1>
           <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
-            ARIA Assistant · Nairobi, Kenya · Last updated: {lastUpdated}
+            ARIA Life · San Francisco, CA · Last updated: {lastUpdated}
           </p>
         </div>
 
@@ -46,9 +46,9 @@ export default function LegalPage({ title, lastUpdated, children }) {
           <Link to="/privacy" style={{ fontSize: 14, color: 'var(--text-muted)' }}>Privacy Policy</Link>
           <Link to="/terms"   style={{ fontSize: 14, color: 'var(--text-muted)' }}>Terms of Service</Link>
           <Link to="/cookies" style={{ fontSize: 14, color: 'var(--text-muted)' }}>Cookie Policy</Link>
-          <a href="mailto:support@ariaassistant.co.ke" style={{ fontSize: 14, color: 'var(--text-muted)' }}>support@ariaassistant.co.ke</a>
+          <a href="mailto:support@arialife.app" style={{ fontSize: 14, color: 'var(--text-muted)' }}>support@arialife.app</a>
         </div>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', opacity: 0.6 }}>© {new Date().getFullYear()} ARIA Assistant. Built for Kenya.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', opacity: 0.6 }}>© {new Date().getFullYear()} ARIA Life. Built for teams worldwide.</p>
       </footer>
     </div>
   );

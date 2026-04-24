@@ -64,7 +64,7 @@ function ClientSheet({ open, onClose, editing }) {
 
               <div>
                 <label className="label">Full Name *</label>
-                <input className="input" value={name} onChange={e => setName(e.target.value)} placeholder="John Kamau" autoFocus />
+                <input className="input" value={name} onChange={e => setName(e.target.value)} placeholder="James Mitchell" autoFocus />
               </div>
               <div>
                 <label className="label">Phone / WhatsApp</label>
@@ -72,11 +72,11 @@ function ClientSheet({ open, onClose, editing }) {
               </div>
               <div>
                 <label className="label">Email</label>
-                <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="john@company.co.ke" />
+                <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="james@company.com" />
               </div>
               <div>
                 <label className="label">Notes</label>
-                <textarea className="input resize-none" rows={2} value={notes} onChange={e => setNotes(e.target.value)} placeholder="KRA PIN, case number, contract details..." />
+                <textarea className="input resize-none" rows={2} value={notes} onChange={e => setNotes(e.target.value)} placeholder="Tax ID, case number, contract details..." />
               </div>
 
               <button type="submit" disabled={saving} className="btn btn-primary w-full btn-lg">

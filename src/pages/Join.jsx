@@ -129,7 +129,7 @@ export default function Join() {
               <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 <div>
                   <label className="label">Your Name *</label>
-                  <input className="input" value={name} onChange={e => setName(e.target.value)} placeholder="Amina Wanjiku" autoFocus />
+                  <input className="input" value={name} onChange={e => setName(e.target.value)} placeholder="Sarah Johnson" autoFocus />
                 </div>
                 <div>
                   <label className="label">Email</label>

@@ -106,11 +106,11 @@ export default function Signup() {
           <form onSubmit={submit} style={{ display:'flex', flexDirection:'column', gap:16 }}>
             <div>
               <label className="label">Full Name *</label>
-              <input className="input" value={form.name} onChange={set('name')} placeholder="Amina Wanjiku" autoComplete="name" />
+              <input className="input" value={form.name} onChange={set('name')} placeholder="Sarah Johnson" autoComplete="name" />
             </div>
             <div>
               <label className="label">Email *</label>
-              <input className="input" type="email" value={form.email} onChange={set('email')} placeholder="you@company.co.ke" autoComplete="email" />
+              <input className="input" type="email" value={form.email} onChange={set('email')} placeholder="you@company.com" autoComplete="email" />
             </div>
             <div>
               <label className="label">WhatsApp Number</label>
@@ -146,7 +146,7 @@ export default function Signup() {
           </form>
 
           <p style={{ textAlign:'center', fontSize:13, color:'var(--text-muted)', marginTop:20, lineHeight:1.6 }}>
-            Questions? <a href="mailto:support@ariaassistant.co.ke" style={{ color:'var(--blue)' }}>support@ariaassistant.co.ke</a>
+            Questions? <a href="mailto:support@arialife.app" style={{ color:'var(--blue)' }}>support@arialife.app</a>
           </p>
           <p style={{ textAlign:'center', fontSize:14, color:'var(--text-muted)', marginTop:12 }}>
             Already have an account?{' '}

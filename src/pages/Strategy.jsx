@@ -15,21 +15,21 @@ import toast from 'react-hot-toast';
 
 const STARTERS = {
   en: [
-    'Write a business plan for a food delivery startup in Nairobi',
+    'Write a business plan for a food delivery startup',
     'Create a marketing strategy for a SaaS product targeting SMEs',
     'Financial projection for a retail store — 12 month forecast',
     'Competitor analysis for the mobile payments space in East Africa',
     'Growth strategy to scale from 100 to 1000 customers',
   ],
   sw: [
-    'Andika mpango wa biashara wa kuanzisha huduma ya chakula Nairobi',
+    'Andika mpango wa biashara wa kuanzisha huduma ya chakula',
     'Tengeneza mkakati wa masoko kwa bidhaa ya SaaS',
     'Makadirio ya kifedha kwa duka la rejareja — miezi 12',
     'Uchambuzi wa washindani katika malipo ya simu Afrika Mashariki',
     'Mkakati wa kukua kutoka wateja 100 hadi 1000',
   ],
   so: [
-    'Qor qorshe ganacsi oo ku saabsan adeeg cunto gaadhsiin ah Nairobi',
+    'Qor qorshe ganacsi oo ku saabsan adeeg cunto gaadhsiin ah',
     'Abuuri istaraatiijiyad suuq-geyn oo badeecada SaaS ah',
     'Saadaal maaliyadeed dukaan 12 bilood ah',
     'Falanqayn tartamayaal lacagaha mobilka Afrika Bari',

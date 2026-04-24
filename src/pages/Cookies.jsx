@@ -98,9 +98,9 @@ export default function Cookies() {
       <LSection title="7. Contact" />
       <LP>
         Questions about our cookie practices? Email{' '}
-        <a href="mailto:support@ariaassistant.co.ke" style={{ color: 'var(--blue)' }}>support@ariaassistant.co.ke</a>.
+        <a href="mailto:support@arialife.app" style={{ color: 'var(--blue)' }}>support@arialife.app</a>.
         <br />
-        ARIA Assistant Ltd. · Nairobi, Kenya
+        ARIA Life Inc. · San Francisco, CA
       </LP>
 
     </LegalPage>

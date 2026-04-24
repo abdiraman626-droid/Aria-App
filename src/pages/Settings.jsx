@@ -416,7 +416,7 @@ export default function Settings() {
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>Dedicated support for {PLAN_META[plan]?.label || plan} plan</p>
                 </div>
                 <a
-                  href="mailto:support@ariaassistant.co.ke?subject=Support Request — ARIA"
+                  href="mailto:support@arialife.app?subject=Support Request — ARIA"
                   style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 12, background: planColor, color: '#fff', textDecoration: 'none', fontWeight: 700, fontSize: 13 }}>
                   <Mail size={13} /> Contact Support
                 </a>
@@ -424,7 +424,7 @@ export default function Settings() {
             ) : (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>Need help? Check our docs or upgrade for priority support.</p>
-                <a href="mailto:support@ariaassistant.co.ke" style={{ fontSize: 13, color: 'var(--blue)', fontWeight: 600 }}>Contact</a>
+                <a href="mailto:support@arialife.app" style={{ fontSize: 13, color: 'var(--blue)', fontWeight: 600 }}>Contact</a>
               </div>
             )}
           </div>

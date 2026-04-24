@@ -65,7 +65,7 @@ export default function AdminLogin() {
           <form onSubmit={submit} style={{ display:'flex', flexDirection:'column', gap:16 }}>
             <div>
               <label className="label">Admin Email</label>
-              <input className="input" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="admin@ariaassistant.co.ke" autoComplete="off"/>
+              <input className="input" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="admin@arialife.app" autoComplete="off"/>
             </div>
             <div>
               <label className="label">Password</label>

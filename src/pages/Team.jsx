@@ -144,7 +144,7 @@ export default function Team() {
                 type="email"
                 value={inviteEmail}
                 onChange={e => setInviteEmail(e.target.value)}
-                placeholder="colleague@company.co.ke"
+                placeholder="colleague@company.com"
                 style={{ flex: 1 }}
               />
               <button type="submit" disabled={inviting || !inviteEmail.trim()} className="btn btn-primary btn-sm">

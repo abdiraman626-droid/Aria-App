@@ -89,7 +89,7 @@ export default function Login() {
           <form onSubmit={submit} style={{ display:'flex', flexDirection:'column', gap:18 }}>
             <div>
               <label className="label">Email</label>
-              <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.co.ke" autoComplete="email" />
+              <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.com" autoComplete="email" />
             </div>
             <div>
               <label className="label">Password</label>

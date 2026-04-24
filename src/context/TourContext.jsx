@@ -8,7 +8,7 @@ export const TOUR_STEPS = [
     id:     'welcome',
     target: 'tour-greeting',
     title:  'Welcome to ARIA 👋',
-    desc:   "Your AI-powered reminder assistant for Kenyan business professionals. Let me show you around in 5 quick steps.",
+    desc:   "Your AI-powered reminder assistant for business professionals. Let me show you around in 5 quick steps.",
     position: 'bottom',
   },
   {
