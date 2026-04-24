@@ -279,44 +279,55 @@ export default function Landing() {
     <div style={{ background: '#060608', color: '#fff', overflowX: 'hidden' }}>
 
       {/* ═══════════════════ NAVBAR ═══════════════════════ */}
+      <style>{`.nav-links{display:none}@media(min-width:768px){.nav-links{display:flex!important}.nav-burger{display:none!important}}`}</style>
       <nav style={{
         position: 'sticky', top: 0, zIndex: 60,
-        background: scrolled ? 'rgba(6,6,8,0.92)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        background: scrolled ? 'rgba(6,6,8,0.95)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
         borderBottom: `1px solid ${scrolled ? '#141418' : 'transparent'}`,
         transition: 'all 0.3s ease',
       }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px', height: 48, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-            <img src="/logo.png" alt="ARIA Life" style={{ width: 28, height: 28, borderRadius: 7, objectFit: 'cover' }} />
-            <span style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 15, color: '#fff', letterSpacing: '0.02em' }}>ARIA</span>
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', height: 48, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {/* Logo — far left */}
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}>
+            <img src="/logo.png" alt="ARIA Life" style={{ width: 26, height: 26, borderRadius: 6, objectFit: 'cover' }} />
+            <span style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 14, color: '#fff', letterSpacing: '0.02em' }}>ARIA</span>
           </Link>
 
-          <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-            <a href="#demos" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontWeight: 400 }}>Features</a>
+          {/* Desktop: nav links + auth — far right */}
+          <div className="nav-links" style={{ alignItems: 'center', gap: 32 }}>
+            <a href="#demos" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontWeight: 400 }}>Demos</a>
             <a href="#pricing" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontWeight: 400 }}>Pricing</a>
+            <div style={{ width: 1, height: 16, background: '#222' }} />
             <Link to="/login" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontWeight: 400 }}>Log in</Link>
             <Link to="/signup" style={{
-              padding: '8px 18px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.25)',
+              padding: '6px 16px', borderRadius: 100,
+              border: '1px solid rgba(255,255,255,0.25)',
               background: 'transparent', color: '#fff', fontSize: 13, fontWeight: 500,
-              textDecoration: 'none',
+              textDecoration: 'none', lineHeight: '20px',
             }}>Sign up</Link>
           </div>
 
-          <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888', padding: 4 }}>
+          {/* Mobile: hamburger — far right */}
+          <button className="nav-burger" onClick={() => setMobileMenu(!mobileMenu)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888', padding: 4, flexShrink: 0 }}>
             {mobileMenu ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
 
+        {/* Mobile dropdown */}
         <AnimatePresence>
           {mobileMenu && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden"
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+              className="nav-burger-menu"
               style={{ background: 'rgba(6,6,8,0.98)', borderTop: '1px solid #141418', overflow: 'hidden' }}>
-              <div style={{ padding: '12px 20px', display: 'flex', flexDirection: 'column', gap: 0 }}>
-                <a href="#demos" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#888', textDecoration: 'none', padding: '12px 0', fontWeight: 400 }}>Features</a>
+              <div style={{ padding: '8px 24px 16px', display: 'flex', flexDirection: 'column' }}>
+                <a href="#demos" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#888', textDecoration: 'none', padding: '12px 0', fontWeight: 400 }}>Demos</a>
                 <a href="#pricing" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#888', textDecoration: 'none', padding: '12px 0', fontWeight: 400 }}>Pricing</a>
+                <div style={{ height: 1, background: '#141418', margin: '4px 0' }} />
                 <Link to="/login" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#888', textDecoration: 'none', padding: '12px 0', fontWeight: 400 }}>Log in</Link>
-                <Link to="/signup" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#fff', textDecoration: 'none', padding: '12px 0', fontWeight: 500 }}>Sign up</Link>
+                <Link to="/signup" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#fff', textDecoration: 'none', padding: '12px 0', fontWeight: 500 }}>Sign up →</Link>
               </div>
             </motion.div>
           )}
