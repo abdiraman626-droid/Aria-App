@@ -283,51 +283,40 @@ export default function Landing() {
         position: 'sticky', top: 0, zIndex: 60,
         background: scrolled ? 'rgba(6,6,8,0.92)' : 'transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: `1px solid ${scrolled ? '#1a1a1f' : 'transparent'}`,
+        borderBottom: `1px solid ${scrolled ? '#141418' : 'transparent'}`,
         transition: 'all 0.3s ease',
       }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* Logo */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <img src="/logo.png" alt="ARIA Life" style={{ width: 40, height: 40, borderRadius: 10, objectFit: 'cover' }} />
-            <span style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 16, color: '#fff', letterSpacing: '0.04em' }}>ARIA</span>
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px', height: 48, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+            <img src="/logo.png" alt="ARIA Life" style={{ width: 28, height: 28, borderRadius: 7, objectFit: 'cover' }} />
+            <span style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 15, color: '#fff', letterSpacing: '0.02em' }}>ARIA</span>
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-            <a href="#demos" style={{ fontSize: 13, color: '#737380', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }}
-              onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#737380'}>Demos</a>
-            <a href="#pricing" style={{ fontSize: 13, color: '#737380', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }}
-              onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#737380'}>Pricing</a>
-            <Link to="/login" style={{ fontSize: 13, color: '#737380', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }}
-              onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#737380'}>Sign In</Link>
+          <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+            <a href="#demos" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontWeight: 400 }}>Features</a>
+            <a href="#pricing" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontWeight: 400 }}>Pricing</a>
+            <Link to="/login" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontWeight: 400 }}>Log in</Link>
             <Link to="/signup" style={{
-              padding: '6px 16px', borderRadius: 100, border: '1px solid #2a2a30',
-              background: 'transparent', color: '#b0b0b8', fontSize: 13, fontWeight: 500,
-              textDecoration: 'none', transition: 'border-color 0.15s, color 0.15s',
-            }}
-              onMouseEnter={e => { e.target.style.borderColor = '#555'; e.target.style.color = '#fff'; }}
-              onMouseLeave={e => { e.target.style.borderColor = '#2a2a30'; e.target.style.color = '#b0b0b8'; }}
-            >Sign Up</Link>
+              padding: '8px 18px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.25)',
+              background: 'transparent', color: '#fff', fontSize: 13, fontWeight: 500,
+              textDecoration: 'none',
+            }}>Sign up</Link>
           </div>
 
-          {/* Mobile hamburger */}
-          <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#737380', padding: 6 }}>
-            {mobileMenu ? <X size={20} /> : <Menu size={20} />}
+          <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888', padding: 4 }}>
+            {mobileMenu ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {mobileMenu && (
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden"
-              style={{ background: 'rgba(6,6,8,0.97)', backdropFilter: 'blur(16px)', borderTop: '1px solid #1a1a1f', overflow: 'hidden' }}>
-              <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <a href="#demos" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#a0a0a8', textDecoration: 'none', padding: '10px 0' }}>Demos</a>
-                <a href="#pricing" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#a0a0a8', textDecoration: 'none', padding: '10px 0' }}>Pricing</a>
-                <div style={{ height: 1, background: '#1a1a1f', margin: '6px 0' }} />
-                <Link to="/login" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#a0a0a8', textDecoration: 'none', padding: '10px 0' }}>Sign In</Link>
-                <Link to="/signup" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#a0a0a8', textDecoration: 'none', padding: '10px 0' }}>Sign Up</Link>
+              style={{ background: 'rgba(6,6,8,0.98)', borderTop: '1px solid #141418', overflow: 'hidden' }}>
+              <div style={{ padding: '12px 20px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+                <a href="#demos" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#888', textDecoration: 'none', padding: '12px 0', fontWeight: 400 }}>Features</a>
+                <a href="#pricing" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#888', textDecoration: 'none', padding: '12px 0', fontWeight: 400 }}>Pricing</a>
+                <Link to="/login" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#888', textDecoration: 'none', padding: '12px 0', fontWeight: 400 }}>Log in</Link>
+                <Link to="/signup" onClick={() => setMobileMenu(false)} style={{ fontSize: 14, color: '#fff', textDecoration: 'none', padding: '12px 0', fontWeight: 500 }}>Sign up</Link>
               </div>
             </motion.div>
           )}
