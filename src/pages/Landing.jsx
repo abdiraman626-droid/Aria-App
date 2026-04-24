@@ -7,10 +7,10 @@ const KSH_TO_USD = 130;
 
 const PLANS = [
   { id: 'individual', name: 'Individual', price: 5000, icon: Star, color: '#3b82f6', desc: '1–3 people', highlight: 'AI calendar + voice assistant', features: ['Built-in calendar (manual scheduling)', 'AI assistant', 'Browser & email notifications', 'Multi-language: English, Somali, Arabic', '7-day free trial'] },
-  { id: 'corporate_mini', name: 'Corporate Mini', price: 15000, priceNote: '/person', icon: Zap, popular: true, color: '#7c3aed', desc: '5–10 people', highlight: 'Gmail summaries + team management', features: ['Everything in Individual', 'WhatsApp reminders', 'Email summaries', 'Google Calendar sync', 'Team admin dashboard', 'Member invites by email', '7-day free trial'] },
-  { id: 'corporate', name: 'Corporate', price: 30000, icon: Building, color: '#22c55e', desc: '10–50 people', highlight: 'Rachel AI voice + meeting transcription', features: ['Everything in Corporate Mini', 'Voice (Rachel AI)', 'Meeting recorder + transcription', 'Priority support', '7-day free trial'] },
-  { id: 'major_corporate', name: 'Major Corporate', price: 100000, icon: Crown, color: '#f59e0b', desc: 'Up to 500 people', highlight: 'Analytics + department management', features: ['Everything in Corporate', 'Advanced analytics dashboard', 'Automated weekly meeting reports', 'Multi-department management', 'Staff training videos', '7-day free trial'] },
-  { id: 'enterprise', name: 'Enterprise', price: 250000, icon: Building2, color: '#ef4444', desc: '500+ people', highlight: 'Full platform + executive tools', features: ['Everything in Major Corporate', 'Executive dashboard', 'Monthly AI-generated strategy reports', 'Automated workflows', 'Direct WhatsApp support line', '7-day free trial'] },
+  { id: 'corporate_mini', name: 'Corporate Mini', price: 15000, priceNote: '/person', icon: Zap, popular: true, color: '#3b82f6', desc: '5–10 people', highlight: 'Gmail summaries + team management', features: ['Everything in Individual', 'WhatsApp reminders', 'Email summaries', 'Google Calendar sync', 'Team calendar view', 'Member invites by email', '7-day free trial'] },
+  { id: 'corporate', name: 'Corporate', price: 30000, icon: Building, color: '#3b82f6', desc: '10–50 people', highlight: 'AI voice assistant + meeting transcription', features: ['Everything in Corporate Mini', 'AI voice assistant', 'Meeting recorder + transcription', 'Priority support', '7-day free trial'] },
+  { id: 'major_corporate', name: 'Major Corporate', price: 100000, icon: Crown, color: '#3b82f6', desc: 'Up to 500 people', highlight: 'Analytics + department management', features: ['Everything in Corporate', 'Advanced analytics dashboard', 'Automated weekly meeting reports', 'Multi-department management', '7-day free trial'] },
+  { id: 'enterprise', name: 'Enterprise', price: 250000, icon: Building2, color: '#3b82f6', desc: '500+ people', highlight: 'Full platform + executive tools', features: ['Everything in Major Corporate', 'Executive dashboard', 'Monthly AI-generated strategy reports', 'Unlimited AI strategy sessions', 'Direct WhatsApp support line', '7-day free trial'] },
 ];
 
 const DEMOS = [
@@ -26,11 +26,11 @@ const TABLE = [
   { feature: 'AI assistant', individual: true, corporate_mini: true, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'WhatsApp reminders', individual: false, corporate_mini: true, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'Email summaries', individual: false, corporate_mini: true, corporate: true, major_corporate: true, enterprise: true },
-  { feature: 'Voice (Rachel AI)', individual: false, corporate_mini: false, corporate: true, major_corporate: true, enterprise: true },
+  { feature: 'AI voice assistant', individual: false, corporate_mini: false, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'Meeting recorder', individual: false, corporate_mini: false, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'Advanced analytics', individual: false, corporate_mini: false, corporate: false, major_corporate: true, enterprise: true },
   { feature: 'Executive dashboard', individual: false, corporate_mini: false, corporate: false, major_corporate: false, enterprise: true },
-  { feature: 'Automated workflows', individual: false, corporate_mini: false, corporate: false, major_corporate: false, enterprise: true },
+  { feature: 'Unlimited AI strategy sessions', individual: false, corporate_mini: false, corporate: false, major_corporate: false, enterprise: true },
 ];
 
 const FEATURES = [
@@ -675,12 +675,11 @@ export default function Landing() {
                     <p style={{ fontSize: 12, fontWeight: 600, color: plan.color }}>{plan.highlight}</p>
                   </div>
                   <ul style={{ listStyle: 'none', marginBottom: 26, display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
-                    {plan.features.slice(0, 5).map(f => (
+                    {plan.features.map(f => (
                       <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 13, color: '#a0a0a8' }}>
                         <Check size={13} color="#22c55e" style={{ marginTop: 2, flexShrink: 0 }} /> {f}
                       </li>
                     ))}
-                    {plan.features.length > 5 && <li style={{ fontSize: 12, color: '#4a4a55', paddingLeft: 22 }}>+{plan.features.length - 5} more</li>}
                   </ul>
                   <Link to={`/signup?plan=${plan.id}`} style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
