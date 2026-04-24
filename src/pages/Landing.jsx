@@ -373,41 +373,35 @@ export default function Landing() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.7 }}
               style={{
-                fontFamily: 'var(--font-head)', fontSize: 'clamp(36px, 6vw, 72px)',
-                fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.04em', marginBottom: 20,
+                fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 60px)',
+                fontWeight: 800, lineHeight: 1.08, letterSpacing: '-0.04em', marginBottom: 16,
               }}>
-              AI-powered{' '}
+              AI Assistant for{' '}
               <span style={{
                 background: 'linear-gradient(135deg, #3b82f6, #7c3aed)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>business assistant</span>
+              }}>Serious Professionals</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.65 }}
-              style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', color: '#737380', maxWidth: 480, margin: '0 auto 36px', lineHeight: 1.6 }}>
-              Voice scheduling, email summaries, and meeting transcription — all in one platform.
+              style={{ fontSize: 'clamp(14px, 1.6vw, 17px)', color: '#737380', maxWidth: 460, margin: '0 auto 32px', lineHeight: 1.6 }}>
+              Voice scheduling, email summaries and meeting intelligence — built for enterprise.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              style={{ display: 'flex', alignItems: 'center', gap: 20, justifyContent: 'center', marginBottom: 16 }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center', marginBottom: 14 }}>
               <Link to="/signup?plan=individual" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 24px', borderRadius: 10,
-                background: '#fff', color: '#060608', fontSize: 14, fontWeight: 600,
+                display: 'inline-flex', alignItems: 'center', gap: 6, padding: '8px 20px', borderRadius: 8,
+                background: '#fff', color: '#060608', fontSize: 13, fontWeight: 600,
                 textDecoration: 'none', transition: 'opacity 0.15s',
-              }}>Get started <ArrowRight size={15} /></Link>
-              <a href="#demos" style={{
-                fontSize: 14, color: '#737380', textDecoration: 'none', fontWeight: 500,
-                transition: 'color 0.15s',
-              }}
-                onMouseEnter={e => e.target.style.color = '#fff'}
-                onMouseLeave={e => e.target.style.color = '#737380'}
-              >See demo →</a>
+              }}>Get started <ArrowRight size={14} /></Link>
+              <a href="#demos" style={{ fontSize: 13, color: '#555', textDecoration: 'none', fontWeight: 400 }}>See demo</a>
             </motion.div>
 
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
