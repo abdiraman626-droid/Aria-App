@@ -188,10 +188,10 @@ export default function Voice() {
   };
 
   const stateConfig = {
-    idle:      { label: t('tap_to_speak'),  color: '#4F6EF7', pulse: false },
+    idle:      { label: t('tap_to_speak'),  color: '#3b82f6', pulse: false },
     listening: { label: t('listening'),     color: '#22c55e', pulse: true },
     thinking:  { label: t('thinking'),      color: '#f59e0b', pulse: false },
-    speaking:  { label: t('speaking'),      color: '#8B5CF6', pulse: true },
+    speaking:  { label: t('speaking'),      color: '#7c3aed', pulse: true },
   }[state];
 
   const prompts = QUICK[lang] || QUICK.en;

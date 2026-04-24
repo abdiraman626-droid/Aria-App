@@ -193,7 +193,7 @@ export default function Dashboard() {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{ width: 64, height: 64, borderRadius: 18, background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 60px rgba(79,110,247,0.3)' }}
+          style={{ width: 64, height: 64, borderRadius: 18, background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 60px rgba(59,130,246,0.3)' }}
         >
           <Mic size={28} color="#fff" />
         </motion.div>
@@ -224,7 +224,7 @@ export default function Dashboard() {
       <div ref={avatarRef} style={{ position: 'fixed', top: 16, right: 16, zIndex: 60 }}>
         <button
           onClick={() => setAvatarOpen(o => !o)}
-          style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(79,110,247,0.18)', border: '2px solid rgba(79,110,247,0.35)', color: '#4F6EF7', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-head)' }}
+          style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(59,130,246,0.18)', border: '2px solid rgba(59,130,246,0.35)', color: '#3b82f6', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-head)' }}
         >
           {user?.avatar || '?'}
         </button>
@@ -289,7 +289,7 @@ export default function Dashboard() {
                   initial={{ opacity: 0, y: -10, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.97 }}
-                  style={{ marginTop: 14, padding: '14px 16px', borderRadius: 14, background: 'rgba(79,110,247,0.08)', border: '1px solid rgba(79,110,247,0.25)', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                  style={{ marginTop: 14, padding: '14px 16px', borderRadius: 14, background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.25)', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                   <span style={{ fontSize: 20 }}>🎉</span>
                   <div style={{ flex: 1 }}>
                     <p style={{ fontWeight: 700, fontSize: 14, marginBottom: 2 }}>{welcomeMsg.title}</p>
@@ -333,7 +333,7 @@ export default function Dashboard() {
                   }} />
                 </div>
                 {usedCount >= reminderLimit && (
-                  <Link to="/settings" style={{ fontSize: 11, fontWeight: 700, color: '#8B5CF6', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                  <Link to="/settings" style={{ fontSize: 11, fontWeight: 700, color: '#7c3aed', textDecoration: 'none', whiteSpace: 'nowrap' }}>
                     Upgrade →
                   </Link>
                 )}
@@ -353,7 +353,7 @@ export default function Dashboard() {
               <motion.div
                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                style={{ position: 'absolute', inset: -16, borderRadius: '50%', background: 'rgba(79,110,247,0.2)' }}
+                style={{ position: 'absolute', inset: -16, borderRadius: '50%', background: 'rgba(59,130,246,0.2)' }}
               />
             )}
             <button
@@ -362,10 +362,10 @@ export default function Dashboard() {
                 width: 120, height: 120, borderRadius: '50%', border: 'none', cursor: 'pointer',
                 background: playing
                   ? 'linear-gradient(135deg,#ef4444,#dc2626)'
-                  : 'linear-gradient(135deg,#4F6EF7,#8B5CF6)',
+                  : 'linear-gradient(135deg,#3b82f6,#7c3aed)',
                 boxShadow: playing
                   ? '0 0 0 0 rgba(239,68,68,0.4), 0 20px 60px rgba(239,68,68,0.4)'
-                  : '0 0 0 0 rgba(79,110,247,0.4), 0 20px 60px rgba(79,110,247,0.35)',
+                  : '0 0 0 0 rgba(59,130,246,0.4), 0 20px 60px rgba(59,130,246,0.35)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'all 0.3s', position: 'relative',
               }}
@@ -398,14 +398,14 @@ export default function Dashboard() {
               padding: '16px 20px', borderRadius: 18, textDecoration: 'none',
               background: !hasMeetingRecorder
                 ? 'var(--bg-card)'
-                : 'linear-gradient(135deg,rgba(79,110,247,0.12),rgba(139,92,246,0.12))',
+                : 'linear-gradient(135deg,rgba(59,130,246,0.12),rgba(124,58,237,0.12))',
               borderWidth: 1, borderStyle: 'solid',
-              borderColor: !hasMeetingRecorder ? 'var(--border)' : 'rgba(79,110,247,0.25)',
+              borderColor: !hasMeetingRecorder ? 'var(--border)' : 'rgba(59,130,246,0.25)',
               opacity: !hasMeetingRecorder ? 0.75 : 1,
             }}
           >
             <div style={{ width: 44, height: 44, borderRadius: 14, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: !hasMeetingRecorder ? 'var(--bg-card2)' : 'rgba(79,110,247,0.15)' }}>
+              background: !hasMeetingRecorder ? 'var(--bg-card2)' : 'rgba(59,130,246,0.15)' }}>
               {!hasMeetingRecorder ? <Lock size={18} style={{ color: 'var(--text-muted)' }} /> : <Video size={18} style={{ color: 'var(--blue)' }} />}
             </div>
             <div style={{ flex: 1 }}>
@@ -419,7 +419,7 @@ export default function Dashboard() {
               </p>
             </div>
             {!hasMeetingRecorder ? (
-              <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: 'rgba(139,92,246,0.12)', color: '#8B5CF6', border: '1px solid rgba(139,92,246,0.2)', flexShrink: 0 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: 'rgba(124,58,237,0.12)', color: '#7c3aed', border: '1px solid rgba(124,58,237,0.2)', flexShrink: 0 }}>
                 Business+
               </span>
             ) : (
@@ -619,9 +619,9 @@ export default function Dashboard() {
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                       {/* Avatar */}
                       <div style={{
-                        width: 38, height: 38, borderRadius: 10, background: 'rgba(79,110,247,0.12)',
-                        border: '1.5px solid rgba(79,110,247,0.25)', display: 'flex', alignItems: 'center',
-                        justifyContent: 'center', flexShrink: 0, color: '#4F6EF7',
+                        width: 38, height: 38, borderRadius: 10, background: 'rgba(59,130,246,0.12)',
+                        border: '1.5px solid rgba(59,130,246,0.25)', display: 'flex', alignItems: 'center',
+                        justifyContent: 'center', flexShrink: 0, color: '#3b82f6',
                       }}>
                         <span style={{ fontSize: 13, fontWeight: 800 }}>{initials(em.from)}</span>
                       </div>
@@ -654,8 +654,8 @@ export default function Dashboard() {
                               display: 'inline-flex', alignItems: 'center', gap: 5,
                               padding: '5px 12px', borderRadius: 8, border: 'none', cursor: 'pointer',
                               fontSize: 12, fontWeight: 700, fontFamily: 'var(--font-body)',
-                              background: speaking ? 'rgba(139,92,246,0.2)' : 'var(--bg-card2)',
-                              color:      speaking ? '#8B5CF6'              : 'var(--text-muted)',
+                              background: speaking ? 'rgba(124,58,237,0.2)' : 'var(--bg-card2)',
+                              color:      speaking ? '#7c3aed'              : 'var(--text-muted)',
                               transition: 'all 0.2s',
                             }}
                           >
@@ -670,7 +670,7 @@ export default function Dashboard() {
                               display: 'inline-flex', alignItems: 'center', gap: 5,
                               padding: '5px 12px', borderRadius: 8, border: 'none', cursor: 'pointer',
                               fontSize: 12, fontWeight: 700, fontFamily: 'var(--font-body)',
-                              background: 'rgba(79,110,247,0.12)', color: '#4F6EF7',
+                              background: 'rgba(59,130,246,0.12)', color: '#3b82f6',
                               transition: 'all 0.2s',
                             }}
                           >
@@ -696,7 +696,7 @@ export default function Dashboard() {
           position: 'fixed', right: 24, bottom: 'calc(88px + env(safe-area-inset-bottom,0px))',
           width: 56, height: 56, borderRadius: '50%',
           background: 'var(--blue)', border: 'none', cursor: 'pointer',
-          boxShadow: '0 8px 32px rgba(79,110,247,0.5)',
+          boxShadow: '0 8px 32px rgba(59,130,246,0.5)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           zIndex: 30,
         }}

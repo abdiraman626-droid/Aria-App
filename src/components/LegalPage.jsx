@@ -13,7 +13,7 @@ export default function LegalPage({ title, lastUpdated, children }) {
       {/* Nav */}
       <header style={{ borderBottom: '1px solid var(--border)', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: 'rgba(10,10,15,0.92)', backdropFilter: 'blur(24px)', zIndex: 50 }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-          <div style={{ width: 32, height: 32, borderRadius: 9, background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 32, height: 32, borderRadius: 9, background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Mic size={14} color="#fff" />
           </div>
           <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 18, color: '#fff' }}>ARIA</span>
@@ -83,7 +83,7 @@ export function LList({ items }) {
 }
 
 /** Info box */
-export function LBox({ children, color = '#4F6EF7' }) {
+export function LBox({ children, color = '#3b82f6' }) {
   return (
     <div style={{ background: `${color}10`, border: `1px solid ${color}30`, borderRadius: 12, padding: '14px 18px', marginBottom: 20, fontSize: 14, color: 'var(--text-secondary)' }}>
       {children}

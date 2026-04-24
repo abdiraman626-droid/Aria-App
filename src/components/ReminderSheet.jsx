@@ -9,8 +9,8 @@ import toast from 'react-hot-toast';
 
 const CHANNELS = [
   { id: 'whatsapp',     label: 'WhatsApp',    icon: MessageCircle, color: '#22c55e' },
-  { id: 'voice',        label: 'Voice',        icon: Mic,           color: '#8B5CF6' },
-  { id: 'email',        label: 'Email',        icon: Mail,          color: '#4F6EF7' },
+  { id: 'voice',        label: 'Voice',        icon: Mic,           color: '#7c3aed' },
+  { id: 'email',        label: 'Email',        icon: Mail,          color: '#3b82f6' },
   { id: 'notification', label: 'Notification', icon: Bell,          color: '#f59e0b' },
 ];
 
@@ -152,7 +152,7 @@ export default function ReminderSheet({ open, onClose, editing, initial }) {
                     <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>Upgrade to Business for unlimited reminders</p>
                   </div>
                   <Link to="/settings" onClick={onClose}
-                    style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '8px 14px', borderRadius: 10, background: '#8B5CF6', color: '#fff', textDecoration: 'none', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>
+                    style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '8px 14px', borderRadius: 10, background: '#7c3aed', color: '#fff', textDecoration: 'none', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>
                     <Zap size={11} /> Upgrade
                   </Link>
                 </div>
@@ -280,7 +280,7 @@ export default function ReminderSheet({ open, onClose, editing, initial }) {
                       <button type="button" key={String(r.id)} onClick={() => setRecurrence(r.id)}
                         className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all"
                         style={{
-                          background: recurrence === r.id ? 'rgba(79,110,247,0.15)' : 'var(--bg-card2)',
+                          background: recurrence === r.id ? 'rgba(59,130,246,0.15)' : 'var(--bg-card2)',
                           border: `1px solid ${recurrence === r.id ? 'var(--blue)' : 'var(--border)'}`,
                           color: recurrence === r.id ? 'var(--blue)' : 'var(--text-muted)',
                           fontSize: 12,
@@ -297,12 +297,12 @@ export default function ReminderSheet({ open, onClose, editing, initial }) {
                   )}
                 </div>
               ) : (
-                <div style={{ padding: '10px 14px', borderRadius: 12, background: 'rgba(139,92,246,0.06)', border: '1px solid rgba(139,92,246,0.15)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <Lock size={12} color="#8B5CF6" />
+                <div style={{ padding: '10px 14px', borderRadius: 12, background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.15)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Lock size={12} color="#7c3aed" />
                   <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                    Recurring reminders · <strong style={{ color: '#8B5CF6' }}>Business plan</strong>
+                    Recurring reminders · <strong style={{ color: '#7c3aed' }}>Business plan</strong>
                   </span>
-                  <Link to="/settings" onClick={onClose} style={{ marginLeft: 'auto', fontSize: 11, color: '#8B5CF6', fontWeight: 700, textDecoration: 'none' }}>Upgrade →</Link>
+                  <Link to="/settings" onClick={onClose} style={{ marginLeft: 'auto', fontSize: 11, color: '#7c3aed', fontWeight: 700, textDecoration: 'none' }}>Upgrade →</Link>
                 </div>
               )}
 

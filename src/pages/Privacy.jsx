@@ -4,7 +4,7 @@ export default function Privacy() {
   return (
     <LegalPage title="Privacy Policy" lastUpdated="25 March 2026">
 
-      <LBox color="#4F6EF7">
+      <LBox color="#3b82f6">
         We built ARIA for Kenyan business professionals who trust us with their schedules, contacts, and communications. We take that trust seriously. This policy explains exactly what data we collect, why we collect it, and how you can control it.
       </LBox>
 

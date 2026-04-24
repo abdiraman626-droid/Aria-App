@@ -90,7 +90,7 @@ export default function ClientPortal() {
     return (
       <div style={{ minHeight: '100svh', background: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ width: 40, height: 40, borderRadius: '50%', border: '3px solid #4F6EF7', borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
+          <div style={{ width: 40, height: 40, borderRadius: '50%', border: '3px solid #3b82f6', borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
           <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
           <p style={{ color: '#6b7280', fontSize: 14 }}>Loading your portal...</p>
         </div>
@@ -122,7 +122,7 @@ export default function ClientPortal() {
   return (
     <div style={{ minHeight: '100svh', background: '#0a0a0f', color: '#fff', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       {/* Header */}
-      <div style={{ background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)', padding: '28px 24px 24px' }}>
+      <div style={{ background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', padding: '28px 24px 24px' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
             <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#fff', opacity: 0.6 }} />
@@ -176,7 +176,7 @@ export default function ClientPortal() {
                         background: isOv ? 'rgba(239,68,68,0.06)' : 'rgba(255,255,255,0.04)',
                         border: `1px solid ${warn24 ? 'rgba(239,68,68,0.4)' : isOv ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.08)'}`,
                       }}>
-                      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 3, background: isOv ? '#ef4444' : '#4F6EF7' }} />
+                      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 3, background: isOv ? '#ef4444' : '#3b82f6' }} />
                       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <p style={{ fontWeight: 700, fontSize: 15, marginBottom: 4, color: isOv ? '#ef4444' : '#fff' }}>{r.title}</p>
@@ -203,10 +203,10 @@ export default function ClientPortal() {
         )}
 
         {/* Request form */}
-        <div style={{ padding: '20px 20px 24px', background: 'rgba(79,110,247,0.06)', border: '1px solid rgba(79,110,247,0.15)', borderRadius: 16 }}>
+        <div style={{ padding: '20px 20px 24px', background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)', borderRadius: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-            <div style={{ width: 34, height: 34, borderRadius: 10, background: 'rgba(79,110,247,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <MessageCircle size={15} color="#4F6EF7" />
+            <div style={{ width: 34, height: 34, borderRadius: 10, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <MessageCircle size={15} color="#3b82f6" />
             </div>
             <div>
               <p style={{ fontWeight: 700, fontSize: 15 }}>Send a Request</p>
@@ -227,7 +227,7 @@ export default function ClientPortal() {
               )}
             </AnimatePresence>
             <button type="submit" disabled={sending || !request.trim()}
-              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 20px', borderRadius: 12, border: 'none', cursor: !request.trim() ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: 14, fontFamily: 'inherit', background: '#4F6EF7', color: '#fff', opacity: !request.trim() ? 0.4 : 1 }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 20px', borderRadius: 12, border: 'none', cursor: !request.trim() ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: 14, fontFamily: 'inherit', background: '#3b82f6', color: '#fff', opacity: !request.trim() ? 0.4 : 1 }}>
               {sending ? <RefreshCw size={14} className="animate-spin" /> : <Send size={14} />}
               {sending ? 'Sending...' : 'Send Request'}
             </button>

@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="container flex items-center justify-between h-16 px-6">
         {/* Logo */}
         <Link to={user ? '/dashboard' : '/'} className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)' }}>
+          <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#3b82f6,#7c3aed)' }}>
             <Bell size={15} className="text-white" />
           </div>
           <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 20, letterSpacing: '-0.02em', color: '#fff' }}>ARIA</span>
@@ -51,7 +51,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 px-3 py-1.5 rounded-xl"
                 style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
               >
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)' }}>
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ background: 'linear-gradient(135deg,#3b82f6,#7c3aed)' }}>
                   {user.avatar}
                 </div>
                 <span className="text-sm text-white font-medium">{user.name.split(' ')[0]}</span>

@@ -61,12 +61,12 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-20" style={{ background:'var(--bg)' }}>
-      <div style={{ position:'absolute', top:'20%', left:'50%', transform:'translateX(-50%)', width:600, height:400, background:'radial-gradient(ellipse,rgba(79,110,247,0.08),transparent 70%)', pointerEvents:'none' }} />
+      <div style={{ position:'absolute', top:'20%', left:'50%', transform:'translateX(-50%)', width:600, height:400, background:'radial-gradient(ellipse,rgba(59,130,246,0.08),transparent 70%)', pointerEvents:'none' }} />
 
       <motion.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.5 }} style={{ width:'100%', maxWidth:400 }}>
         {/* Logo */}
         <div style={{ display:'flex', alignItems:'center', gap:10, justifyContent:'center', marginBottom:40 }}>
-          <div style={{ width:44, height:44, borderRadius:14, background:'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+          <div style={{ width:44, height:44, borderRadius:14, background:'linear-gradient(135deg,#3b82f6,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center' }}>
             <Mic size={20} color="#fff" />
           </div>
           <span style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800 }}>ARIA</span>

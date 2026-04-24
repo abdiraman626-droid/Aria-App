@@ -12,8 +12,8 @@ import { db } from '../../lib/firebase';
 import toast from 'react-hot-toast';
 
 const PLAN_META = {
-  individual:      { price:5000,   color:'#4F6EF7', icon:Star  },
-  corporate_mini:  { price:15000,  color:'#8B5CF6', icon:Zap   },
+  individual:      { price:5000,   color:'#3b82f6', icon:Star  },
+  corporate_mini:  { price:15000,  color:'#7c3aed', icon:Zap   },
   corporate:       { price:30000,  color:'#22c55e', icon:Zap   },
   major_corporate: { price:100000, color:'#f59e0b', icon:Crown },
   enterprise:      { price:250000, color:'#ef4444', icon:Crown },
@@ -172,7 +172,7 @@ export default function AdminDashboard() {
       {/* ── Sidebar ─────────────────────────────────────────────────────── */}
       <aside style={{ width:220, background:'var(--bg-card)', borderRight:'1px solid var(--border)', display:'flex', flexDirection:'column', flexShrink:0 }}>
         <div style={{ padding:'20px 16px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', gap:8 }}>
-          <div style={{ width:32, height:32, borderRadius:10, background:'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+          <div style={{ width:32, height:32, borderRadius:10, background:'linear-gradient(135deg,#3b82f6,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center' }}>
             <Shield size={15} color="#fff"/>
           </div>
           <p style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:15, color:'#fff' }}>ARIA Admin</p>
@@ -181,8 +181,8 @@ export default function AdminDashboard() {
           {TABS.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
               style={{ display:'flex', alignItems:'center', gap:10, padding:'10px 12px', borderRadius:12, border:'none', cursor:'pointer', fontFamily:'var(--font-body)', fontWeight:600, fontSize:14, textAlign:'left', width:'100%', transition:'all 0.15s',
-                background: tab===t.id?'rgba(79,110,247,0.12)':'transparent',
-                color:      tab===t.id?'#4F6EF7':'var(--text-muted)' }}>
+                background: tab===t.id?'rgba(59,130,246,0.12)':'transparent',
+                color:      tab===t.id?'#3b82f6':'var(--text-muted)' }}>
               <t.icon size={15}/> {t.label}
             </button>
           ))}
@@ -213,8 +213,8 @@ export default function AdminDashboard() {
             <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16, marginBottom:24 }}>
               {[
                 {label:'MRR',    value:`$${revenue.mrr.toLocaleString()}`,        icon:DollarSign,  color:'#22c55e'},
-                {label:'ARR',    value:`$${(revenue.mrr*12).toLocaleString()}`,   icon:TrendingUp,  color:'#4F6EF7'},
-                {label:'Users',  value:revenue.total,                             icon:Users,       color:'#8B5CF6'},
+                {label:'ARR',    value:`$${(revenue.mrr*12).toLocaleString()}`,   icon:TrendingUp,  color:'#3b82f6'},
+                {label:'Users',  value:revenue.total,                             icon:Users,       color:'#7c3aed'},
                 {label:'Active', value:revenue.active,                            icon:CheckCircle, color:'#f59e0b'},
               ].map(s=>(
                 <div key={s.label} className="card" style={{ padding:'20px' }}>
@@ -300,7 +300,7 @@ export default function AdminDashboard() {
                       ))}
 
                       <div style={{ marginLeft:'auto', display:'flex', gap:8 }}>
-                        <button onClick={() => {setActionU(u);setActionT('extend');}} className="btn btn-sm" style={{ background:'rgba(79,110,247,0.1)', color:'#4F6EF7', border:'1px solid rgba(79,110,247,0.2)', minHeight:32 }}>
+                        <button onClick={() => {setActionU(u);setActionT('extend');}} className="btn btn-sm" style={{ background:'rgba(59,130,246,0.1)', color:'#3b82f6', border:'1px solid rgba(59,130,246,0.2)', minHeight:32 }}>
                           <Clock size={11}/> Extend Trial
                         </button>
                         <button onClick={() => {setMsgTo(u.email);setTab('messages');}} className="btn btn-sm" style={{ background:'rgba(34,197,94,0.1)', color:'#22c55e', border:'1px solid rgba(34,197,94,0.2)', minHeight:32 }}>

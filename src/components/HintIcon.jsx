@@ -43,7 +43,7 @@ export default function HintIcon({ hint, position = 'top' }) {
                 left: '50%', transform: 'translateX(-50%)',
                 width: 230,
                 background: 'var(--bg-card)',
-                border: '1px solid rgba(79,110,247,0.3)',
+                border: '1px solid rgba(59,130,246,0.3)',
                 borderRadius: 14,
                 padding: '12px 14px',
                 boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
@@ -60,8 +60,8 @@ export default function HintIcon({ hint, position = 'top' }) {
                 borderLeft: '6px solid transparent',
                 borderRight: '6px solid transparent',
                 ...(position === 'top'
-                  ? { borderTop: '6px solid rgba(79,110,247,0.3)' }
-                  : { borderBottom: '6px solid rgba(79,110,247,0.3)' }),
+                  ? { borderTop: '6px solid rgba(59,130,246,0.3)' }
+                  : { borderBottom: '6px solid rgba(59,130,246,0.3)' }),
               }} />
               {hint}
             </motion.div>

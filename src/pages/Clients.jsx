@@ -180,7 +180,7 @@ export default function Clients() {
                     <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 3, background: 'var(--blue)' }} />
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                       {/* Avatar */}
-                      <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(79,110,247,0.12)', border: '1.5px solid rgba(79,110,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(59,130,246,0.12)', border: '1.5px solid rgba(59,130,246,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--blue)' }}>
                           {c.name[0].toUpperCase()}
                         </span>

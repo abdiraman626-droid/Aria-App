@@ -35,14 +35,14 @@ function Stars({ canvasRef }) {
         s.a = 0.3 + Math.sin(t * 0.001 * s.speed + s.phase) * 0.4;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(79,110,247,${s.a})`;
+        ctx.fillStyle = `rgba(59,130,246,${s.a})`;
         ctx.fill();
       });
       // A few purple stars
       stars.slice(0, 30).forEach(s => {
         ctx.beginPath();
         ctx.arc(s.x + 1, s.y + 1, s.r * 0.6, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(139,92,246,${s.a * 0.5})`;
+        ctx.fillStyle = `rgba(124,58,237,${s.a * 0.5})`;
         ctx.fill();
       });
       raf = requestAnimationFrame(draw);
@@ -124,7 +124,7 @@ export default function SplashScreen({ onComplete }) {
             style={{
               position: 'absolute',
               width: 400, height: 400, borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(79,110,247,0.2) 0%, rgba(139,92,246,0.08) 40%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(124,58,237,0.08) 40%, transparent 70%)',
               filter: 'blur(40px)',
             }}
           />
@@ -140,8 +140,8 @@ export default function SplashScreen({ onComplete }) {
             style={{
               position: 'absolute',
               width: 200, height: 200, borderRadius: '50%',
-              border: '2px solid rgba(79,110,247,0.3)',
-              boxShadow: '0 0 40px rgba(79,110,247,0.15)',
+              border: '2px solid rgba(59,130,246,0.3)',
+              boxShadow: '0 0 40px rgba(59,130,246,0.15)',
             }}
           />
 
@@ -156,7 +156,7 @@ export default function SplashScreen({ onComplete }) {
             style={{
               position: 'absolute',
               width: 260, height: 260, borderRadius: '50%',
-              border: '1px solid rgba(139,92,246,0.2)',
+              border: '1px solid rgba(124,58,237,0.2)',
             }}
           />
 
@@ -174,9 +174,9 @@ export default function SplashScreen({ onComplete }) {
             {/* Logo icon */}
             <div style={{
               width: 72, height: 72, borderRadius: 20,
-              background: 'linear-gradient(135deg, #4F6EF7, #8B5CF6)',
+              background: 'linear-gradient(135deg, #3b82f6, #7c3aed)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 0 60px rgba(79,110,247,0.4), 0 0 120px rgba(139,92,246,0.15)',
+              boxShadow: '0 0 60px rgba(59,130,246,0.4), 0 0 120px rgba(124,58,237,0.15)',
             }}>
               <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
                 <path d="M50 18a22 22 0 0 0-22 22c0 24-11 30-11 30h66s-11-6-11-30A22 22 0 0 0 50 18z" fill="white" fillOpacity="0.95"/>
@@ -190,7 +190,7 @@ export default function SplashScreen({ onComplete }) {
               animate={{ opacity: phase === 'stars' ? 0 : 1, y: phase === 'stars' ? 8 : 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Syne', sans-serif",
                 fontSize: 'clamp(36px, 8vw, 52px)',
                 fontWeight: 800,
                 letterSpacing: '-0.03em',
@@ -213,7 +213,7 @@ export default function SplashScreen({ onComplete }) {
               marginTop: 20,
               fontSize: 'clamp(14px, 3vw, 18px)',
               color: '#A0A0B8',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
               letterSpacing: '0.01em',
               textAlign: 'center',
@@ -225,7 +225,7 @@ export default function SplashScreen({ onComplete }) {
             {typedText.length < TAGLINE.length && (
               <span style={{
                 display: 'inline-block', width: 2, height: '1em',
-                background: '#4F6EF7', marginLeft: 2,
+                background: '#3b82f6', marginLeft: 2,
                 verticalAlign: 'text-bottom',
                 animation: 'blink 0.7s step-end infinite',
               }} />

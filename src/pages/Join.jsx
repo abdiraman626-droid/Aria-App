@@ -82,11 +82,11 @@ export default function Join() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-20" style={{ background: 'var(--bg)' }}>
-      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 400, background: 'radial-gradient(ellipse,rgba(139,92,246,0.08),transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 400, background: 'radial-gradient(ellipse,rgba(124,58,237,0.08),transparent 70%)', pointerEvents: 'none' }} />
 
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ width: '100%', maxWidth: 400 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center', marginBottom: 40 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Mic size={20} color="#fff" />
           </div>
           <span style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>ARIA</span>
@@ -109,12 +109,12 @@ export default function Join() {
             </div>
           ) : (
             <>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderRadius: 12, background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)', marginBottom: 24 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(139,92,246,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Users size={16} color="#8B5CF6" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderRadius: 12, background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', marginBottom: 24 }}>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(124,58,237,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Users size={16} color="#7c3aed" />
                 </div>
                 <div>
-                  <p style={{ fontWeight: 700, fontSize: 14, color: '#8B5CF6' }}>Team Invite</p>
+                  <p style={{ fontWeight: 700, fontSize: 14, color: '#7c3aed' }}>Team Invite</p>
                   <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
                     {invite.ownerName || 'Your team owner'} invited you to join ARIA
                   </p>

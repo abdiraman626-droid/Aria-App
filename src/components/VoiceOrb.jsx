@@ -42,12 +42,12 @@ class WebGLErrorBoundary extends Component {
 
 export default function VoiceOrb({ state = 'idle', size = 160, onClick }) {
   const colorMap = {
-    idle: '#4F6EF7',
+    idle: '#3b82f6',
     listening: '#22c55e',
     thinking: '#f59e0b',
-    speaking: '#8B5CF6',
+    speaking: '#7c3aed',
   };
-  const color = colorMap[state] || '#4F6EF7';
+  const color = colorMap[state] || '#3b82f6';
 
   const fallbackButton = (
     <button onClick={onClick} style={{
@@ -80,7 +80,7 @@ export default function VoiceOrb({ state = 'idle', size = 160, onClick }) {
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} intensity={1} />
           <pointLight position={[-3, -3, 2]} intensity={0.8} color={color} />
-          <pointLight position={[2, 3, -1]} intensity={0.3} color="#8B5CF6" />
+          <pointLight position={[2, 3, -1]} intensity={0.3} color="#7c3aed" />
           <AnimatedOrb state={state} color={color} />
         </Canvas>
       </WebGLErrorBoundary>

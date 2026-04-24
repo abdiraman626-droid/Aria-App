@@ -4,7 +4,7 @@ export default function Terms() {
   return (
     <LegalPage title="Terms of Service" lastUpdated="25 March 2026">
 
-      <LBox color="#8B5CF6">
+      <LBox color="#7c3aed">
         Please read these terms carefully before using ARIA. By creating an account or using the service, you agree to be bound by these terms.
       </LBox>
 

@@ -16,7 +16,7 @@ import HintIcon from '../components/HintIcon';
 import toast from 'react-hot-toast';
 
 const PLAN_ICONS  = { individual: Star, corporate_mini: Zap, corporate: Building, major_corporate: Crown, enterprise: Building2 };
-const PLAN_COLORS = { individual: '#4F6EF7', corporate_mini: '#8B5CF6', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
+const PLAN_COLORS = { individual: '#3b82f6', corporate_mini: '#7c3aed', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
 
 function Section({ icon: Icon, title, children, accent, locked }) {
   return (
@@ -76,7 +76,7 @@ export default function Settings() {
   }, [user?.googleConnected]);
 
   const PlanIcon  = PLAN_ICONS[user?.plan]  || Star;
-  const planColor = PLAN_COLORS[user?.plan] || '#4F6EF7';
+  const planColor = PLAN_COLORS[user?.plan] || '#3b82f6';
 
   const saveProfile = () => {
     updateUser({ name, whatsappNumber: whatsapp });
@@ -201,7 +201,7 @@ export default function Settings() {
           </div>
 
           {/* Profile */}
-          <Section icon={User} title={t('profile')} accent="#4F6EF7">
+          <Section icon={User} title={t('profile')} accent="#3b82f6">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div>
                 <label className="label">{t('full_name')}</label>
@@ -236,9 +236,9 @@ export default function Settings() {
           </Section>
 
           {/* ElevenLabs Voice */}
-          <Section icon={Mic} title={<span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>Voice — ElevenLabs <HintIcon hint="Choose from 5 AI voices. Preview each before selecting. Add your free ElevenLabs API key to unlock high-quality voices. Without a key, ARIA uses your browser's built-in speech." /></span>} accent="#8B5CF6">
-            <div style={{ padding: '12px 16px', borderRadius: 12, background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.15)', marginBottom: 16, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-              Get your free API key at <a href="https://elevenlabs.io" target="_blank" rel="noreferrer" style={{ color: '#8B5CF6' }}>elevenlabs.io</a>. Without a key, ARIA uses your browser's built-in speech.
+          <Section icon={Mic} title={<span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>Voice — ElevenLabs <HintIcon hint="Choose from 5 AI voices. Preview each before selecting. Add your free ElevenLabs API key to unlock high-quality voices. Without a key, ARIA uses your browser's built-in speech." /></span>} accent="#7c3aed">
+            <div style={{ padding: '12px 16px', borderRadius: 12, background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.15)', marginBottom: 16, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+              Get your free API key at <a href="https://elevenlabs.io" target="_blank" rel="noreferrer" style={{ color: '#7c3aed' }}>elevenlabs.io</a>. Without a key, ARIA uses your browser's built-in speech.
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div>
@@ -262,8 +262,8 @@ export default function Settings() {
                         onClick={() => { if (!locked) { setVoiceId(v.id); localStorage.setItem('aria_voice_id', v.id); } }}
                         style={{
                           padding: '12px 14px', borderRadius: 14, cursor: locked ? 'not-allowed' : 'pointer',
-                          background: selected ? 'rgba(139,92,246,0.12)' : 'var(--bg-card2)',
-                          border: `1px solid ${selected ? '#8B5CF6' : 'var(--border)'}`,
+                          background: selected ? 'rgba(124,58,237,0.12)' : 'var(--bg-card2)',
+                          border: `1px solid ${selected ? '#7c3aed' : 'var(--border)'}`,
                           opacity: locked ? 0.5 : 1, transition: 'all 0.2s', position: 'relative',
                         }}>
                         {isPremiumVoice && (
@@ -271,7 +271,7 @@ export default function Settings() {
                             {locked ? '👑 Premium' : '👑'}
                           </span>
                         )}
-                        <p style={{ fontWeight: 700, fontSize: 13, color: selected ? '#8B5CF6' : '#fff', marginBottom: 2 }}>{v.name}</p>
+                        <p style={{ fontWeight: 700, fontSize: 13, color: selected ? '#7c3aed' : '#fff', marginBottom: 2 }}>{v.name}</p>
                         <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 8, lineHeight: 1.3 }}>{v.desc}</p>
                         <button
                           type="button"
@@ -281,8 +281,8 @@ export default function Settings() {
                             display: 'flex', alignItems: 'center', gap: 4, padding: '4px 10px',
                             borderRadius: 8, border: 'none', cursor: locked ? 'not-allowed' : 'pointer',
                             fontSize: 11, fontWeight: 700, fontFamily: 'var(--font-body)',
-                            background: testingId === v.id ? 'rgba(139,92,246,0.2)' : 'var(--bg-card)',
-                            color: testingId === v.id ? '#8B5CF6' : 'var(--text-muted)',
+                            background: testingId === v.id ? 'rgba(124,58,237,0.2)' : 'var(--bg-card)',
+                            color: testingId === v.id ? '#7c3aed' : 'var(--text-muted)',
                           }}>
                           {testingId === v.id
                             ? <><Square size={9} style={{ fill: 'currentColor' }} /> Stop</>
@@ -302,7 +302,7 @@ export default function Settings() {
           </Section>
 
           {/* Google Integration */}
-          <Section icon={Calendar} title="Google Integration" accent="#4F6EF7">
+          <Section icon={Calendar} title="Google Integration" accent="#3b82f6">
             <Row
               label="Gmail & Google Calendar"
               hint={googleConn ? 'Events and emails synced to your dashboard' : 'Connect to show real calendar events and emails'}
@@ -351,11 +351,11 @@ export default function Settings() {
           </Section>
 
           {/* Team Management — Business feature */}
-          <Section icon={Users} title={<span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>Team Management <HintIcon hint="Invite colleagues by email, share a join link, and assign reminders to team members. Business: up to 5 members. Premium: unlimited." /></span>} accent={hasTeam ? '#8B5CF6' : '#6b7280'}>
+          <Section icon={Users} title={<span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>Team Management <HintIcon hint="Invite colleagues by email, share a join link, and assign reminders to team members. Business: up to 5 members. Premium: unlimited." /></span>} accent={hasTeam ? '#7c3aed' : '#6b7280'}>
             {hasTeam ? (
               <>
                 <Row label="Team Members" hint={isEnterprise ? 'Unlimited team members' : `Up to ${isIndividual ? 3 : isCorporate ? 50 : isMajorCorporate ? 500 : 10} members`}>
-                  <Link to="/team" className="btn btn-sm" style={{ background: '#8B5CF6', color: '#fff', border: 'none', textDecoration: 'none' }}>
+                  <Link to="/team" className="btn btn-sm" style={{ background: '#7c3aed', color: '#fff', border: 'none', textDecoration: 'none' }}>
                     <Users size={13} /> Manage Team
                   </Link>
                 </Row>
@@ -442,7 +442,7 @@ export default function Settings() {
 
           {/* Suggestion Box */}
           <button onClick={() => setSuggestionOpen(true)} style={{ width: '100%', textDecoration: 'none' }}>
-            <div className="card" style={{ padding: '16px 24px', marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', border: '1px solid rgba(79,110,247,0.2)', background: 'rgba(79,110,247,0.04)' }}>
+            <div className="card" style={{ padding: '16px 24px', marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', border: '1px solid rgba(59,130,246,0.2)', background: 'rgba(59,130,246,0.04)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <MessageSquare size={16} style={{ color: 'var(--blue)' }} />
                 <span style={{ fontWeight: 600, fontSize: 15, color: '#fff' }}>
@@ -489,7 +489,7 @@ export default function Settings() {
                         { id: 'bug', label: lang === 'ar' ? 'خطأ' : lang === 'so' ? 'Cillad' : lang === 'sw' ? 'Hitilafu' : 'Bug', emoji: '🐛' },
                       ].map(opt => (
                         <button key={opt.id} onClick={() => setSuggestionType(opt.id)}
-                          style={{ flex: 1, padding: '10px 0', borderRadius: 10, border: `1px solid ${suggestionType === opt.id ? 'var(--blue)' : 'var(--border)'}`, background: suggestionType === opt.id ? 'rgba(79,110,247,0.1)' : 'transparent', color: suggestionType === opt.id ? 'var(--blue)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                          style={{ flex: 1, padding: '10px 0', borderRadius: 10, border: `1px solid ${suggestionType === opt.id ? 'var(--blue)' : 'var(--border)'}`, background: suggestionType === opt.id ? 'rgba(59,130,246,0.1)' : 'transparent', color: suggestionType === opt.id ? 'var(--blue)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                           {opt.emoji} {opt.label}
                         </button>
                       ))}

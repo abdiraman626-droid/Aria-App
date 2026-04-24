@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 
-export default function ParticleField({ count = 60, color = '#4F6EF7' }) {
+export default function ParticleField({ count = 60, color = '#3b82f6' }) {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const particlesRef = useRef([]);

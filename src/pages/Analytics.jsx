@@ -83,9 +83,9 @@ export default function Analytics() {
   const pendingInvites     = members.filter(m => m.status === 'pending').length;
 
   const featureUsage = [
-    { label: lang === 'ar' ? 'التذكيرات' : 'Reminders', value: reminders.length, color: '#4F6EF7' },
+    { label: lang === 'ar' ? 'التذكيرات' : 'Reminders', value: reminders.length, color: '#3b82f6' },
     { label: lang === 'ar' ? 'الأحداث' : 'Calendar Events', value: events.length, color: '#22c55e' },
-    { label: lang === 'ar' ? 'الاجتماعات' : 'Meetings Recorded', value: meetings.length, color: '#8B5CF6' },
+    { label: lang === 'ar' ? 'الاجتماعات' : 'Meetings Recorded', value: meetings.length, color: '#7c3aed' },
     { label: lang === 'ar' ? 'الاستراتيجيات' : 'Strategies', value: strategies.length, color: '#f59e0b' },
     { label: lang === 'ar' ? 'أعضاء الفريق' : 'Team Members', value: members.length, color: '#ec4899' },
     { label: lang === 'ar' ? 'العملاء' : 'Clients', value: clients.length, color: '#06b6d4' },
@@ -151,7 +151,7 @@ export default function Analytics() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
-            <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(79,110,247,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BarChart3 size={20} style={{ color: 'var(--blue)' }} />
             </div>
             <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>{l.title}</h1>
@@ -160,9 +160,9 @@ export default function Analytics() {
           {/* Overview Stats */}
           <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>{l.overview}</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 24 }}>
-            <StatCard icon={Bell} label={lang === 'ar' ? 'نشطة' : 'Active'} value={activeReminders} color="#4F6EF7" sub={`${completedReminders} completed`} />
+            <StatCard icon={Bell} label={lang === 'ar' ? 'نشطة' : 'Active'} value={activeReminders} color="#3b82f6" sub={`${completedReminders} completed`} />
             <StatCard icon={TrendingUp} label={lang === 'ar' ? 'عاجلة' : 'Urgent'} value={highPriority} color="#ef4444" />
-            <StatCard icon={Users} label={lang === 'ar' ? 'الفريق' : 'Team'} value={activeMembers} color="#8B5CF6" sub={`${pendingInvites} pending`} />
+            <StatCard icon={Users} label={lang === 'ar' ? 'الفريق' : 'Team'} value={activeMembers} color="#7c3aed" sub={`${pendingInvites} pending`} />
             <StatCard icon={Calendar} label={lang === 'ar' ? 'أحداث' : 'Events'} value={events.length} color="#22c55e" />
             <StatCard icon={Mic} label={lang === 'ar' ? 'اجتماعات' : 'Meetings'} value={meetings.length} color="#f59e0b" />
             <StatCard icon={Building2} label={l.depts} value={departments.length} color="#06b6d4" />
@@ -180,7 +180,7 @@ export default function Analytics() {
           <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>{l.weekly}</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 24 }}>
             <div className="card" style={{ padding: '16px', textAlign: 'center' }}>
-              <p style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-head)', color: '#4F6EF7' }}>{weekReminders}</p>
+              <p style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-head)', color: '#3b82f6' }}>{weekReminders}</p>
               <p style={{ fontSize: 11, color: 'var(--text-muted)' }}>{lang === 'ar' ? 'تذكيرات' : 'Reminders'}</p>
             </div>
             <div className="card" style={{ padding: '16px', textAlign: 'center' }}>

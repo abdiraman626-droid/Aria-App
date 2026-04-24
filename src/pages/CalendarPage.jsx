@@ -10,7 +10,7 @@ import BottomNav from '../components/BottomNav';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, addMonths, subMonths, isToday } from 'date-fns';
 import toast from 'react-hot-toast';
 
-const EVENT_COLORS = ['#4F6EF7', '#8B5CF6', '#22c55e', '#f59e0b', '#ef4444', '#ec4899'];
+const EVENT_COLORS = ['#3b82f6', '#7c3aed', '#22c55e', '#f59e0b', '#ef4444', '#ec4899'];
 
 function EventSheet({ open, onClose, onSave, editing, t }) {
   const [title, setTitle]   = useState('');
@@ -67,7 +67,7 @@ function EventSheet({ open, onClose, onSave, editing, t }) {
               <div style={{ display: 'flex', gap: 8, marginBottom: 18 }}>
                 {['meeting', 'task', 'appointment'].map(t => (
                   <button key={t} onClick={() => setType(t)}
-                    style={{ flex: 1, padding: '8px 0', borderRadius: 10, border: `1px solid ${type === t ? '#4F6EF7' : 'var(--border)'}`, background: type === t ? 'rgba(79,110,247,0.1)' : 'transparent', color: type === t ? '#4F6EF7' : 'var(--text-muted)', cursor: 'pointer', fontSize: 13, fontWeight: 600, textTransform: 'capitalize' }}>
+                    style={{ flex: 1, padding: '8px 0', borderRadius: 10, border: `1px solid ${type === t ? '#3b82f6' : 'var(--border)'}`, background: type === t ? 'rgba(59,130,246,0.1)' : 'transparent', color: type === t ? '#3b82f6' : 'var(--text-muted)', cursor: 'pointer', fontSize: 13, fontWeight: 600, textTransform: 'capitalize' }}>
                     {t}
                   </button>
                 ))}
@@ -174,7 +174,7 @@ export default function CalendarPage() {
   const typeColor = (type) => {
     if (type === 'task') return '#f59e0b';
     if (type === 'appointment') return '#22c55e';
-    return '#4F6EF7';
+    return '#3b82f6';
   };
 
   return (
@@ -223,14 +223,14 @@ export default function CalendarPage() {
                   <button key={day.toISOString()} onClick={() => setSelectedDate(day)}
                     style={{
                       aspectRatio: '1', borderRadius: 12, border: 'none', cursor: 'pointer',
-                      background: selected ? '#4F6EF7' : today ? 'rgba(79,110,247,0.12)' : 'transparent',
-                      color: selected ? '#fff' : today ? '#4F6EF7' : '#fff',
+                      background: selected ? '#3b82f6' : today ? 'rgba(59,130,246,0.12)' : 'transparent',
+                      color: selected ? '#fff' : today ? '#3b82f6' : '#fff',
                       fontWeight: selected || today ? 700 : 400, fontSize: 14, position: 'relative',
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2,
                     }}>
                     {format(day, 'd')}
                     {hasEvents && (
-                      <div style={{ width: 4, height: 4, borderRadius: '50%', background: selected ? '#fff' : '#4F6EF7', position: 'absolute', bottom: 4 }} />
+                      <div style={{ width: 4, height: 4, borderRadius: '50%', background: selected ? '#fff' : '#3b82f6', position: 'absolute', bottom: 4 }} />
                     )}
                   </button>
                 );

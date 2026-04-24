@@ -20,8 +20,8 @@ function LockedPage() {
     <div style={{ minHeight: '100svh', background: 'var(--bg)', display: 'flex', flexDirection: 'column' }}>
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '72px 24px 120px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', maxWidth: 340 }}>
-          <div style={{ width: 80, height: 80, borderRadius: 24, background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
-            <Video size={34} style={{ color: '#8B5CF6' }} />
+          <div style={{ width: 80, height: 80, borderRadius: 24, background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+            <Video size={34} style={{ color: '#7c3aed' }} />
           </div>
           <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 26, fontWeight: 800, marginBottom: 10 }}>
             Meeting Recorder
@@ -39,7 +39,7 @@ function LockedPage() {
               'Meeting history in Firestore',
             ].map(f => (
               <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14 }}>
-                <CheckCircle size={15} color="#8B5CF6" style={{ flexShrink: 0 }} />
+                <CheckCircle size={15} color="#7c3aed" style={{ flexShrink: 0 }} />
                 <span>{f}</span>
               </div>
             ))}
@@ -47,7 +47,7 @@ function LockedPage() {
           <Link
             to="/settings"
             className="btn btn-primary btn-lg w-full"
-            style={{ background: 'linear-gradient(135deg,#8B5CF6,#6d28d9)', textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
+            style={{ background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
             Upgrade to Business
           </Link>
         </motion.div>
@@ -98,7 +98,7 @@ function MeetingDetail({ meeting, onClose }) {
               </div>
 
               {/* Summary */}
-              <div style={{ padding: 16, borderRadius: 14, background: 'rgba(79,110,247,0.06)', border: '1px solid rgba(79,110,247,0.2)', marginBottom: 16 }}>
+              <div style={{ padding: 16, borderRadius: 14, background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.2)', marginBottom: 16 }}>
                 <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Summary</p>
                 <p style={{ fontSize: 14, lineHeight: 1.75, color: '#fff' }}>{meeting.summary}</p>
               </div>
@@ -221,12 +221,12 @@ export default function Meetings() {
             style={{
               width: '100%', display: 'flex', alignItems: 'center', gap: 14,
               padding: '18px 22px', borderRadius: 18, border: 'none', cursor: 'pointer',
-              background: 'linear-gradient(135deg,rgba(79,110,247,0.15),rgba(139,92,246,0.15))',
-              borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(79,110,247,0.3)',
+              background: 'linear-gradient(135deg,rgba(59,130,246,0.15),rgba(124,58,237,0.15))',
+              borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(59,130,246,0.3)',
               transition: 'all 0.2s', textAlign: 'left',
             }}
           >
-            <div style={{ width: 48, height: 48, borderRadius: 14, background: 'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: 48, height: 48, borderRadius: 14, background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Plus size={22} color="#fff" />
             </div>
             <div>
@@ -255,7 +255,7 @@ export default function Meetings() {
             </div>
           ) : meetings.length === 0 ? (
             <div className="card" style={{ padding: '40px 24px', textAlign: 'center' }}>
-              <div style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(79,110,247,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}>
+              <div style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(59,130,246,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}>
                 <Video size={24} style={{ color: 'var(--text-muted)' }} />
               </div>
               <p style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>No meetings yet</p>

@@ -197,7 +197,7 @@ export default function MeetingRecorder({ open, onClose, onSaved }) {
               {/* ── PROCESSING ── */}
               {step === STEP.PROCESSING && (
                 <div style={{ textAlign: 'center', padding: '52px 0' }}>
-                  <div style={{ width: 72, height: 72, borderRadius: 22, background: 'rgba(79,110,247,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+                  <div style={{ width: 72, height: 72, borderRadius: 22, background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
                     <Loader2 size={32} style={{ color: 'var(--blue)' }} className="animate-spin" />
                   </div>
                   <p style={{ fontWeight: 700, fontSize: 16, marginBottom: 6 }}>{processingMsg}</p>
@@ -207,7 +207,7 @@ export default function MeetingRecorder({ open, onClose, onSaved }) {
                         <motion.div
                           animate={{ width: `${uploadPct}%` }}
                           transition={{ ease: 'linear', duration: 0.3 }}
-                          style={{ height: '100%', borderRadius: 3, background: 'linear-gradient(90deg,#4F6EF7,#8B5CF6)' }}
+                          style={{ height: '100%', borderRadius: 3, background: 'linear-gradient(90deg,#3b82f6,#7c3aed)' }}
                         />
                       </div>
                       <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 6 }}>{uploadPct}% uploaded</p>
@@ -223,7 +223,7 @@ export default function MeetingRecorder({ open, onClose, onSaved }) {
               {step === STEP.DONE && result && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   {/* Summary */}
-                  <div style={{ padding: 16, borderRadius: 14, background: 'rgba(79,110,247,0.06)', border: '1px solid rgba(79,110,247,0.2)' }}>
+                  <div style={{ padding: 16, borderRadius: 14, background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.2)' }}>
                     <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Summary</p>
                     <p style={{ fontSize: 14, lineHeight: 1.75, color: '#fff' }}>{result.summary}</p>
                   </div>
@@ -240,7 +240,7 @@ export default function MeetingRecorder({ open, onClose, onSaved }) {
                             <button
                               onClick={() => handleCreateReminder(item, i)}
                               disabled={creatingIdx === i}
-                              style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 700, color: 'var(--blue)', background: 'rgba(79,110,247,0.1)', border: 'none', borderRadius: 8, padding: '5px 10px', cursor: 'pointer', flexShrink: 0 }}>
+                              style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 700, color: 'var(--blue)', background: 'rgba(59,130,246,0.1)', border: 'none', borderRadius: 8, padding: '5px 10px', cursor: 'pointer', flexShrink: 0 }}>
                               {creatingIdx === i ? <Loader2 size={11} className="animate-spin" /> : <Plus size={11} />}
                               Remind
                             </button>
@@ -311,8 +311,8 @@ export default function MeetingRecorder({ open, onClose, onSaved }) {
                         <button
                           onClick={step === STEP.RECORDING ? stopRecording : startRecording}
                           style={{ width: 100, height: 100, borderRadius: '50%', border: 'none', cursor: 'pointer',
-                            background: step === STEP.RECORDING ? 'linear-gradient(135deg,#ef4444,#dc2626)' : 'linear-gradient(135deg,#4F6EF7,#8B5CF6)',
-                            boxShadow: step === STEP.RECORDING ? '0 8px 32px rgba(239,68,68,0.45)' : '0 8px 32px rgba(79,110,247,0.4)',
+                            background: step === STEP.RECORDING ? 'linear-gradient(135deg,#ef4444,#dc2626)' : 'linear-gradient(135deg,#3b82f6,#7c3aed)',
+                            boxShadow: step === STEP.RECORDING ? '0 8px 32px rgba(239,68,68,0.45)' : '0 8px 32px rgba(59,130,246,0.4)',
                             display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s' }}>
                           {step === STEP.RECORDING
                             ? <Square size={34} color="#fff" fill="#fff" />
@@ -346,7 +346,7 @@ export default function MeetingRecorder({ open, onClose, onSaved }) {
                   ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                       <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, padding: '32px 24px', borderRadius: 16, border: '2px dashed var(--border)', cursor: 'pointer', background: 'var(--bg-card2)', transition: 'border-color 0.2s' }}>
-                        <div style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(79,110,247,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <FileAudio size={22} style={{ color: 'var(--blue)' }} />
                         </div>
                         <div style={{ textAlign: 'center' }}>
@@ -407,8 +407,8 @@ export function MeetingRecorderLocked({ open, onClose }) {
               <div className="w-10 h-1 rounded-full" style={{ background: 'var(--border)' }} />
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ width: 72, height: 72, borderRadius: 22, background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-                <Mic size={30} style={{ color: '#8B5CF6' }} />
+              <div style={{ width: 72, height: 72, borderRadius: 22, background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+                <Mic size={30} style={{ color: '#7c3aed' }} />
               </div>
               <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 22, fontWeight: 800, marginBottom: 8 }}>Meeting Recorder</h2>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 28, maxWidth: 300, margin: '0 auto 28px' }}>
@@ -417,12 +417,12 @@ export function MeetingRecorderLocked({ open, onClose }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28, textAlign: 'left' }}>
                 {['AI transcription via AssemblyAI', 'Claude summary + action items', 'Auto-create reminders', 'Send summary via WhatsApp'].map(f => (
                   <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14 }}>
-                    <CheckCircle size={15} color="#8B5CF6" />
+                    <CheckCircle size={15} color="#7c3aed" />
                     <span>{f}</span>
                   </div>
                 ))}
               </div>
-              <Link to="/settings" onClick={onClose} className="btn btn-primary btn-lg w-full" style={{ background: 'linear-gradient(135deg,#8B5CF6,#6d28d9)', textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
+              <Link to="/settings" onClick={onClose} className="btn btn-primary btn-lg w-full" style={{ background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
                 Upgrade to Business
               </Link>
               <button onClick={onClose} className="btn btn-ghost w-full" style={{ marginTop: 10, fontSize: 13 }}>Maybe later</button>

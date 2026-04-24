@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { usePlan } from '../hooks/usePlan';
 
 const META = {
-  corporate_mini:  { color: '#8B5CF6', label: 'Corporate Mini',  price: 'KSH 15,000/mo' },
+  corporate_mini:  { color: '#7c3aed', label: 'Corporate Mini',  price: 'KSH 15,000/mo' },
   corporate:       { color: '#22c55e', label: 'Corporate',       price: 'KSH 30,000/mo' },
   major_corporate: { color: '#f59e0b', label: 'Major Corporate', price: 'KSH 100,000/mo' },
   enterprise:      { color: '#ef4444', label: 'Enterprise',      price: 'KSH 250,000/mo' },

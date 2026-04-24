@@ -32,7 +32,7 @@ export default function VerifyEmail({ email }) {
         style={{ width:'100%', maxWidth:420, textAlign:'center' }}
       >
         {/* Icon */}
-        <div style={{ width:80, height:80, borderRadius:24, background:'rgba(79,110,247,0.12)', border:'1px solid rgba(79,110,247,0.2)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 28px' }}>
+        <div style={{ width:80, height:80, borderRadius:24, background:'rgba(59,130,246,0.12)', border:'1px solid rgba(59,130,246,0.2)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 28px' }}>
           <Mail size={36} style={{ color:'var(--blue)' }}/>
         </div>
 

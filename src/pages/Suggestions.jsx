@@ -74,7 +74,7 @@ export default function Suggestions() {
 
           {/* Header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-            <div style={{ width: 44, height: 44, borderRadius: 14, background: 'rgba(79,110,247,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 14, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <MessageSquare size={20} style={{ color: 'var(--blue)' }} />
             </div>
             <div>
@@ -120,7 +120,7 @@ export default function Suggestions() {
                         style={{
                           flex: 1, padding: '12px 8px', borderRadius: 12, cursor: 'pointer',
                           border: `1px solid ${category === cat.id ? 'var(--blue)' : 'var(--border)'}`,
-                          background: category === cat.id ? 'rgba(79,110,247,0.1)' : 'transparent',
+                          background: category === cat.id ? 'rgba(59,130,246,0.1)' : 'transparent',
                           color: category === cat.id ? 'var(--blue)' : 'var(--text-muted)',
                           fontSize: 13, fontWeight: 600, display: 'flex', flexDirection: 'column',
                           alignItems: 'center', gap: 6, transition: 'all 0.2s',

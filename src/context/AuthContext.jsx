@@ -20,8 +20,8 @@ import { initPushNotifications } from '../services/notifications';
 const AuthContext = createContext(null);
 
 export const PLAN_META = {
-  individual:     { label: 'Individual',      price: 5000,   color: '#4F6EF7', reminderLimit: null },
-  corporate_mini: { label: 'Corporate Mini',  price: 15000,  color: '#8B5CF6', reminderLimit: null },
+  individual:     { label: 'Individual',      price: 5000,   color: '#3b82f6', reminderLimit: null },
+  corporate_mini: { label: 'Corporate Mini',  price: 15000,  color: '#7c3aed', reminderLimit: null },
   corporate:      { label: 'Corporate',       price: 30000,  color: '#22c55e', reminderLimit: null },
   major_corporate:{ label: 'Major Corporate', price: 100000, color: '#f59e0b', reminderLimit: null },
   enterprise:     { label: 'Enterprise',      price: 250000, color: '#ef4444', reminderLimit: null },

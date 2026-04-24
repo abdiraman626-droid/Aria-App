@@ -4,7 +4,7 @@ export default function Cookies() {
   return (
     <LegalPage title="Cookie Policy" lastUpdated="25 March 2026">
 
-      <LBox color="#4F6EF7">
+      <LBox color="#3b82f6">
         ARIA uses a minimal set of cookies and local storage — only what is strictly necessary to keep you signed in and remember your preferences. We do not use advertising cookies or third-party tracking.
       </LBox>
 

@@ -81,8 +81,8 @@ export default function Tour() {
                 position: 'fixed', zIndex: 1001, pointerEvents: 'none',
                 left: hl.x, top: hl.y, width: hl.w, height: hl.h,
                 borderRadius: 14,
-                border: '2px solid #4F6EF7',
-                boxShadow: '0 0 0 4px rgba(79,110,247,0.25), 0 0 24px rgba(79,110,247,0.3)',
+                border: '2px solid #3b82f6',
+                boxShadow: '0 0 0 4px rgba(59,130,246,0.25), 0 0 24px rgba(59,130,246,0.3)',
               }}
             />
           )}
@@ -99,7 +99,7 @@ export default function Tour() {
               left: tipX, top: tipY,
               width: tipW,
               background: 'var(--bg-card)',
-              border: '1px solid rgba(79,110,247,0.35)',
+              border: '1px solid rgba(59,130,246,0.35)',
               borderRadius: 20,
               padding: '18px 18px 14px',
               boxShadow: '0 24px 64px rgba(0,0,0,0.6)',
@@ -111,7 +111,7 @@ export default function Tour() {
                 <div key={i} style={{
                   height: 4, borderRadius: 2, transition: 'all 0.3s ease',
                   width: i === step ? 22 : 8,
-                  background: i <= step ? '#4F6EF7' : 'var(--border)',
+                  background: i <= step ? '#3b82f6' : 'var(--border)',
                 }} />
               ))}
             </div>

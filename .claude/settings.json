@@ -17,7 +17,16 @@
       "Bash(grep -c \"VoiceOrb\" dist/assets/index-*.js)",
       "Bash(grep -l \"ParticleField\\\\|offsetWidth\\\\|mousemove\" dist/assets/*.js)",
       "Bash(firebase deploy *)",
-      "Bash(npx firebase-tools *)"
+      "Bash(npx firebase-tools *)",
+      "Bash(npx --yes sharp-cli --help)",
+      "Bash(npx --yes sharp-cli -i public/logo.svg -o public/logo.png --width 800 --height 800)",
+      "Bash(npx --yes sharp-cli -i public/logo.svg -o public/logo.png resize 800 800)",
+      "Bash(ls -la /Users/abdirahmanmohamed/aria-app/*.*)",
+      "Bash(ls -1 /Users/abdirahmanmohamed/aria-app/src/pages/*.jsx)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(ls -1 /Users/abdirahmanmohamed/aria-app/src/components/*.jsx)",
+      "Bash(npx @anthropic-ai/claude-code mcp add 21st-magic -- npx -y @21st-dev/magic@latest)",
+      "Bash(xargs sed *)"
     ]
   }
 }

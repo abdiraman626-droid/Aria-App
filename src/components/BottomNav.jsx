@@ -45,16 +45,16 @@ export default function BottomNav() {
                 <motion.div
                   layoutId="nav-pill"
                   className="absolute inset-x-2 inset-y-0 rounded-xl"
-                  style={{ background: 'rgba(79,110,247,0.12)' }}
+                  style={{ background: 'rgba(59,130,246,0.12)' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                 />
               )}
               <tab.icon
                 size={22}
                 strokeWidth={active ? 2.2 : 1.6}
-                style={{ color: active ? '#4F6EF7' : '#505068', position: 'relative' }}
+                style={{ color: active ? '#3b82f6' : '#505068', position: 'relative' }}
               />
-              <span style={{ fontSize: 10, fontWeight: active ? 600 : 400, color: active ? '#4F6EF7' : '#505068', position: 'relative', fontFamily: 'var(--font-body)' }}>
+              <span style={{ fontSize: 10, fontWeight: active ? 600 : 400, color: active ? '#3b82f6' : '#505068', position: 'relative', fontFamily: 'var(--font-body)' }}>
                 {tab.label}
               </span>
             </NavLink>

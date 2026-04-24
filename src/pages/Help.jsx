@@ -5,7 +5,7 @@ import { usePlan } from '../hooks/usePlan';
 import BottomNav from '../components/BottomNav';
 import { Link } from 'react-router-dom';
 
-const PLAN_COLORS = { individual: '#4F6EF7', corporate_mini: '#8B5CF6', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
+const PLAN_COLORS = { individual: '#3b82f6', corporate_mini: '#7c3aed', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
 
 function Accordion({ question, answer, icon: Icon, accent }) {
   const [open, setOpen] = useState(false);
@@ -78,8 +78,8 @@ export default function Help() {
 
   const tabs = [
     { id: 'all',      label: 'All Features' },
-    { id: 'personal', label: 'Personal',   color: '#4F6EF7' },
-    { id: 'business', label: 'Business',   color: '#8B5CF6' },
+    { id: 'personal', label: 'Personal',   color: '#3b82f6' },
+    { id: 'business', label: 'Business',   color: '#7c3aed' },
     { id: 'premium',  label: 'Premium',    color: '#f59e0b' },
   ];
 
@@ -103,7 +103,7 @@ export default function Help() {
 
           {/* Plan badge */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 12px', borderRadius: 20, background: `${PLAN_COLORS[plan]}14`, border: `1px solid ${PLAN_COLORS[plan]}25`, marginBottom: 24 }}>
-            {isEnterprise ? <Crown size={12} style={{ color: '#f59e0b' }} /> : isCorporate ? <Zap size={12} style={{ color: '#8B5CF6' }} /> : <Star size={12} style={{ color: '#4F6EF7' }} />}
+            {isEnterprise ? <Crown size={12} style={{ color: '#f59e0b' }} /> : isCorporate ? <Zap size={12} style={{ color: '#7c3aed' }} /> : <Star size={12} style={{ color: '#3b82f6' }} />}
             <span style={{ fontSize: 12, fontWeight: 700, color: PLAN_COLORS[plan] }}>
               You're on the {plan[0].toUpperCase() + plan.slice(1)} plan
             </span>
@@ -127,29 +127,29 @@ export default function Help() {
 
           {/* ── GETTING STARTED ───────────────────────────────────── */}
           {show('personal') && (
-            <Section title="Getting Started" color="#4F6EF7" icon={Bell}>
+            <Section title="Getting Started" color="#3b82f6" icon={Bell}>
               <Accordion
-                icon={Bell} accent="#4F6EF7"
+                icon={Bell} accent="#3b82f6"
                 question="How do I create my first reminder?"
                 answer="Tap the blue + button (bottom right on any page) or the + Add button on the Reminders page. Fill in a title, pick a date & time, choose your notification channel (WhatsApp, Voice, Email, or Browser Notification), and tap Add Reminder. That's it!"
               />
               <Accordion
-                icon={Mic} accent="#4F6EF7"
+                icon={Mic} accent="#3b82f6"
                 question="What is the Voice Briefing?"
                 answer="The Voice Briefing reads your day's upcoming reminders aloud using AI voices from ElevenLabs. Tap the large circular button on the Dashboard. It auto-plays every morning between 7–11am on your first visit of the day. To use ElevenLabs voices, add your free API key in Settings → Voice."
               />
               <Accordion
-                icon={Bell} accent="#4F6EF7"
+                icon={Bell} accent="#3b82f6"
                 question="What are the notification channels?"
                 answer="WhatsApp: sends a formatted message to your WhatsApp number (set in Settings → Profile). Voice: reads the reminder aloud through ARIA's AI voice. Email: opens your mail app with a pre-filled email. Notification: fires a browser push notification when the reminder is due."
               />
               <Accordion
-                icon={Calendar} accent="#4F6EF7"
+                icon={Calendar} accent="#3b82f6"
                 question="How do I connect Google Calendar and Gmail?"
                 answer="Go to Settings → Google Integration and tap Connect Google. You'll be asked to authorize ARIA to read your calendar events and emails. Once connected, your Dashboard shows real calendar events and smart email categories (Urgent, People, Companies)."
               />
               <Accordion
-                icon={Bell} accent="#4F6EF7"
+                icon={Bell} accent="#3b82f6"
                 question="How does the reminder limit work on Personal plan?"
                 answer="Individual plan includes unlimited reminders. You'll see your reminders on your Dashboard and Reminders page. When you reach the limit, creating new reminders is blocked until you delete old ones or upgrade to Business."
               />
@@ -158,29 +158,29 @@ export default function Help() {
 
           {/* ── BUSINESS PLAN ─────────────────────────────────────── */}
           {show('business') && (
-            <Section title="Business Features" plan="Business" color="#8B5CF6" icon={Users}>
+            <Section title="Business Features" plan="Business" color="#7c3aed" icon={Users}>
               <Accordion
-                icon={Users} accent="#8B5CF6"
+                icon={Users} accent="#7c3aed"
                 question="How do I invite team members?"
                 answer="Go to Team (nav bar) and enter a colleague's email in the Invite Team Member form. After inviting, copy the unique invite link and share it via WhatsApp or email. Your colleague clicks the link, creates their account, and is automatically linked to your team. Business plan supports up to 5 members."
               />
               <Accordion
-                icon={Bell} accent="#8B5CF6"
+                icon={Bell} accent="#7c3aed"
                 question="How do I assign reminders to team members?"
                 answer="When creating or editing a reminder, scroll to the Assign To dropdown at the bottom of the form. Select a team member and save. The reminder appears in their ARIA account and in your Team dashboard filtered by member."
               />
               <Accordion
-                icon={Users} accent="#8B5CF6"
+                icon={Users} accent="#7c3aed"
                 question="How does client management work?"
                 answer="Go to Clients (reachable from Settings or the Clients link). Add clients with name, phone, email, and notes. You can then link reminders to specific clients using the For Client dropdown in the reminder form. WhatsApp and email buttons appear on each client card for quick contact."
               />
               <Accordion
-                icon={RefreshCw} accent="#8B5CF6"
+                icon={RefreshCw} accent="#7c3aed"
                 question="What are recurring reminders?"
                 answer="When creating a reminder, you'll see a Repeat section with options: None, Daily, Weekly, Monthly. Choose a recurrence and optionally set an end date. When you mark a recurring reminder as done, ARIA automatically creates the next occurrence. This is a Business plan feature."
               />
               <Accordion
-                icon={MessageCircle} accent="#8B5CF6"
+                icon={MessageCircle} accent="#7c3aed"
                 question="Can I send WhatsApp messages to any number?"
                 answer="Yes! Business and Premium users can tap the WhatsApp button on any reminder and enter any phone number — not just their own. A modal appears pre-filled with your own number for convenience. Personal plan users can only send to their own registered WhatsApp number."
               />

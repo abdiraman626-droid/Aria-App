@@ -13,7 +13,7 @@ import { db } from '../lib/firebase';
 import BottomNav from '../components/BottomNav';
 import toast from 'react-hot-toast';
 
-const DEPT_COLORS = ['#4F6EF7', '#8B5CF6', '#22c55e', '#f59e0b', '#ef4444', '#ec4899', '#06b6d4', '#10b981'];
+const DEPT_COLORS = ['#3b82f6', '#7c3aed', '#22c55e', '#f59e0b', '#ef4444', '#ec4899', '#06b6d4', '#10b981'];
 
 export default function Departments() {
   const { user } = useAuth();
@@ -149,12 +149,12 @@ export default function Departments() {
                 const isExpanded = expandedDept === dept.id;
                 const isAssigning = assigningDept === dept.id;
                 return (
-                  <div key={dept.id} className="card" style={{ padding: '18px 20px', borderLeft: `4px solid ${dept.color || '#4F6EF7'}` }}>
+                  <div key={dept.id} className="card" style={{ padding: '18px 20px', borderLeft: `4px solid ${dept.color || '#3b82f6'}` }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <div style={{ flex: 1, cursor: 'pointer' }} onClick={() => setExpandedDept(isExpanded ? null : dept.id)}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                           <p style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>{dept.name}</p>
-                          <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 6, background: `${dept.color || '#4F6EF7'}18`, color: dept.color || '#4F6EF7', fontWeight: 600 }}>
+                          <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 6, background: `${dept.color || '#3b82f6'}18`, color: dept.color || '#3b82f6', fontWeight: 600 }}>
                             {deptMembers.length} {l.members_label.toLowerCase()}
                           </span>
                           <ChevronDown size={14} style={{ color: 'var(--text-muted)', transform: isExpanded ? 'rotate(180deg)' : 'none', transition: '0.2s' }} />

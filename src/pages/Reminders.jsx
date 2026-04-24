@@ -160,7 +160,7 @@ export default function Reminders() {
                     }} />
                   </div>
                   {(atLimit || nearLimit) && (
-                    <a href="/settings" style={{ fontSize: 11, fontWeight: 700, color: '#8B5CF6', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                    <a href="/settings" style={{ fontSize: 11, fontWeight: 700, color: '#7c3aed', textDecoration: 'none', whiteSpace: 'nowrap' }}>
                       Upgrade →
                     </a>
                   )}
@@ -261,7 +261,7 @@ export default function Reminders() {
                             </span>
                           )}
                           {r.recurrence && !r.done && (
-                            <span title={`Repeats ${r.recurrence}`} style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, background: 'rgba(79,110,247,0.1)', color: 'var(--blue)', flexShrink: 0 }}>
+                            <span title={`Repeats ${r.recurrence}`} style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, background: 'rgba(59,130,246,0.1)', color: 'var(--blue)', flexShrink: 0 }}>
                               <RefreshCw size={9} /> {r.recurrence}
                             </span>
                           )}
@@ -287,7 +287,7 @@ export default function Reminders() {
                       <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
                         {/* Voice */}
                         <button onClick={() => speakReminder(r)} title="Read aloud"
-                          style={{ width: 32, height: 32, borderRadius: 10, background: speaking === r.id ? 'rgba(139,92,246,0.2)' : 'var(--bg-card2)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: speaking === r.id ? '#8B5CF6' : 'var(--text-muted)' }}>
+                          style={{ width: 32, height: 32, borderRadius: 10, background: speaking === r.id ? 'rgba(124,58,237,0.2)' : 'var(--bg-card2)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: speaking === r.id ? '#7c3aed' : 'var(--text-muted)' }}>
                           <Mic size={13} />
                         </button>
                         {/* WhatsApp — Corporate Mini+ only */}
@@ -299,7 +299,7 @@ export default function Reminders() {
                         )}
                         {/* Email */}
                         <button onClick={() => sendEmail(r)} title="Send email reminder"
-                          style={{ width: 32, height: 32, borderRadius: 10, background: 'var(--bg-card2)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F6EF7' }}>
+                          style={{ width: 32, height: 32, borderRadius: 10, background: 'var(--bg-card2)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3b82f6' }}>
                           <Mail size={13} />
                         </button>
                         {/* M-Pesa Mark Paid */}
@@ -375,7 +375,7 @@ export default function Reminders() {
         initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3, type: 'spring' }}
         onClick={() => { setEditing(null); setSheetOpen(true); }}
         whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}
-        style={{ position: 'fixed', right: 24, bottom: 'calc(88px + env(safe-area-inset-bottom,0px))', width: 56, height: 56, borderRadius: '50%', background: 'var(--blue)', border: 'none', cursor: 'pointer', boxShadow: '0 8px 32px rgba(79,110,247,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 30 }}
+        style={{ position: 'fixed', right: 24, bottom: 'calc(88px + env(safe-area-inset-bottom,0px))', width: 56, height: 56, borderRadius: '50%', background: 'var(--blue)', border: 'none', cursor: 'pointer', boxShadow: '0 8px 32px rgba(59,130,246,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 30 }}
       >
         <Plus size={24} color="#fff" />
       </motion.button>

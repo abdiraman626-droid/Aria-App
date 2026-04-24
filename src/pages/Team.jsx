@@ -127,8 +127,8 @@ export default function Team() {
           {/* ── Invite Section ─────────────────────────────── */}
           <div className="card" style={{ padding: '20px 24px', marginBottom: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 34, height: 34, borderRadius: 10, background: 'rgba(139,92,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Users size={15} color="#8B5CF6" />
+              <div style={{ width: 34, height: 34, borderRadius: 10, background: 'rgba(124,58,237,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Users size={15} color="#7c3aed" />
               </div>
               <div>
                 <p style={{ fontWeight: 700, fontSize: 15 }}>Invite Team Member</p>
@@ -279,7 +279,7 @@ export default function Team() {
                               </p>
                             </div>
                             {member && (
-                              <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: 'rgba(139,92,246,0.1)', color: '#8B5CF6', flexShrink: 0 }}>
+                              <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: 'rgba(124,58,237,0.1)', color: '#7c3aed', flexShrink: 0 }}>
                                 {member.name || member.invited_email.split('@')[0]}
                               </span>
                             )}

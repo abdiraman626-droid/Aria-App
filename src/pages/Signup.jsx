@@ -62,11 +62,11 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-20" style={{ background:'var(--bg)' }}>
-      <div style={{ position:'absolute', top:'10%', right:'10%', width:400, height:400, background:'radial-gradient(ellipse,rgba(139,92,246,0.08),transparent 70%)', pointerEvents:'none' }} />
+      <div style={{ position:'absolute', top:'10%', right:'10%', width:400, height:400, background:'radial-gradient(ellipse,rgba(124,58,237,0.08),transparent 70%)', pointerEvents:'none' }} />
 
       <motion.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.5 }} style={{ width:'100%', maxWidth:440 }}>
         <div style={{ display:'flex', alignItems:'center', gap:10, justifyContent:'center', marginBottom:40 }}>
-          <div style={{ width:44, height:44, borderRadius:14, background:'linear-gradient(135deg,#4F6EF7,#8B5CF6)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+          <div style={{ width:44, height:44, borderRadius:14, background:'linear-gradient(135deg,#3b82f6,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center' }}>
             <Mic size={20} color="#fff" />
           </div>
           <span style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800 }}>ARIA</span>
@@ -94,11 +94,11 @@ export default function Signup() {
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(100px, 1fr))', gap:8, marginBottom:20 }}>
             {PLANS.map(p => (
               <button key={p.id} type="button" onClick={() => setForm(f => ({ ...f, plan:p.id }))}
-                style={{ padding:'10px 8px', borderRadius:14, border:`1px solid ${form.plan===p.id?'#4F6EF7':'var(--border)'}`, background: form.plan===p.id?'rgba(79,110,247,0.1)':'var(--bg-card2)', cursor:'pointer', position:'relative' }}>
-                {p.popular && <div style={{ position:'absolute', top:-8, left:'50%', transform:'translateX(-50%)', background:'#8B5CF6', color:'#fff', fontSize:9, fontWeight:700, padding:'2px 8px', borderRadius:100, whiteSpace:'nowrap' }}>POPULAR</div>}
+                style={{ padding:'10px 8px', borderRadius:14, border:`1px solid ${form.plan===p.id?'#3b82f6':'var(--border)'}`, background: form.plan===p.id?'rgba(59,130,246,0.1)':'var(--bg-card2)', cursor:'pointer', position:'relative' }}>
+                {p.popular && <div style={{ position:'absolute', top:-8, left:'50%', transform:'translateX(-50%)', background:'#7c3aed', color:'#fff', fontSize:9, fontWeight:700, padding:'2px 8px', borderRadius:100, whiteSpace:'nowrap' }}>POPULAR</div>}
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2 }}>
-                  <span style={{ fontSize:12, fontWeight:700, color: form.plan===p.id?'#4F6EF7':'#fff' }}>{p.label}</span>
-                  {form.plan===p.id && <Check size={11} color="#4F6EF7"/>}
+                  <span style={{ fontSize:12, fontWeight:700, color: form.plan===p.id?'#3b82f6':'#fff' }}>{p.label}</span>
+                  {form.plan===p.id && <Check size={11} color="#3b82f6"/>}
                 </div>
                 <div style={{ fontSize:11, color:'var(--text-muted)' }}>KSH {p.price}/mo</div>
               </button>
@@ -131,7 +131,7 @@ export default function Signup() {
             <label style={{ display:'flex', alignItems:'flex-start', gap:10, cursor:'pointer', userSelect:'none' }}>
               <div
                 onClick={() => setAgreed(a => !a)}
-                style={{ width:18, height:18, borderRadius:5, border:`1.5px solid ${agreed ? '#4F6EF7' : 'var(--border)'}`, background: agreed ? '#4F6EF7' : 'transparent', flexShrink:0, marginTop:1, display:'flex', alignItems:'center', justifyContent:'center', transition:'all 0.15s', cursor:'pointer' }}>
+                style={{ width:18, height:18, borderRadius:5, border:`1.5px solid ${agreed ? '#3b82f6' : 'var(--border)'}`, background: agreed ? '#3b82f6' : 'transparent', flexShrink:0, marginTop:1, display:'flex', alignItems:'center', justifyContent:'center', transition:'all 0.15s', cursor:'pointer' }}>
                 {agreed && <Check size={11} color="#fff" />}
               </div>
               <span style={{ fontSize:13, color:'var(--text-secondary)', lineHeight:1.55 }}>
