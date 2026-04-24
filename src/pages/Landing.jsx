@@ -262,24 +262,6 @@ function ScrollProgress() {
   );
 }
 
-/* ── Stat counter ──────────────────────────────────────────── */
-function Counter({ value, suffix = '' }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const end = parseInt(value);
-    const timer = setInterval(() => {
-      start += Math.ceil(end / 60);
-      if (start >= end) { setCount(end); clearInterval(timer); }
-      else setCount(start);
-    }, 25);
-    return () => clearInterval(timer);
-  }, [inView, value]);
-  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
-}
 
 export default function Landing() {
   const [usd, setUsd] = useState(false);
@@ -421,31 +403,6 @@ export default function Landing() {
               <ChevronDown size={16} />
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════ STATS ════════════════════════ */}
-      <section style={{
-        padding: '52px 0',
-        borderTop: '1px solid rgba(59,130,246,0.1)', borderBottom: '1px solid rgba(59,130,246,0.1)',
-        background: 'linear-gradient(180deg, rgba(59,130,246,0.03), transparent)',
-      }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 32, textAlign: 'center' }}>
-          {[
-            { value: 2500, suffix: '+', label: 'Active Users' },
-            { value: 98, suffix: '%', label: 'Uptime SLA' },
-            { value: 150, suffix: 'K+', label: 'Tasks Automated' },
-            { value: 4, suffix: '.9★', label: 'User Rating' },
-          ].map((s, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <div style={{ fontFamily: 'var(--font-head)', fontSize: 40, fontWeight: 900, letterSpacing: '-0.03em' }}>
-                <span style={{ background: 'linear-gradient(135deg, #3b82f6, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                  <Counter value={s.value} suffix={s.suffix} />
-                </span>
-              </div>
-              <p style={{ fontSize: 13, color: '#4a4a55', marginTop: 4, fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{s.label}</p>
-            </Reveal>
-          ))}
         </div>
       </section>
 
