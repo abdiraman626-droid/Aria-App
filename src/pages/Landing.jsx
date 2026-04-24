@@ -295,7 +295,6 @@ export default function Landing() {
 
   return (
     <div style={{ background: '#060608', color: '#fff', overflowX: 'hidden' }}>
-      <ScrollProgress />
 
       {/* ═══════════════════ NAVBAR ═══════════════════════ */}
       <nav style={{
