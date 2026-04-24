@@ -474,29 +474,24 @@ export default function Landing() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
                       <div style={{
                         width: 54, height: 54, borderRadius: 18,
-                        background: `linear-gradient(135deg, ${demo.color}18, ${demo.color}08)`,
-                        border: `1px solid ${demo.color}30`,
+                        background: 'linear-gradient(135deg, rgba(59,130,246,0.1), rgba(59,130,246,0.04))',
+                        border: '1px solid rgba(59,130,246,0.2)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        boxShadow: `0 0 20px ${demo.color}15`,
+                        boxShadow: '0 0 20px rgba(59,130,246,0.08)',
                       }}>
-                        <demo.icon size={24} style={{ color: demo.color }} />
+                        <demo.icon size={24} style={{ color: '#3b82f6' }} />
                       </div>
                       <h3 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>{demo.title}</h3>
                     </div>
-                    <p style={{ fontSize: 16, color: '#737380', lineHeight: 1.8, marginBottom: 28 }}>{demo.desc}</p>
-                    <Link to="/signup" style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', borderRadius: 12,
-                      background: `linear-gradient(135deg, ${demo.color}, ${demo.color}cc)`, color: '#fff', fontSize: 14, fontWeight: 700,
-                      textDecoration: 'none', boxShadow: `0 4px 20px ${demo.color}40`,
-                    }}>Try it free <ArrowRight size={16} /></Link>
+                    <p style={{ fontSize: 16, color: '#737380', lineHeight: 1.8 }}>{demo.desc}</p>
                   </div>
 
                   <div style={{ order: idx % 2 === 0 ? 1 : 0 }}>
                     <div style={{
                       padding: 28, borderRadius: 24,
                       background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-                      border: `1px solid ${demo.color}20`,
-                      boxShadow: `0 0 0 1px ${demo.color}10, 0 16px 64px rgba(0,0,0,0.4)`,
+                      border: '1px solid rgba(59,130,246,0.12)',
+                      boxShadow: '0 0 0 1px rgba(59,130,246,0.06), 0 16px 64px rgba(0,0,0,0.4)',
                     }}>
                       {demo.mockup[0]?.side && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -612,9 +607,10 @@ export default function Landing() {
               Built for the{' '}
               <span style={{ background: 'linear-gradient(135deg, #3b82f6, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Future</span>
             </h3>
-            <p style={{ fontSize: 17, color: '#737380', lineHeight: 1.8 }}>
+            <p style={{ fontSize: 17, color: '#737380', lineHeight: 1.8, marginBottom: 32 }}>
               ARIA Life combines cutting-edge AI with beautiful design to create the ultimate business productivity platform.
             </p>
+            <Link to="/signup" style={{ fontSize: 14, color: '#3b82f6', textDecoration: 'none', fontWeight: 600 }}>Get started →</Link>
           </div>
         </Reveal>
       </section>
