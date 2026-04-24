@@ -65,7 +65,7 @@ function AdminRoute({ children }) {
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(
-    () => !!localStorage.getItem('aria_splash_seen')
+    () => !!sessionStorage.getItem('aria_splash_played')
   );
   const handleSplashComplete = useCallback(() => setSplashDone(true), []);
 
