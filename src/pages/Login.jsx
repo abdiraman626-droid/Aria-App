@@ -66,9 +66,7 @@ export default function Login() {
       <motion.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.5 }} style={{ width:'100%', maxWidth:400 }}>
         {/* Logo */}
         <div style={{ display:'flex', alignItems:'center', gap:10, justifyContent:'center', marginBottom:40 }}>
-          <div style={{ width:44, height:44, borderRadius:14, background:'linear-gradient(135deg,#3b82f6,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-            <Mic size={20} color="#fff" />
-          </div>
+          <img src="/logo.png" alt="ARIA Life" style={{ width:44, height:44, borderRadius:14, objectFit:'cover' }} />
           <span style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800 }}>ARIA</span>
         </div>
 

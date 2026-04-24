@@ -193,9 +193,9 @@ export default function Dashboard() {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{ width: 64, height: 64, borderRadius: 18, background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 60px rgba(59,130,246,0.3)' }}
+          style={{ width: 64, height: 64, borderRadius: 18, overflow: 'hidden', boxShadow: '0 0 60px rgba(59,130,246,0.3)' }}
         >
-          <Mic size={28} color="#fff" />
+          <img src="/logo.png" alt="ARIA Life" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 12 }}

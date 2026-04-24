@@ -25,10 +25,8 @@ export default function Navbar() {
     >
       <div className="container flex items-center justify-between h-16 px-6">
         {/* Logo */}
-        <Link to={user ? '/dashboard' : '/'} className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#3b82f6,#7c3aed)' }}>
-            <Bell size={15} className="text-white" />
-          </div>
+        <Link to={user ? '/dashboard' : '/'} className="flex items-center gap-2.5" style={{ textDecoration: 'none' }}>
+          <img src="/logo.png" alt="ARIA Life" style={{ width: 40, height: 40, borderRadius: 10, objectFit: 'cover' }} />
           <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 20, letterSpacing: '-0.02em', color: '#fff' }}>ARIA</span>
         </Link>
 

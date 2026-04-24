@@ -55,8 +55,8 @@ export default function AdminLogin() {
     <div className="min-h-screen flex items-center justify-center px-6" style={{ background:'var(--bg)' }}>
       <motion.div initial={{ opacity:0,y:24 }} animate={{ opacity:1,y:0 }} style={{ width:'100%',maxWidth:380 }}>
         <div style={{ textAlign:'center', marginBottom:36 }}>
-          <div style={{ width:56, height:56, borderRadius:18, background:'linear-gradient(135deg,#3b82f6,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 16px' }}>
-            <Shield size={26} color="#fff"/>
+          <div style={{ width:56, height:56, borderRadius:18, overflow:'hidden', margin:'0 auto 16px' }}>
+            <img src="/logo.png" alt="ARIA Life" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
           </div>
           <h1 style={{ fontFamily:'var(--font-head)', fontSize:26, fontWeight:800 }}>ARIA Admin</h1>
           <p style={{ fontSize:14, color:'var(--text-muted)', marginTop:4 }}>Restricted access</p>

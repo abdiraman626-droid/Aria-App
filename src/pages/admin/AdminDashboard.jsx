@@ -172,8 +172,8 @@ export default function AdminDashboard() {
       {/* ── Sidebar ─────────────────────────────────────────────────────── */}
       <aside style={{ width:220, background:'var(--bg-card)', borderRight:'1px solid var(--border)', display:'flex', flexDirection:'column', flexShrink:0 }}>
         <div style={{ padding:'20px 16px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', gap:8 }}>
-          <div style={{ width:32, height:32, borderRadius:10, background:'linear-gradient(135deg,#3b82f6,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-            <Shield size={15} color="#fff"/>
+          <div style={{ width:32, height:32, borderRadius:10, overflow:'hidden' }}>
+            <img src="/logo.png" alt="ARIA" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
           </div>
           <p style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:15, color:'#fff' }}>ARIA Admin</p>
         </div>
