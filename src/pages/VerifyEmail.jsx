@@ -36,7 +36,7 @@ export default function VerifyEmail({ email }) {
           <Mail size={36} style={{ color:'var(--blue)' }}/>
         </div>
 
-        <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800, marginBottom:12 }}>
+        <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700, marginBottom:12 }}>
           Check your email
         </h1>
 

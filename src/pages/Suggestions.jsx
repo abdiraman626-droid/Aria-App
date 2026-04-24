@@ -78,7 +78,7 @@ export default function Suggestions() {
               <MessageSquare size={20} style={{ color: 'var(--blue)' }} />
             </div>
             <div>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 26, fontWeight: 800 }}>{l.title}</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 26, fontWeight: 700 }}>{l.title}</h1>
               <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>{l.subtitle}</p>
             </div>
           </div>

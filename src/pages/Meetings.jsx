@@ -23,7 +23,7 @@ function LockedPage() {
           <div style={{ width: 80, height: 80, borderRadius: 24, background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
             <Video size={34} style={{ color: '#7c3aed' }} />
           </div>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 26, fontWeight: 800, marginBottom: 10 }}>
+          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 26, fontWeight: 700, marginBottom: 10 }}>
             Meeting Recorder
           </h1>
           <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: 32 }}>
@@ -206,7 +206,7 @@ export default function Meetings() {
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ paddingTop: 72, paddingBottom: 24 }}>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, marginBottom: 6 }}>
+          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 700, marginBottom: 6 }}>
             Meetings
           </h1>
           <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
@@ -284,7 +284,7 @@ export default function Meetings() {
                       <p style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase' }}>
                         {m.createdAt ? format(new Date(m.createdAt), 'MMM') : '—'}
                       </p>
-                      <p style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, fontFamily: 'var(--font-head)' }}>
+                      <p style={{ fontSize: 22, fontWeight: 700, lineHeight: 1, fontFamily: 'var(--font-head)' }}>
                         {m.createdAt ? format(new Date(m.createdAt), 'd') : '—'}
                       </p>
                     </div>

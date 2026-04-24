@@ -140,7 +140,7 @@ export default function Clients() {
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
             <div>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em' }}>Clients</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}>Clients</h1>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 2 }}>{clients.length} client{clients.length !== 1 ? 's' : ''}</p>
             </div>
             <button onClick={() => { setEditing(null); setSheetOpen(true); }} className="btn btn-primary btn-sm">
@@ -181,7 +181,7 @@ export default function Clients() {
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                       {/* Avatar */}
                       <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(59,130,246,0.12)', border: '1.5px solid rgba(59,130,246,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--blue)' }}>
+                        <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--blue)' }}>
                           {c.name[0].toUpperCase()}
                         </span>
                       </div>

@@ -67,11 +67,11 @@ export default function Signup() {
       <motion.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.5 }} style={{ width:'100%', maxWidth:440 }}>
         <div style={{ display:'flex', alignItems:'center', gap:10, justifyContent:'center', marginBottom:40 }}>
           <img src="/logo.png" alt="ARIA Life" style={{ width:44, height:44, borderRadius:14, objectFit:'cover' }} />
-          <span style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800 }}>ARIA</span>
+          <span style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700 }}>ARIA</span>
         </div>
 
         <div className="card" style={{ padding:'36px 32px' }}>
-          <h1 style={{ fontFamily:'var(--font-head)', fontSize:26, fontWeight:800, marginBottom:4 }}>Create your account</h1>
+          <h1 style={{ fontFamily:'var(--font-head)', fontSize:26, fontWeight:700, marginBottom:4 }}>Create your account</h1>
           <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:13, color:'#22c55e', marginBottom:24 }}>
             <Shield size={13}/> 7-day free trial · No credit card required
           </div>

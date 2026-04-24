@@ -201,7 +201,7 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, textAlign: 'center' }}
+          style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 700, textAlign: 'center' }}
         >
           {lang === 'ar' ? `مرحباً، ${user?.name?.split(' ')[0] || ''}` : lang === 'so' ? `Soo dhawoow, ${user?.name?.split(' ')[0] || ''}` : lang === 'sw' ? `Karibu tena, ${user?.name?.split(' ')[0] || ''}` : `Welcome back, ${user?.name?.split(' ')[0] || ''}`}
         </motion.h1>
@@ -278,7 +278,7 @@ export default function Dashboard() {
                 </span>
               )}
             </div>
-            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(28px,6vw,40px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(28px,6vw,40px)', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
               {greet}, {name} 👋
             </h1>
 
@@ -511,7 +511,7 @@ export default function Dashboard() {
                     <div key={ev.id} className="card" style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 14 }}>
                       <div style={{ textAlign: 'center', width: 40, flexShrink: 0 }}>
                         <p style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600 }}>{format(d, 'MMM').toUpperCase()}</p>
-                        <p style={{ fontSize: 20, fontWeight: 800, lineHeight: 1, fontFamily: 'var(--font-head)' }}>{format(d, 'd')}</p>
+                        <p style={{ fontSize: 20, fontWeight: 700, lineHeight: 1, fontFamily: 'var(--font-head)' }}>{format(d, 'd')}</p>
                       </div>
                       <div style={{ width: 1, height: 36, background: 'var(--border)' }} />
                       <div style={{ flex: 1, minWidth: 0 }}>
@@ -623,7 +623,7 @@ export default function Dashboard() {
                         border: '1.5px solid rgba(59,130,246,0.25)', display: 'flex', alignItems: 'center',
                         justifyContent: 'center', flexShrink: 0, color: '#3b82f6',
                       }}>
-                        <span style={{ fontSize: 13, fontWeight: 800 }}>{initials(em.from)}</span>
+                        <span style={{ fontSize: 13, fontWeight: 700 }}>{initials(em.from)}</span>
                       </div>
 
                       {/* Content */}

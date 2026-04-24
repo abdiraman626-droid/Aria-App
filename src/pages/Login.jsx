@@ -67,11 +67,11 @@ export default function Login() {
         {/* Logo */}
         <div style={{ display:'flex', alignItems:'center', gap:10, justifyContent:'center', marginBottom:40 }}>
           <img src="/logo.png" alt="ARIA Life" style={{ width:44, height:44, borderRadius:14, objectFit:'cover' }} />
-          <span style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800 }}>ARIA</span>
+          <span style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700 }}>ARIA</span>
         </div>
 
         <div className="card" style={{ padding:'36px 32px' }}>
-          <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800, marginBottom:6 }}>Welcome back</h1>
+          <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700, marginBottom:6 }}>Welcome back</h1>
           <p style={{ fontSize:15, color:'var(--text-secondary)', marginBottom:28 }}>Sign in to your ARIA account</p>
 
           {/* Google OAuth */}

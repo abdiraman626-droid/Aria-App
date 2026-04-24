@@ -327,7 +327,7 @@ export default function MeetingRecorder({ open, onClose, onSaved }) {
                               style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444' }} />
                             <span style={{ fontWeight: 700, fontSize: 15 }}>Recording</span>
                           </div>
-                          <p style={{ fontSize: 22, fontFamily: 'monospace', color: '#ef4444', fontWeight: 800 }}>{fmt(elapsed)}</p>
+                          <p style={{ fontSize: 22, fontFamily: 'monospace', color: '#ef4444', fontWeight: 700 }}>{fmt(elapsed)}</p>
                           <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>Tap to stop</p>
                         </div>
                       ) : (
@@ -410,7 +410,7 @@ export function MeetingRecorderLocked({ open, onClose }) {
               <div style={{ width: 72, height: 72, borderRadius: 22, background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
                 <Mic size={30} style={{ color: '#7c3aed' }} />
               </div>
-              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 22, fontWeight: 800, marginBottom: 8 }}>Meeting Recorder</h2>
+              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>Meeting Recorder</h2>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 28, maxWidth: 300, margin: '0 auto 28px' }}>
                 Record, transcribe, and summarize meetings with AI. Extract action items and create reminders instantly.
               </p>

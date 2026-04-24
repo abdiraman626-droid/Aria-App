@@ -114,7 +114,7 @@ export default function Team() {
           {/* Header */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
             <div>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em' }}>Team</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}>Team</h1>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 2 }}>
                 {activeCount} member{activeCount !== 1 ? 's' : ''} · {clients.length} client{clients.length !== 1 ? 's' : ''}
               </p>

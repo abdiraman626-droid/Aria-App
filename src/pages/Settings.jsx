@@ -164,7 +164,7 @@ export default function Settings() {
     <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)' }}>
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '72px 20px 0' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 24 }}>{t('settings')}</h1>
+          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 24 }}>{t('settings')}</h1>
 
           {/* Plan card */}
           <div className="card" style={{ padding: '20px 24px', marginBottom: 16, background: `${planColor}08`, border: `1px solid ${planColor}30`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>

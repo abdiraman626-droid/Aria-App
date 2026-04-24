@@ -196,7 +196,7 @@ export default function Strategy() {
               <Lightbulb size={20} style={{ color: 'var(--blue)' }} />
             </div>
             <div>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 22, fontWeight: 800 }}>{l.title}</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 22, fontWeight: 700 }}>{l.title}</h1>
               <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>{l.subtitle}</p>
             </div>
           </div>

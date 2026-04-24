@@ -106,7 +106,7 @@ export default function Departments() {
               <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(6,182,212,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Building2 size={20} style={{ color: '#06b6d4' }} />
               </div>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>{l.title}</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700 }}>{l.title}</h1>
             </div>
             <button onClick={() => { setEditingDept(null); setName(''); setShowForm(true); }}
               className="btn btn-primary btn-sm" style={{ gap: 6 }}>

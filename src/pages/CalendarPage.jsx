@@ -182,7 +182,7 @@ export default function CalendarPage() {
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '0 20px' }}>
         <div style={{ paddingTop: 60, paddingBottom: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>{t('calendar')}</h1>
+            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700 }}>{t('calendar')}</h1>
             <button onClick={() => { setEditing(null); setSheetOpen(true); }}
               className="btn btn-primary btn-sm" style={{ gap: 6 }}>
               <Plus size={16} /> {t('new_event')}

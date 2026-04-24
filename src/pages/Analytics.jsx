@@ -23,7 +23,7 @@ function StatCard({ icon: Icon, label, value, color, sub }) {
         </div>
         <div style={{ flex: 1 }}>
           <p style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</p>
-          <p style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-head)', color: '#fff' }}>{value}</p>
+          <p style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-head)', color: '#fff' }}>{value}</p>
           {sub && <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>{sub}</p>}
         </div>
       </div>
@@ -154,7 +154,7 @@ export default function Analytics() {
             <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BarChart3 size={20} style={{ color: 'var(--blue)' }} />
             </div>
-            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>{l.title}</h1>
+            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700 }}>{l.title}</h1>
           </div>
 
           {/* Overview Stats */}
@@ -180,15 +180,15 @@ export default function Analytics() {
           <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>{l.weekly}</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 24 }}>
             <div className="card" style={{ padding: '16px', textAlign: 'center' }}>
-              <p style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-head)', color: '#3b82f6' }}>{weekReminders}</p>
+              <p style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-head)', color: '#3b82f6' }}>{weekReminders}</p>
               <p style={{ fontSize: 11, color: 'var(--text-muted)' }}>{lang === 'ar' ? 'تذكيرات' : 'Reminders'}</p>
             </div>
             <div className="card" style={{ padding: '16px', textAlign: 'center' }}>
-              <p style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-head)', color: '#22c55e' }}>{weekEvents}</p>
+              <p style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-head)', color: '#22c55e' }}>{weekEvents}</p>
               <p style={{ fontSize: 11, color: 'var(--text-muted)' }}>{lang === 'ar' ? 'أحداث' : 'Events'}</p>
             </div>
             <div className="card" style={{ padding: '16px', textAlign: 'center' }}>
-              <p style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-head)', color: '#f59e0b' }}>{weekMeetings}</p>
+              <p style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-head)', color: '#f59e0b' }}>{weekMeetings}</p>
               <p style={{ fontSize: 11, color: 'var(--text-muted)' }}>{lang === 'ar' ? 'اجتماعات' : 'Meetings'}</p>
             </div>
           </div>

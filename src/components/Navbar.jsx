@@ -27,7 +27,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to={user ? '/dashboard' : '/'} className="flex items-center gap-2.5" style={{ textDecoration: 'none' }}>
           <img src="/logo.png" alt="ARIA Life" style={{ width: 40, height: 40, borderRadius: 10, objectFit: 'cover' }} />
-          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 20, letterSpacing: '-0.02em', color: '#fff' }}>ARIA</span>
+          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', color: '#fff' }}>ARIA</span>
         </Link>
 
         {/* Desktop */}

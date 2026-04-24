@@ -96,7 +96,7 @@ export default function Help() {
               <ArrowLeft size={20} />
             </Link>
             <div>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em' }}>Help & Guide</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}>Help & Guide</h1>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 2 }}>Everything you need to get the most from ARIA</p>
             </div>
           </div>

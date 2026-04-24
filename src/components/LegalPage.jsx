@@ -16,7 +16,7 @@ export default function LegalPage({ title, lastUpdated, children }) {
           <div style={{ width: 32, height: 32, borderRadius: 9, background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Mic size={14} color="#fff" />
           </div>
-          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 18, color: '#fff' }}>ARIA</span>
+          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 18, color: '#fff' }}>ARIA</span>
         </Link>
         <button onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', fontSize: 14 }}>
           <ArrowLeft size={16} /> Back
@@ -28,7 +28,7 @@ export default function LegalPage({ title, lastUpdated, children }) {
 
         {/* Title block */}
         <div style={{ marginBottom: 40, paddingBottom: 32, borderBottom: '1px solid var(--border)' }}>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(28px,4vw,44px)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 10 }}>{title}</h1>
+          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(28px,4vw,44px)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 10 }}>{title}</h1>
           <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
             ARIA Life · San Francisco, CA · Last updated: {lastUpdated}
           </p>

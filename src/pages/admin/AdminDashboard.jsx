@@ -175,7 +175,7 @@ export default function AdminDashboard() {
           <div style={{ width:32, height:32, borderRadius:10, overflow:'hidden' }}>
             <img src="/logo.png" alt="ARIA" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
           </div>
-          <p style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:15, color:'#fff' }}>ARIA Admin</p>
+          <p style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:15, color:'#fff' }}>ARIA Admin</p>
         </div>
         <nav style={{ flex:1, padding:'12px 8px', display:'flex', flexDirection:'column', gap:4 }}>
           {TABS.map(t => (
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
         {tab==='overview' && (
           <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}}>
             <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:24 }}>
-              <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800 }}>Overview</h1>
+              <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700 }}>Overview</h1>
               <button onClick={refresh} disabled={loading} className="btn btn-ghost btn-sm">
                 <RefreshCw size={14} className={loading?'animate-spin':''}/>
               </button>
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
               ].map(s=>(
                 <div key={s.label} className="card" style={{ padding:'20px' }}>
                   <s.icon size={20} style={{ color:s.color, marginBottom:12 }}/>
-                  <p style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800, color:'#fff' }}>{s.value}</p>
+                  <p style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700, color:'#fff' }}>{s.value}</p>
                   <p style={{ fontSize:13, color:'var(--text-muted)' }}>{s.label}</p>
                 </div>
               ))}
@@ -252,7 +252,7 @@ export default function AdminDashboard() {
         {tab==='users' && (
           <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}}>
             <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:16 }}>
-              <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800 }}>
+              <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700 }}>
                 Users {loading ? <Loader2 size={18} className="animate-spin" style={{ display:'inline', marginLeft:8, color:'var(--text-muted)' }}/> : `(${users.length})`}
               </h1>
               <button onClick={refresh} disabled={loading} className="btn btn-ghost btn-sm">
@@ -272,7 +272,7 @@ export default function AdminDashboard() {
                   <div key={u.id} className="card" style={{ padding:'18px 20px', opacity:u.active?1:0.55, border: u.active?'1px solid var(--border)':'1px solid rgba(239,68,68,0.2)' }}>
                     <div style={{ display:'flex', alignItems:'flex-start', gap:14, flexWrap:'wrap' }}>
                       {/* Avatar */}
-                      <div style={{ width:40, height:40, borderRadius:12, background:`linear-gradient(135deg,${pm.color},${pm.color}99)`, display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:800, fontSize:16, flexShrink:0 }}>
+                      <div style={{ width:40, height:40, borderRadius:12, background:`linear-gradient(135deg,${pm.color},${pm.color}99)`, display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:700, fontSize:16, flexShrink:0 }}>
                         {u.avatar}
                       </div>
                       {/* Info */}
@@ -328,7 +328,7 @@ export default function AdminDashboard() {
         {/* REVENUE */}
         {tab==='revenue' && (
           <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}}>
-            <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800, marginBottom:24 }}>Revenue</h1>
+            <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700, marginBottom:24 }}>Revenue</h1>
             <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16, marginBottom:24 }}>
               {[
                 {l:'MRR', v:`$${revenue.mrr.toLocaleString()}`,                                   s:'Monthly Recurring'},
@@ -337,7 +337,7 @@ export default function AdminDashboard() {
               ].map(c=>(
                 <div key={c.l} className="card" style={{ padding:'24px' }}>
                   <p style={{ fontSize:12, fontWeight:700, letterSpacing:'0.1em', color:'var(--text-muted)', textTransform:'uppercase', marginBottom:8 }}>{c.l}</p>
-                  <p style={{ fontFamily:'var(--font-head)', fontSize:36, fontWeight:800 }}>{c.v}</p>
+                  <p style={{ fontFamily:'var(--font-head)', fontSize:36, fontWeight:700 }}>{c.v}</p>
                   <p style={{ fontSize:13, color:'var(--text-muted)', marginTop:4 }}>{c.s}</p>
                 </div>
               ))}
@@ -363,9 +363,9 @@ export default function AdminDashboard() {
                     </tr>;
                   })}
                   <tr style={{ borderTop:'2px solid var(--border)', background:'var(--bg-card2)' }}>
-                    <td colSpan={3} style={{ padding:'12px', fontWeight:800, color:'#fff' }}>Total</td>
-                    <td style={{ padding:'12px', textAlign:'right', fontWeight:800, color:'#22c55e', fontSize:16 }}>${revenue.mrr.toLocaleString()}</td>
-                    <td style={{ padding:'12px', textAlign:'right', fontWeight:800, color:'#22c55e' }}>${(revenue.mrr*12).toLocaleString()}</td>
+                    <td colSpan={3} style={{ padding:'12px', fontWeight:700, color:'#fff' }}>Total</td>
+                    <td style={{ padding:'12px', textAlign:'right', fontWeight:700, color:'#22c55e', fontSize:16 }}>${revenue.mrr.toLocaleString()}</td>
+                    <td style={{ padding:'12px', textAlign:'right', fontWeight:700, color:'#22c55e' }}>${(revenue.mrr*12).toLocaleString()}</td>
                   </tr>
                 </tbody>
               </table>
@@ -376,7 +376,7 @@ export default function AdminDashboard() {
         {/* MESSAGES */}
         {tab==='messages' && (
           <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}}>
-            <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800, marginBottom:24 }}>Messages</h1>
+            <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700, marginBottom:24 }}>Messages</h1>
             <div className="card" style={{ padding:'24px', marginBottom:20 }}>
               <h3 style={{ fontFamily:'var(--font-head)', fontSize:18, fontWeight:700, marginBottom:20 }}>Compose</h3>
               <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
@@ -423,7 +423,7 @@ export default function AdminDashboard() {
         {/* PRICING */}
         {tab==='pricing' && (
           <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}}>
-            <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:800, marginBottom:8 }}>Pricing Settings</h1>
+            <h1 style={{ fontFamily:'var(--font-head)', fontSize:28, fontWeight:700, marginBottom:8 }}>Pricing Settings</h1>
             <p style={{ fontSize:15, color:'var(--text-muted)', marginBottom:24 }}>Changes update live pricing shown to visitors.</p>
             <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
               {['personal','business','premium'].map(key => {
@@ -470,7 +470,7 @@ export default function AdminDashboard() {
             <motion.div initial={{opacity:0,scale:0.92}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:0.92}}
               style={{ position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'90%', maxWidth:380, background:'var(--bg-card)', border:'1px solid var(--border)', borderRadius:24, padding:28, zIndex:50 }}>
               <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
-                <h3 style={{ fontFamily:'var(--font-head)', fontSize:20, fontWeight:800 }}>Extend Trial</h3>
+                <h3 style={{ fontFamily:'var(--font-head)', fontSize:20, fontWeight:700 }}>Extend Trial</h3>
                 <button onClick={() => setActionU(null)} style={{ background:'none', border:'none', cursor:'pointer', color:'var(--text-muted)' }}><X size={18}/></button>
               </div>
               <p style={{ fontSize:14, color:'var(--text-muted)', marginBottom:20 }}>{actionU.name} · {actionU.email}</p>

@@ -89,7 +89,7 @@ export default function Join() {
           <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg,#3b82f6,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Mic size={20} color="#fff" />
           </div>
-          <span style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>ARIA</span>
+          <span style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700 }}>ARIA</span>
         </div>
 
         <div className="card" style={{ padding: '36px 32px' }}>
@@ -121,7 +121,7 @@ export default function Join() {
                 </div>
               </div>
 
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 24, fontWeight: 800, marginBottom: 4 }}>Create your account</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 24, fontWeight: 700, marginBottom: 4 }}>Create your account</h1>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 24 }}>
                 Join {invite.ownerName || 'the team'} on ARIA
               </p>

@@ -13,7 +13,7 @@ export default function HintIcon({ hint, position = 'top' }) {
         style={{
           width: 18, height: 18, borderRadius: '50%',
           background: 'var(--bg-card2)', border: '1px solid var(--border)',
-          color: 'var(--text-muted)', fontSize: 10, fontWeight: 800, cursor: 'pointer',
+          color: 'var(--text-muted)', fontSize: 10, fontWeight: 700, cursor: 'pointer',
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
           lineHeight: 1, flexShrink: 0, fontFamily: 'var(--font-body)',
         }}>

@@ -129,7 +129,7 @@ export default function Reminders() {
         <div style={{ paddingTop: 72, paddingBottom: 0 }}>
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 8 }}>
                 Reminders
                 <HintIcon hint="Create, manage and send reminders via WhatsApp, Voice, Email or Browser Notification. Tap + to add a new one." />
               </h1>

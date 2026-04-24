@@ -356,7 +356,7 @@ export default function Landing() {
               transition={{ delay: 0.5, duration: 0.7 }}
               style={{
                 fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 60px)',
-                fontWeight: 800, lineHeight: 1.08, letterSpacing: '-0.04em', marginBottom: 16,
+                fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.04em', marginBottom: 16,
               }}>
               AI Assistant for{' '}
               <span style={{
@@ -412,7 +412,7 @@ export default function Landing() {
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 72 }}>
               <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: '#3b82f6', textTransform: 'uppercase' }}>FEATURES</span>
-              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 900, letterSpacing: '-0.03em', margin: '12px 0 16px' }}>
+              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 700, letterSpacing: '-0.03em', margin: '12px 0 16px' }}>
                 Everything your team needs
               </h2>
               <p style={{ fontSize: 18, color: '#737380', maxWidth: 550, margin: '0 auto' }}>Powerful AI tools designed to transform how enterprise teams work</p>
@@ -461,7 +461,7 @@ export default function Landing() {
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 72 }}>
               <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: '#7c3aed', textTransform: 'uppercase' }}>PRODUCT DEMOS</span>
-              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 900, letterSpacing: '-0.03em', margin: '12px 0 12px' }}>See ARIA in action</h2>
+              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 700, letterSpacing: '-0.03em', margin: '12px 0 12px' }}>See ARIA in action</h2>
               <p style={{ fontSize: 18, color: '#737380', maxWidth: 550, margin: '0 auto' }}>Every feature built to save you time and keep your team aligned</p>
             </div>
           </Reveal>
@@ -481,7 +481,7 @@ export default function Landing() {
                       }}>
                         <demo.icon size={24} style={{ color: '#3b82f6' }} />
                       </div>
-                      <h3 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 800 }}>{demo.title}</h3>
+                      <h3 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700 }}>{demo.title}</h3>
                     </div>
                     <p style={{ fontSize: 16, color: '#737380', lineHeight: 1.8 }}>{demo.desc}</p>
                   </div>
@@ -558,7 +558,7 @@ export default function Landing() {
                                 width: 40, height: 40, borderRadius: 14,
                                 background: m.active ? 'linear-gradient(135deg, #ef4444, #dc2626)' : 'rgba(15,15,18,0.8)',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                color: m.active ? '#fff' : '#4a4a55', fontSize: 15, fontWeight: 800,
+                                color: m.active ? '#fff' : '#4a4a55', fontSize: 15, fontWeight: 700,
                                 boxShadow: m.active ? '0 4px 20px rgba(239,68,68,0.4)' : 'none',
                               }}>{m.step}</div>
                               <div>
@@ -603,7 +603,7 @@ export default function Landing() {
                 style={{ width: 220, height: 220, display: 'block' }}
               />
             </motion.div>
-            <h3 style={{ fontFamily: 'var(--font-head)', fontSize: 36, fontWeight: 900, marginBottom: 16 }}>
+            <h3 style={{ fontFamily: 'var(--font-head)', fontSize: 36, fontWeight: 700, marginBottom: 16 }}>
               Built for the{' '}
               <span style={{ background: 'linear-gradient(135deg, #3b82f6, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Future</span>
             </h3>
@@ -621,7 +621,7 @@ export default function Landing() {
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 56 }}>
               <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: '#3b82f6', textTransform: 'uppercase' }}>PRICING</span>
-              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 900, letterSpacing: '-0.03em', margin: '12px 0 12px' }}>Invest in your productivity</h2>
+              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 700, letterSpacing: '-0.03em', margin: '12px 0 12px' }}>Invest in your productivity</h2>
               <p style={{ fontSize: 18, color: '#737380', marginBottom: 28 }}>7-day free trial on all plans · No credit card required</p>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: 12, padding: '10px 24px', borderRadius: 16,
@@ -667,7 +667,7 @@ export default function Landing() {
                   </div>
                   <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', color: '#4a4a55', textTransform: 'uppercase', marginBottom: 4 }}>{plan.name}</p>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 3, marginBottom: 2 }}>
-                    <span style={{ fontFamily: 'var(--font-head)', fontSize: 30, fontWeight: 900, letterSpacing: '-0.03em' }}>{fmtPrice(plan.price)}</span>
+                    <span style={{ fontFamily: 'var(--font-head)', fontSize: 30, fontWeight: 700, letterSpacing: '-0.03em' }}>{fmtPrice(plan.price)}</span>
                     <span style={{ fontSize: 12, color: '#4a4a55' }}>/mo{plan.priceNote || ''}</span>
                   </div>
                   <p style={{ fontSize: 12, color: '#4a4a55', marginBottom: 16 }}>{plan.desc}</p>
@@ -698,7 +698,7 @@ export default function Landing() {
 
           {/* Comparison table */}
           <Reveal>
-            <h3 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 900, textAlign: 'center', marginBottom: 28 }}>Compare plans</h3>
+            <h3 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700, textAlign: 'center', marginBottom: 28 }}>Compare plans</h3>
             <div style={{
               overflow: 'auto', borderRadius: 24, padding: 0,
               background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(20px)',
@@ -755,7 +755,7 @@ export default function Landing() {
                 style={{ display: 'inline-block', borderRadius: 20, overflow: 'hidden', marginBottom: 28, border: '1px solid rgba(59,130,246,0.2)' }}>
                 <img src="/logo.png" alt="ARIA Life" style={{ width: 72, height: 72, display: 'block' }} />
               </motion.div>
-              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: 16 }}>
+              <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: 16 }}>
                 Ready to transform your workflow?
               </h2>
               <p style={{ fontSize: 18, color: '#737380', marginBottom: 12 }}>Join enterprise teams using ARIA to stay ahead.</p>
@@ -783,7 +783,7 @@ export default function Landing() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <img src="/logo.png" alt="ARIA" style={{ width: 36, height: 36, borderRadius: 10 }} />
             <div>
-              <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 18 }}>ARIA</span>
+              <span style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 18 }}>ARIA</span>
               <span style={{ fontSize: 10, color: '#7c3aed', marginLeft: 6, letterSpacing: '0.15em', fontWeight: 700 }}>LIFE</span>
             </div>
           </div>

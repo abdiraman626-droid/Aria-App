@@ -128,7 +128,7 @@ export default function ClientPortal() {
             <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#fff', opacity: 0.6 }} />
             <p style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Powered by ARIA</p>
           </div>
-          <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 4 }}>
+          <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 4 }}>
             Hi, {client?.name?.split(' ')[0] || 'there'} 👋
           </h1>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>
