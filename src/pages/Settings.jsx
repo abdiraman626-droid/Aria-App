@@ -17,7 +17,7 @@ import HintIcon from '../components/HintIcon';
 import toast from 'react-hot-toast';
 
 const PLAN_ICONS  = { individual: Star, corporate_mini: Zap, corporate: Building, major_corporate: Crown, enterprise: Building2 };
-const PLAN_COLORS = { individual: '#3b82f6', corporate_mini: '#7c3aed', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
+const PLAN_COLORS = { individual: '#3b82f6', corporate_mini: '#3b82f6', corporate: '#3b82f6', major_corporate: '#3b82f6', enterprise: '#3b82f6' };
 
 function Section({ icon: Icon, title, children, accent, locked }) {
   return (

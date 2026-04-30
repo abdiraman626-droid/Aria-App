@@ -5,7 +5,7 @@ import { usePlan } from '../hooks/usePlan';
 import BottomNav from '../components/BottomNav';
 import { Link } from 'react-router-dom';
 
-const PLAN_COLORS = { individual: '#3b82f6', corporate_mini: '#7c3aed', corporate: '#22c55e', major_corporate: '#f59e0b', enterprise: '#ef4444' };
+const PLAN_COLORS = { individual: '#3b82f6', corporate_mini: '#3b82f6', corporate: '#3b82f6', major_corporate: '#3b82f6', enterprise: '#3b82f6' };
 
 function Accordion({ question, answer, icon: Icon, accent }) {
   const [open, setOpen] = useState(false);

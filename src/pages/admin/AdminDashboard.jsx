@@ -13,10 +13,10 @@ import toast from 'react-hot-toast';
 
 const PLAN_META = {
   individual:      { price:5000,   color:'#3b82f6', icon:Star  },
-  corporate_mini:  { price:15000,  color:'#7c3aed', icon:Zap   },
-  corporate:       { price:30000,  color:'#22c55e', icon:Zap   },
-  major_corporate: { price:100000, color:'#f59e0b', icon:Crown },
-  enterprise:      { price:250000, color:'#ef4444', icon:Crown },
+  corporate_mini:  { price:15000,  color:'#3b82f6', icon:Zap   },
+  corporate:       { price:30000,  color:'#3b82f6', icon:Zap   },
+  major_corporate: { price:100000, color:'#3b82f6', icon:Crown },
+  enterprise:      { price:250000, color:'#3b82f6', icon:Crown },
 };
 
 function msgs()      { try { return JSON.parse(localStorage.getItem('aria_msgs')||'[]'); } catch { return []; } }
