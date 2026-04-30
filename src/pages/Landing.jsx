@@ -9,10 +9,10 @@ const KSH_TO_USD = 130;
 
 const PLANS = [
   { id: 'individual', name: 'Individual', price: 5000, icon: Star, color: '#3b82f6', desc: '1–3 people', highlight: 'AI calendar + voice assistant', features: ['Built-in calendar (manual scheduling)', 'AI assistant', 'Browser & email notifications', 'Multi-language: English, Somali, Arabic', '7-day free trial'] },
-  { id: 'corporate_mini', name: 'Corporate Mini', price: 15000, priceNote: '/person', icon: Zap, popular: true, color: '#3b82f6', desc: '5–10 people', highlight: 'Gmail summaries + team management', features: ['Everything in Individual', 'WhatsApp reminders', 'Email summaries', 'Google Calendar sync', 'Team calendar view', 'Member invites by email', '7-day free trial'] },
-  { id: 'corporate', name: 'Corporate', price: 30000, icon: Building, color: '#3b82f6', desc: '10–50 people', highlight: 'AI voice assistant + meeting transcription', features: ['Everything in Corporate Mini', 'AI voice assistant', 'Meeting recorder + transcription', 'Priority support', '7-day free trial'] },
-  { id: 'major_corporate', name: 'Major Corporate', price: 100000, icon: Crown, color: '#3b82f6', desc: 'Up to 500 people', highlight: 'Analytics + department management', features: ['Everything in Corporate', 'Advanced analytics dashboard', 'Automated weekly meeting reports', 'Multi-department management', '7-day free trial'] },
-  { id: 'enterprise', name: 'Enterprise', price: 250000, icon: Building2, color: '#3b82f6', desc: '500+ people', highlight: 'Full platform + executive tools', features: ['Everything in Major Corporate', 'Executive dashboard', 'Monthly AI-generated strategy reports', 'Unlimited AI strategy sessions', 'Direct WhatsApp support line', '7-day free trial'] },
+  { id: 'corporate_mini', name: 'Corporate Mini', price: 15000, priceNote: '/person', icon: Zap, popular: true, color: '#3b82f6', desc: '5–10 people', highlight: 'Gmail summaries + team management', features: ['Everything in Individual', 'WhatsApp reminders', 'Email summaries', 'Google Calendar sync', 'Team calendar view', 'Member invites by email', 'AI Strategy chat — ask ARIA anything about your business', '7-day free trial'] },
+  { id: 'corporate', name: 'Corporate', price: 30000, icon: Building, color: '#3b82f6', desc: '10–50 people', highlight: 'AI voice assistant + meeting transcription', features: ['Everything in Corporate Mini', 'AI voice assistant', 'Meeting recorder + transcription', 'AI Strategy chat — ask ARIA anything about your business', 'Priority support', '7-day free trial'] },
+  { id: 'major_corporate', name: 'Major Corporate', price: 100000, icon: Crown, color: '#3b82f6', desc: 'Up to 500 people', highlight: 'Analytics + department management', features: ['Everything in Corporate', 'Advanced analytics dashboard', 'Automated weekly meeting reports', 'Multi-department management', 'AI Strategy chat — ask ARIA anything about your business', '7-day free trial'] },
+  { id: 'enterprise', name: 'Enterprise', price: 250000, icon: Building2, color: '#3b82f6', desc: '500+ people', highlight: 'Full platform + executive tools', features: ['Everything in Major Corporate', 'Executive dashboard', 'Monthly AI-generated strategy reports', 'AI Strategy chat — ask ARIA anything about your business', 'Unlimited AI strategy sessions', 'Direct WhatsApp support line', '7-day free trial'] },
 ];
 
 const DEMOS = [
@@ -28,6 +28,7 @@ const TABLE = [
   { feature: 'AI assistant', individual: true, corporate_mini: true, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'WhatsApp reminders', individual: false, corporate_mini: true, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'Email summaries', individual: false, corporate_mini: true, corporate: true, major_corporate: true, enterprise: true },
+  { feature: 'AI Strategy chat', individual: false, corporate_mini: true, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'AI voice assistant', individual: false, corporate_mini: false, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'Meeting recorder', individual: false, corporate_mini: false, corporate: true, major_corporate: true, enterprise: true },
   { feature: 'Advanced analytics', individual: false, corporate_mini: false, corporate: false, major_corporate: true, enterprise: true },
