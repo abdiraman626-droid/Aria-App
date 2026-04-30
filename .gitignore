@@ -34,3 +34,15 @@ dist-ssr
 *.sw?
 .vercel
 functions/.env
+
+# Capacitor — commit native projects, ignore build output
+ios/App/Pods/
+ios/App/build/
+ios/App/DerivedData/
+ios/App/App/public/
+android/.gradle/
+android/build/
+android/app/build/
+android/app/src/main/assets/public/
+android/local.properties
+android/.idea/
