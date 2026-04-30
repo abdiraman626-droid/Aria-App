@@ -275,6 +275,6 @@ export async function summarizeEmails(emails) {
 
   const data = await res.json();
   const out = {};
-  (data.summaries || []).forEach(s => { out[s.id] = s.summary; });
+  (data.summaries || []).forEach(s => { out[s.id] = decodeHtmlEntities(s.summary || ''); });
   return out;
 }

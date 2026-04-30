@@ -12,6 +12,7 @@ import { useLang } from '../context/LangContext';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import BottomNav from '../components/BottomNav';
+import { decodeEntities } from '../lib/decodeEntities';
 import toast from 'react-hot-toast';
 
 function StatCard({ icon: Icon, label, value, color, sub }) {
@@ -124,7 +125,7 @@ export default function Analytics() {
       });
       if (!res.ok) throw new Error('Report failed');
       const data = await res.json();
-      setWeeklyReport(data.report);
+      setWeeklyReport(decodeEntities(data.report || ''));
       toast.success(user?.whatsappNumber ? 'Report generated & sent to WhatsApp' : 'Report generated');
     } catch { toast.error('Failed to generate report'); }
     finally { setReportLoading(false); }

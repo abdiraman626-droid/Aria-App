@@ -1,6 +1,7 @@
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 import { db, storage } from '../lib/firebase';
+import { decodeEntities } from '../lib/decodeEntities';
 
 const WASENDER_KEY = import.meta.env.VITE_WASENDER_API_KEY;
 
@@ -83,7 +84,13 @@ export async function summarizeWithClaude(transcript) {
     throw new Error(err.error || `Summarization error ${res.status}`);
   }
 
-  return res.json();
+  const data = await res.json();
+  return {
+    ...data,
+    summary: decodeEntities(data.summary || ''),
+    actionItems: (data.actionItems || []).map(decodeEntities),
+    followUps: (data.followUps || []).map(decodeEntities),
+  };
 }
 
 // ── Send summary via WhatsApp using WasenderAPI ───────────────────────────

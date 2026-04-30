@@ -10,6 +10,7 @@ import {
   collection, query, where, orderBy, getDocs, addDoc, deleteDoc, doc, serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+import { decodeEntities } from '../lib/decodeEntities';
 import BottomNav from '../components/BottomNav';
 import toast from 'react-hot-toast';
 
@@ -121,7 +122,7 @@ export default function Strategy() {
 
       if (!res.ok) throw new Error('API error');
       const data = await res.json();
-      setMessages([...updated, { role: 'assistant', content: data.text }]);
+      setMessages([...updated, { role: 'assistant', content: decodeEntities(data.text || '') }]);
     } catch {
       toast.error('Failed to get strategy advice. Try again.');
       setMessages(updated); // keep user message

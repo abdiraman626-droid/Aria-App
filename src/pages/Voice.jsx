@@ -8,6 +8,7 @@ import { useCalendar } from '../context/CalendarContext';
 import { useLang } from '../context/LangContext';
 import { voice } from '../services/voice';
 import BottomNav from '../components/BottomNav';
+import { decodeEntities } from '../lib/decodeEntities';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
 
@@ -127,7 +128,7 @@ export default function Voice() {
         return confirmMsg;
       }
 
-      return data.text || t('error');
+      return decodeEntities(data.text || '') || t('error');
     } catch {
       // Fallback to local response if API fails
       return buildLocalResponse(query);
