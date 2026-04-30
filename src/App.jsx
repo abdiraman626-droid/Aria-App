@@ -27,7 +27,6 @@ import Settings   from './pages/Settings';
 import Team       from './pages/Team';
 import Clients    from './pages/Clients';
 import Meetings   from './pages/Meetings';
-import AdminLogin     from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import VerifyEmail    from './pages/VerifyEmail';
 import ClientPortal   from './pages/ClientPortal';
@@ -58,9 +57,14 @@ function PrivateRoute({ children }) {
   return <PageTransition>{children}</PageTransition>;
 }
 
+const ADMIN_EMAILS = ['abdiraman626@gmail.com', 'arialifesupport@gmail.com'];
 function AdminRoute({ children }) {
-  const isAdmin = sessionStorage.getItem('aria_admin') === '1';
-  return isAdmin ? children : <Navigate to="/admin" replace />;
+  const { user, loading } = useAuth();
+  if (loading) return <Spinner />;
+  if (!user) return <Navigate to="/login?next=/admin" replace />;
+  const email = (user.email || '').toLowerCase();
+  if (!ADMIN_EMAILS.includes(email)) return <Navigate to="/" replace />;
+  return children;
 }
 
 export default function App() {
@@ -111,7 +115,7 @@ export default function App() {
                 <Route path="/cookies" element={<Cookies />} />
 
                 {/* Admin */}
-                <Route path="/admin"           element={<AdminLogin />} />
+                <Route path="/admin"           element={<AdminRoute><AdminDashboard /></AdminRoute>} />
                 <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
 
                 {/* Protected app */}
