@@ -12,6 +12,7 @@ import { connectGoogle, disconnectGoogle, getProfile } from '../services/google'
 import { useNavigate, Link } from 'react-router-dom';
 import BottomNav from '../components/BottomNav';
 import UpgradePrompt from '../components/UpgradePrompt';
+import UpgradeModal from '../components/UpgradeModal';
 import HintIcon from '../components/HintIcon';
 import toast from 'react-hot-toast';
 
@@ -65,6 +66,7 @@ export default function Settings() {
   const [googleConn,    setGoogleConn]    = useState(user?.googleConnected || false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const googleProfile = getProfile();
+  const [upgradePlan, setUpgradePlan] = useState(null);
   const [suggestionOpen, setSuggestionOpen] = useState(false);
   const [suggestionType, setSuggestionType] = useState('feedback');
   const [suggestionText, setSuggestionText] = useState('');
@@ -194,9 +196,9 @@ export default function Settings() {
               </div>
             </div>
             {!isEnterprise && (
-              <Link to="/signup?plan=corporate_mini" className="btn btn-sm" style={{ background: planColor, color: '#fff', border: 'none' }}>
+              <button onClick={() => setUpgradePlan('corporate_mini')} className="btn btn-sm" style={{ background: planColor, color: '#fff', border: 'none', cursor: 'pointer' }}>
                 {t('upgrade')}
-              </Link>
+              </button>
             )}
           </div>
 
@@ -542,6 +544,7 @@ export default function Settings() {
         </motion.div>
       </div>
       <BottomNav />
+      <UpgradeModal open={!!upgradePlan} planId={upgradePlan} onClose={() => setUpgradePlan(null)} />
     </div>
   );
 }

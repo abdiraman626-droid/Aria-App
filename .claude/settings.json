@@ -27,7 +27,8 @@
       "Bash(ls -1 /Users/abdirahmanmohamed/aria-app/src/components/*.jsx)",
       "Bash(npx @anthropic-ai/claude-code mcp add 21st-magic -- npx -y @21st-dev/magic@latest)",
       "Bash(xargs sed *)",
-      "Bash(\" src/ --include='*.jsx' --include='*.js' | head -30)"
+      "Bash(\" src/ --include='*.jsx' --include='*.js' | head -30)",
+      "Bash(grep -n '</footer>\\\\|^    </div>$\\\\|^  \\);' src/pages/Landing.jsx)"
     ]
   }
 }

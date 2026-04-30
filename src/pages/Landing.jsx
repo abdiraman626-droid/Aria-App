@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring, useInView, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Check, Star, Mic, Calendar, Mail, Zap, Crown, X, Building2, Building, Play, Lightbulb, Video, Menu, ChevronDown, Brain, Users, Lock } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import UpgradeModal from '../components/UpgradeModal';
 
 const KSH_TO_USD = 130;
 
@@ -264,10 +266,18 @@ function ScrollProgress() {
 
 
 export default function Landing() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [usd, setUsd] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [upgradePlan, setUpgradePlan] = useState(null);
   const fmtPrice = (p) => usd ? `KSH ${p.toLocaleString()}` : `$${Math.round(p / KSH_TO_USD).toLocaleString()}`;
+
+  const handlePlanCta = (planId) => {
+    if (user) setUpgradePlan(planId);
+    else navigate(`/signup?plan=${planId}`);
+  };
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60);
@@ -681,15 +691,15 @@ export default function Landing() {
                       </li>
                     ))}
                   </ul>
-                  <Link to={`/signup?plan=${plan.id}`} style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                    padding: '14px 20px', borderRadius: 14, fontSize: 14, fontWeight: 700, textDecoration: 'none',
+                  <button onClick={() => handlePlanCta(plan.id)} style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, width: '100%',
+                    padding: '14px 20px', borderRadius: 14, fontSize: 14, fontWeight: 700, cursor: 'pointer',
                     background: plan.popular ? `linear-gradient(135deg, ${plan.color}, ${plan.color}cc)` : 'rgba(255,255,255,0.03)',
                     border: `1px solid ${plan.popular ? plan.color : 'rgba(255,255,255,0.1)'}`,
                     color: plan.popular ? '#fff' : '#a0a0a8',
                     boxShadow: plan.popular ? `0 4px 24px ${plan.color}40` : 'none',
-                    transition: 'all 0.2s',
-                  }}>Start Free Trial</Link>
+                    transition: 'all 0.2s', fontFamily: 'var(--font-head)',
+                  }}>{user ? 'Get Started' : 'Start Free Trial'}</button>
                 </motion.div>
               </Reveal>
             ))}
@@ -795,6 +805,8 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+
+      <UpgradeModal open={!!upgradePlan} planId={upgradePlan} onClose={() => setUpgradePlan(null)} />
     </div>
   );
 }
