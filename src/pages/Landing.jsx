@@ -12,7 +12,7 @@ const PLANS = [
   { id: 'corporate_mini', name: 'Corporate Mini', price: 15000, priceNote: '/person', icon: Zap, popular: true, color: '#3b82f6', desc: '5–10 people', highlight: 'Gmail summaries + team management', features: ['Everything in Individual', 'WhatsApp reminders', 'Email summaries', 'Google Calendar sync', 'Team calendar view', 'Member invites by email', 'AI Strategy chat — ask ARIA anything about your business', '7-day free trial'] },
   { id: 'corporate', name: 'Corporate', price: 30000, icon: Building, color: '#3b82f6', desc: '10–50 people', highlight: 'AI voice assistant + meeting transcription', features: ['Everything in Corporate Mini', 'AI voice assistant', 'Meeting recorder + transcription', 'AI Strategy chat — ask ARIA anything about your business', '7-day free trial'] },
   { id: 'major_corporate', name: 'Major Corporate', price: 100000, icon: Crown, color: '#3b82f6', desc: 'Up to 500 people', highlight: 'Analytics + department management', features: ['Everything in Corporate', 'Advanced analytics dashboard', 'Automated weekly meeting reports', 'Multi-department management', 'AI Strategy chat — ask ARIA anything about your business', '7-day free trial'] },
-  { id: 'enterprise', name: 'Enterprise', price: 250000, icon: Building2, color: '#3b82f6', desc: '500+ people', highlight: 'Full platform + executive tools', features: ['Everything in Major Corporate', 'Executive dashboard', 'Monthly AI-generated strategy reports', 'AI Strategy chat — ask ARIA anything about your business', 'Unlimited AI strategy sessions', '7-day free trial'] },
+  { id: 'enterprise', name: 'Enterprise', price: 250000, icon: Building2, color: '#3b82f6', desc: '500+ people', highlight: 'Full platform + executive tools', features: ['Everything in Major Corporate', 'Executive dashboard', 'Monthly AI-generated strategy reports', 'AI Strategy chat — ask ARIA anything about your business', 'Unlimited AI strategy sessions', 'Staff directory — view all staff, their roles and activity', 'Role-based access control — control what each staff member can see and do in ARIA Life', '7-day free trial'] },
 ];
 
 const DEMOS = [
@@ -34,6 +34,8 @@ const TABLE = [
   { feature: 'Advanced analytics', individual: false, corporate_mini: false, corporate: false, major_corporate: true, enterprise: true },
   { feature: 'Executive dashboard', individual: false, corporate_mini: false, corporate: false, major_corporate: false, enterprise: true },
   { feature: 'Unlimited AI strategy sessions', individual: false, corporate_mini: false, corporate: false, major_corporate: false, enterprise: true },
+  { feature: 'Staff directory', individual: false, corporate_mini: false, corporate: false, major_corporate: false, enterprise: true },
+  { feature: 'Role-based access control', individual: false, corporate_mini: false, corporate: false, major_corporate: false, enterprise: true },
 ];
 
 const FEATURES = [
