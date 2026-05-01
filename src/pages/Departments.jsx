@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Building2, Plus, X, Users, Trash2, Edit3, Save, Loader2, UserPlus, ChevronDown,
+  Building2, Plus, X, Users, Trash2, Edit3, Save, Loader2, UserPlus, ChevronDown, Lock,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTeam } from '../context/TeamContext';
 import { useLang } from '../context/LangContext';
@@ -89,6 +90,42 @@ export default function Departments() {
   };
   const l = labels[lang] || labels.en;
 
+  // Plan gate — only Major Corporate and Enterprise can access
+  const userPlan = user?.plan || 'individual';
+  const allowedPlans = ['major_corporate', 'enterprise'];
+  if (!allowedPlans.includes(userPlan)) {
+    return (
+      <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+          className="card"
+          style={{ maxWidth: 380, width: '100%', padding: '40px 28px', textAlign: 'center' }}>
+          <div style={{
+            width: 64, height: 64, borderRadius: 18, margin: '0 auto 20px',
+            background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.25)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <Lock size={26} style={{ color: '#3b82f6' }} />
+          </div>
+          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 22, fontWeight: 700, marginBottom: 10, letterSpacing: '-0.02em' }}>
+            Department Management
+          </h1>
+          <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 24 }}>
+            This feature is available on Major Corporate and Enterprise plans
+          </p>
+          <Link to="/pricing"
+            style={{
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              padding: '12px 24px', borderRadius: 10, background: '#3b82f6',
+              color: '#fff', fontSize: 14, fontWeight: 600, textDecoration: 'none',
+            }}>
+            Upgrade Plan
+          </Link>
+        </motion.div>
+        <BottomNav />
+      </div>
+    );
+  }
+
   if (loading) return (
     <div className="pb-nav" style={{ minHeight: '100svh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Loader2 size={32} className="animate-spin" style={{ color: 'var(--blue)' }} /><BottomNav />
@@ -101,16 +138,23 @@ export default function Departments() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
 
           {/* Header */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(6,182,212,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Building2 size={20} style={{ color: '#06b6d4' }} />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, gap: 12, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0, flex: '1 1 auto' }}>
+              <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <Building2 size={20} style={{ color: '#3b82f6' }} />
               </div>
-              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700 }}>{l.title}</h1>
+              <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 28, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.title}</h1>
             </div>
             <button onClick={() => { setEditingDept(null); setName(''); setShowForm(true); }}
-              className="btn btn-primary btn-sm" style={{ gap: 6 }}>
-              <Plus size={16} /> {l.create}
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                padding: '12px 20px', borderRadius: 10, border: 'none', cursor: 'pointer',
+                background: '#3b82f6', color: '#fff',
+                fontSize: 14, fontWeight: 600, fontFamily: 'var(--font-head)',
+                maxWidth: '100%', whiteSpace: 'nowrap', flexShrink: 0,
+                boxShadow: '0 2px 12px rgba(59,130,246,0.25)',
+              }}>
+              <Plus size={15} /> {l.create}
             </button>
           </div>
 
